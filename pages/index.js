@@ -51,17 +51,16 @@ const Home = (props) => {
 
 export async function getServerSideProps() {
 	try {
-		mongoose.connect(process.env.mongodb, {
-			useNewUrlParser: true,
-			useUnifiedTopology: true,
-			useCreateIndexes: true
-		}, () => console.log("connected"))
+		await mongoose.connect(process.env.mongodb)
+		console.log("connected")
 	} catch (error) {
 		console.log(error)
 	}
-	const articles = await Articles.find().sort({ createdAt: "desc" })
+	const articles = await Articles.find()
 	console.log(articles)
-	return { props: articles }
+	return { props: {
+		articles: JSON.parse(JSON.stringify(articles))
+	} }
 }
 
 export default Home
