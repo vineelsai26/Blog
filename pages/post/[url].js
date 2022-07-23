@@ -1,14 +1,13 @@
 import Head from 'next/head'
 import mongoose from 'mongoose'
 import styles from '../../styles/Home.module.css'
-import Articles from '../../models/article'
+import Article from '../../models/article'
+import showdown from 'showdown'
 
-const Post = ({ article }) => {
-
-    var showdown = require('showdown'),
-        converter = new showdown.Converter({ tables: true, tasklists: true, tablesHeaderId: true, strikethrough: true, simplifiedAutoLink: true, ghCompatibleHeaderId: true, emoji: true }),
+export default function Post({ article }) {
+    const converter = new showdown.Converter({ tables: true, tasklists: true, tablesHeaderId: true, strikethrough: true, simplifiedAutoLink: true, ghCompatibleHeaderId: true, emoji: true }),
         text = article.longDescription,
-        html = converter.makeHtml(text);
+        html = converter.makeHtml(text)
 
     return (
         <div className={styles.container}>
@@ -38,19 +37,17 @@ const Post = ({ article }) => {
     )
 }
 
-Post.getInitialProps = async (context) => {
+export async function getServerSideProps(context) {
     try {
-        mongoose.connect(process.env.mongodb, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useCreateIndexes: true
-        }, () => console.log("connected"))
+        mongoose.connect(process.env.mongodb)
     } catch (error) {
         console.log(error)
     }
 
-    const articles = await Articles.where('url').equals(context.query.url)
-    return { article: articles[0] }
+    const article = await Article.findOne({ url: context.query.url })
+    return {
+        props: {
+            article: JSON.parse(JSON.stringify(article))
+        }
+    }
 }
-
-export default Post

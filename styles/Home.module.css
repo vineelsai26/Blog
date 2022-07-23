@@ -43,7 +43,7 @@
   height: 100vh;
 }
 
-.profileImg{
+.profileImg {
   width: 150px;
   height: 150px;
   display: block;
@@ -52,7 +52,7 @@
   border-radius: 50%;
 }
 
-.name{
+.name {
   color: white;
   width: 100%;
   text-align: center;
@@ -76,7 +76,7 @@
   background-size: cover;
 }
 
-.nav{
+.nav {
   color: white;
   width: 100%;
   border-top: #FFFFFF 0.5px solid;
@@ -90,7 +90,7 @@
   margin-right: auto;
 }
 
-.email{
+.email {
   color: white;
   width: 100%;
   text-align: center;
@@ -136,7 +136,7 @@
 }
 
 .image {
-	width: 150px;
+  width: 150px;
   height: 130px;
   object-fit: contain;
   object-position: center;
@@ -214,23 +214,24 @@
     width: 100%;
     flex-direction: column;
   }
+
   .image {
     width: 100%;
   }
 
-  .card h3{
+  .card h3 {
     width: 100%;
   }
 
-  .sidebar{
+  .sidebar {
     visibility: collapse;
   }
 
   .grid {
     margin: 0px;
-  }  
+  }
 
-  .card p{
+  .card p {
     width: 100%;
   }
 }

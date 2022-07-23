@@ -8,25 +8,34 @@ const articleSchema = new mongoose.Schema({
     },
     title: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     description: {
-        type: String
+        type: String,
+        required: true
     },
     longDescription: {
-        type: String
+        type: String,
+        required: true
     },
     imageUrl: {
-        type: String
+        type: String,
+        required: true
     },
     createdAt: {
         type: Date,
+        required: true,
         default: Date.now
+    },
+    createdBy: {
+        type: String,
+        required: true
     }
 })
 
-mongoose.models = {};
+mongoose.models = {}
 
-var Article = mongoose.model('Article', articleSchema)
+const Article = mongoose.model('Article', articleSchema)
 
 export default Article
