@@ -34,8 +34,6 @@ const articleSchema = new mongoose.Schema({
     }
 })
 
-mongoose.models = {}
-
-const Article = mongoose.model('Article', articleSchema)
+const Article = mongoose.models.Article || mongoose.model('Article', articleSchema)
 
 export default Article

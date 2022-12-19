@@ -36,9 +36,9 @@ UserSchema.pre('save', function (next) {
     var user = this
     if (!user.isModified('password')) return next()
 
-    bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
+    bcrypt.genSalt(SALT_WORK_FACTOR, function (err: mongoose.CallbackError | undefined, salt: any) {
         if (err) return next(err)
-        bcrypt.hash(user.password, salt, function (err, hash) {
+        bcrypt.hash(user.password, salt, function (err: mongoose.CallbackError | undefined, hash: string) {
             if (err) return next(err)
             user.password = hash
             next()

@@ -2,9 +2,10 @@ import Head from 'next/head'
 import mongoose from 'mongoose'
 import styles from '../../styles/Home.module.css'
 import Article from '../../models/article'
+import { ArticleType } from '../../types/article'
 import showdown from 'showdown'
 
-export default function Post({ article }) {
+export default function Post({ article }: { article: ArticleType }) {
     const converter = new showdown.Converter({ tables: true, tasklists: true, tablesHeaderId: true, strikethrough: true, simplifiedAutoLink: true, ghCompatibleHeaderId: true, emoji: true }),
         text = article.longDescription,
         html = converter.makeHtml(text)
@@ -15,12 +16,6 @@ export default function Post({ article }) {
                 <title>{article.title}</title>
                 <link rel="icon" href="/logo.png" />
             </Head>
-
-            <nav className={styles.navbar}>
-                <a href="/">
-                    <img src={"/logo.png"}></img>
-                </a>
-            </nav>
 
             <h1 className={styles.title}>{article.title}</h1>
             <main className={styles.main}>
@@ -37,9 +32,9 @@ export default function Post({ article }) {
     )
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: { query: { url: string } }) {
     try {
-        mongoose.connect(process.env.mongodb)
+        mongoose.connect(process.env.NEXT_MONGODB_URL!)
     } catch (error) {
         console.log(error)
     }
@@ -47,7 +42,7 @@ export async function getServerSideProps(context) {
     const article = await Article.findOne({ url: context.query.url })
     return {
         props: {
-            article: JSON.parse(JSON.stringify(article))
+            article: JSON.parse(JSON.stringify(article)) as ArticleType
         }
     }
 }

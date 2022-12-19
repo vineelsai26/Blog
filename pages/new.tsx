@@ -9,12 +9,6 @@ const New = () => {
                 <link rel="icon" href="/logo.png" />
             </Head>
 
-            <nav className={styles.navbar}>
-                <a href="/">
-                    <img src={"/logo.png"}></img>
-                </a>
-            </nav>
-
             <main className={styles.main}>
                 <div className={styles.grid}>
                     <form action="/api/add" method="POST">

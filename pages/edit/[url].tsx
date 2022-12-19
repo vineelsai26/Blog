@@ -2,8 +2,9 @@ import Head from 'next/head'
 import mongoose from 'mongoose'
 import styles from '../../styles/Home.module.css'
 import Article from '../../models/article'
+import { ArticleType } from '../../types/article'
 
-export default function EditPost({ article }) {
+export default function EditPost({ article }: { article: ArticleType }) {
 
     return (
         <div className={styles.container}>
@@ -11,12 +12,6 @@ export default function EditPost({ article }) {
                 <title>Edit Article</title>
                 <link rel="icon" href="/logo.png" />
             </Head>
-
-            <nav className={styles.navbar}>
-                <a href="/">
-                    <img src={"/logo.png"}></img>
-                </a>
-            </nav>
 
             <main className={styles.main}>
                 <div className={styles.grid}>
@@ -42,9 +37,9 @@ export default function EditPost({ article }) {
     )
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: { query: { url: string } }) {
     try {
-        mongoose.connect(process.env.mongodb)
+        mongoose.connect(process.env.NEXT_MONGODB_URL!)
     } catch (error) {
         console.log(error)
     }
