@@ -5,17 +5,18 @@ import User from '../../models/user'
 import bcrypt from "bcrypt"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    const { email, password, url, title, imageUrl, description, content } = req.body
     if (req.method === "POST") {
-        const user = await User.findOne({ email: req.body.email })
+        const user = await User.findOne({ email: email })
         if (user && user.email) {
-            const result = await bcrypt.compare(req.body.password, user.password)
+            const result = await bcrypt.compare(password, user.password)
             if (result) {
                 let article = new Article({
-                    title: req.body.title,
-                    url: req.body.url,
-                    imageUrl: req.body.imageUrl,
-                    description: req.body.description,
-                    longDescription: req.body.content,
+                    title: title,
+                    url: url,
+                    imageUrl: imageUrl,
+                    description: description,
+                    longDescription: content,
                     createdBy: user.email
                 })
                 article.save(function (err: any) {

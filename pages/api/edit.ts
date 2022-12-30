@@ -6,25 +6,26 @@ import bcrypt from "bcrypt"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === "POST") {
-        const user = await User.findOne({ email: req.body.email })
+        const { email, password, url, title, imageUrl, description, content, deleteArticle } = req.body
+        const user = await User.findOne({ email: email })
         if (user && user.email) {
-            const result = await bcrypt.compare(req.body.password, user.password)
+            const result = await bcrypt.compare(password, user.password)
             if (result) {
                 let article = await Article.findOne({
-                    url: req.body.url
+                    url: url
                 })
-                if (req.body.delete == "true") {
+                if (deleteArticle == "true") {
                     await article.delete()
                     return res.status(200).json({
                         message: "Article deleted successfully"
                     })
                 } else {
                     article.update({
-                        title: req.body.title,
-                        url: req.body.url,
-                        imageUrl: req.body.imageUrl,
-                        description: req.body.description,
-                        longDescription: req.body.content
+                        title: title,
+                        url: url,
+                        imageUrl: imageUrl,
+                        description: description,
+                        longDescription: content
                     }, function (err: any) {
                         if (err) {
                             return res.status(400).json({
