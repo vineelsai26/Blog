@@ -1,28 +1,67 @@
 import Head from 'next/head'
 import Footer from '../src/Footer/Footer'
+import Navbar from '../src/Navbar/Navbar'
+import { useState } from 'react'
+import { SaveResponse } from '../types/article'
+import ArticleEditor from '../src/ArticleEditor/ArticleEditor'
 
 export default function New() {
+    const [title, setTitle] = useState('')
+    const [url, setUrl] = useState('')
+    const [imageUrl, setImageUrl] = useState('')
+    const [description, setDescription] = useState('')
+    const [content, setContent] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const [data, setData] = useState<SaveResponse>({} as SaveResponse)
+
+    const handleSubmit = async () => {
+        const request = await fetch('/api/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title: title,
+                url: url,
+                imageUrl: imageUrl,
+                description: description,
+                content: content,
+                email: email,
+                password: password
+            })
+        })
+
+        const response = await request.json()
+
+        setData(response)
+    }
     return (
-        <div className='container'>
+        <div>
             <Head>
                 <title>New Article</title>
                 <link rel="icon" href="/logo.png" />
             </Head>
 
-            <main className='main'>
-                <div className='grid'>
-                    <form action="/api/add" method="POST">
-                        <input id="title" name="title" className='textBox' placeholder="Title" required></input>
-                        <input id="url" name="url" className='textBox' placeholder="Url" required></input>
-                        <input id="imageUrl" name="imageUrl" className='textBox' placeholder="Image  Url" required></input>
-                        <textarea id="description" name="description" className='textBox' rows={5} placeholder="Description" required></textarea>
-                        <textarea id="content" name="content" className='textBox' rows={20} placeholder="Content" required></textarea>
-                        <input id="email" name="email" type="email" className='textBox' placeholder="Email" required></input>
-                        <input id="password" name="password" type="password" className='textBox' placeholder="Password" required></input>
-                        <button className='submit'>Publish</button>
-                    </form>
-                </div>
-            </main>
+            <Navbar />
+
+            <ArticleEditor
+                title={title}
+                setTitle={setTitle}
+                url={url}
+                setUrl={setUrl}
+                imageUrl={imageUrl}
+                setImageUrl={setImageUrl}
+                description={description}
+                setDescription={setDescription}
+                content={content}
+                setContent={setContent}
+                setEmail={setEmail}
+                setPassword={setPassword}
+                data={data}
+                handleSubmit={handleSubmit}
+            />
 
             <Footer />
         </div >

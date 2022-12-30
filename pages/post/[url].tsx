@@ -2,14 +2,10 @@ import Head from 'next/head'
 import mongoose from 'mongoose'
 import Article from '../../models/article'
 import { ArticleType } from '../../types/article'
-import showdown from 'showdown'
 import Footer from '../../src/Footer/Footer'
+import ArticlePreview from '../../src/ArticlePreview/ArticlePreview'
 
 export default function Post({ article }: { article: ArticleType }) {
-    const converter = new showdown.Converter({ tables: true, tasklists: true, tablesHeaderId: true, strikethrough: true, simplifiedAutoLink: true, ghCompatibleHeaderId: true, emoji: true }),
-        text = article.longDescription,
-        html = converter.makeHtml(text)
-
     return (
         <div className='container'>
             <Head>
@@ -17,12 +13,7 @@ export default function Post({ article }: { article: ArticleType }) {
                 <link rel="icon" href="/logo.png" />
             </Head>
 
-            <h1 className='title'>{article.title}</h1>
-            <main className='main'>
-                <div dangerouslySetInnerHTML={{
-                    __html: html
-                }} className='description'></div>
-            </main>
+            <ArticlePreview article={article} />
 
             <Footer />
         </div>
