@@ -9,8 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.7",
-    "@heroicons/react": "^2.0.13",
     "@monaco-editor/react": "^4.4.6",
     "@next/font": "13.1.1",
     "bcrypt": "^5.1.0",

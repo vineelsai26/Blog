@@ -7,7 +7,7 @@ import bcrypt from "bcrypt"
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { email, password, url, title, imageUrl, description, content } = req.body
     if (req.method === "POST") {
-        const user = await User.findOne({ email: email })
+        const user = await User.findOne({ email: { $eq: email } })
         if (user && user.email) {
             const result = await bcrypt.compare(password, user.password)
             if (result) {

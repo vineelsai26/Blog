@@ -7,12 +7,12 @@ import bcrypt from "bcrypt"
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === "POST") {
         const { email, password, url, title, imageUrl, description, content, deleteArticle } = req.body
-        const user = await User.findOne({ email: email })
+        const user = await User.findOne({ email: { $eq: email } })
         if (user && user.email) {
             const result = await bcrypt.compare(password, user.password)
             if (result) {
                 let article = await Article.findOne({
-                    url: url
+                    url: { $eq: url }
                 })
                 if (deleteArticle == "true") {
                     await article.delete()
@@ -20,20 +20,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         message: "Article deleted successfully"
                     })
                 } else {
-                    article.update({
-                        title: title,
-                        url: url,
-                        imageUrl: imageUrl,
-                        description: description,
-                        longDescription: content
-                    }, function (err: any) {
+                    article.title = title
+                    article.url = url
+                    article.imageUrl = imageUrl
+                    article.description = description
+                    article.longDescription = content
+                    article.createdBy = user.email
+
+                    article.save(function (err: any) {
                         if (err) {
+                            console.log(err)
                             return res.status(400).json({
-                                error: err
+                                error: "Error saving article"
                             })
                         } else {
                             return res.status(200).json({
-                                message: "Article modified successfully"
+                                message: "Article saved successfully"
                             })
                         }
                     })
