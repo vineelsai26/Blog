@@ -7,33 +7,33 @@ import ArticlePreview from '../../src/ArticlePreview/ArticlePreview'
 import Navbar from '../../src/Navbar/Navbar'
 
 export default function Post({ article }: { article: ArticleType }) {
-    return (
-        <div>
-            <Head>
-                <title>{article.title}</title>
-                <link rel="icon" href="/logo.png" />
-            </Head>
+	return (
+		<div>
+			<Head>
+				<title>{article.title}</title>
+				<link rel="icon" href="/logo.png" />
+			</Head>
 
-            <Navbar />
+			<Navbar />
 
-            <ArticlePreview article={article} />
+			<ArticlePreview article={article} />
 
-            <Footer />
-        </div>
-    )
+			<Footer />
+		</div>
+	)
 }
 
 export async function getServerSideProps(context: { query: { url: string } }) {
-    try {
-        mongoose.connect(process.env.NEXT_MONGODB_URL!)
-    } catch (error) {
-        console.log(error)
-    }
+	try {
+		mongoose.connect(process.env.NEXT_MONGODB_URL!)
+	} catch (error) {
+		console.log(error)
+	}
 
-    const article = await Article.findOne({ url: context.query.url })
-    return {
-        props: {
-            article: JSON.parse(JSON.stringify(article)) as ArticleType
-        }
-    }
+	const article = await Article.findOne({ url: context.query.url })
+	return {
+		props: {
+			article: JSON.parse(JSON.stringify(article)) as ArticleType
+		}
+	}
 }

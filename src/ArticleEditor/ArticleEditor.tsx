@@ -4,110 +4,110 @@ import ArticlePreview from "../ArticlePreview/ArticlePreview"
 import { useState } from "react"
 
 export default function ArticleEditor({
-    title,
-    setTitle,
-    url,
-    setUrl,
-    imageUrl,
-    setImageUrl,
-    description,
-    setDescription,
-    content,
-    setContent,
-    setEmail,
-    setPassword,
-    data,
-    handleSubmit
+	title,
+	setTitle,
+	url,
+	setUrl,
+	imageUrl,
+	setImageUrl,
+	description,
+	setDescription,
+	content,
+	setContent,
+	setEmail,
+	setPassword,
+	data,
+	handleSubmit
 }: ArticleEditorProps) {
-    const [article, setArticle] = useState<ArticleType>({
-        title: title,
-        url: url,
-        imageUrl: imageUrl,
-        description: description,
-        longDescription: content
-    } as ArticleType)
-    return (
-        <div className='flex flex-row'>
-            <div className='m-2 p-2 w-1/2 flex flex-col overflow-hidden'>
-                <input
-                    className='m-2 p-3 border-black border-2 rounded'
-                    placeholder="Title"
-                    defaultValue={title}
-                    onChange={(e) => {
-                        setTitle(e.target.value)
-                        setArticle({ ...article, title: e.target.value })
-                    }}
-                />
-                <input
-                    className='m-2 p-3  border-black border-2 rounded'
-                    placeholder="Url"
-                    defaultValue={url}
-                    onChange={(e) => {
-                        setUrl(e.target.value)
-                        setArticle({ ...article, url: e.target.value })
-                    }}
-                />
-                <input
-                    className='m-2 p-3  border-black border-2 rounded'
-                    placeholder="Image Url"
-                    defaultValue={imageUrl}
-                    onChange={(e) => {
-                        setImageUrl(e.target.value)
-                        setArticle({ ...article, imageUrl: e.target.value })
-                    }}
-                />
-                <textarea
-                    className='m-2 p-3  border-black border-2 rounded'
-                    rows={5}
-                    placeholder="Description"
-                    defaultValue={description}
-                    onChange={(e) => {
-                        setDescription(e.target.value)
-                        setArticle({ ...article, description: e.target.value })
-                    }}
-                />
-                <Editor
-                    className="m-2 p-3 border-black border-2 rounded"
-                    height="50vh"
-                    width="-webkit-fill-available"
-                    defaultValue={content}
-                    onChange={(value) => {
-                        setContent(value)
-                        setArticle({ ...article, longDescription: value! })
-                    }}
-                    options={{
-                        minimap: { enabled: false },
-                    }}
-                    defaultLanguage="markdown"
-                />
-                <input
-                    type="email"
-                    className='m-2 p-3  border-black border-2 rounded'
-                    placeholder="Email"
-                    onChange={(e) => {
-                        setEmail(e.target.value)
-                    }}
-                />
-                <input
-                    type="password"
-                    className='m-2 p-3  border-black border-2 rounded'
-                    placeholder="Password"
-                    onChange={(e) => {
-                        setPassword(e.target.value)
-                    }}
-                />
-                {data.message && <p className='text-green-600 text-center'>{data.message}</p>}
-                {data.error && <p className='text-red-600 text-center'>{data.error}</p>}
-                <div className='flex justify-center' style={{ margin: '10px', padding: '10px' }}>
-                    <button className="w-1/4  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                        onClick={handleSubmit}>
-                        Submit
-                    </button>
-                </div>
-            </div>
-            <div className='m-2 w-1/2 overflow-scroll'>
-                <ArticlePreview article={article} />
-            </div>
-        </div>
-    )
+	const [article, setArticle] = useState<ArticleType>({
+		title: title,
+		url: url,
+		imageUrl: imageUrl,
+		description: description,
+		longDescription: content
+	} as ArticleType)
+	return (
+		<div className='flex flex-row'>
+			<div className='m-2 p-2 w-1/2 flex flex-col overflow-hidden'>
+				<input
+					className='m-2 p-3 border-black border-2 rounded'
+					placeholder="Title"
+					defaultValue={title}
+					onChange={(e) => {
+						setTitle(e.target.value)
+						setArticle({ ...article, title: e.target.value })
+					}}
+				/>
+				<input
+					className='m-2 p-3  border-black border-2 rounded'
+					placeholder="Url"
+					defaultValue={url}
+					onChange={(e) => {
+						setUrl(e.target.value)
+						setArticle({ ...article, url: e.target.value })
+					}}
+				/>
+				<input
+					className='m-2 p-3  border-black border-2 rounded'
+					placeholder="Image Url"
+					defaultValue={imageUrl}
+					onChange={(e) => {
+						setImageUrl(e.target.value)
+						setArticle({ ...article, imageUrl: e.target.value })
+					}}
+				/>
+				<textarea
+					className='m-2 p-3  border-black border-2 rounded'
+					rows={5}
+					placeholder="Description"
+					defaultValue={description}
+					onChange={(e) => {
+						setDescription(e.target.value)
+						setArticle({ ...article, description: e.target.value })
+					}}
+				/>
+				<Editor
+					className="m-2 p-3 border-black border-2 rounded"
+					height="50vh"
+					width="-webkit-fill-available"
+					defaultValue={content}
+					onChange={(value) => {
+						setContent(value)
+						setArticle({ ...article, longDescription: value! })
+					}}
+					options={{
+						minimap: { enabled: false },
+					}}
+					defaultLanguage="markdown"
+				/>
+				<input
+					type="email"
+					className='m-2 p-3  border-black border-2 rounded'
+					placeholder="Email"
+					onChange={(e) => {
+						setEmail(e.target.value)
+					}}
+				/>
+				<input
+					type="password"
+					className='m-2 p-3  border-black border-2 rounded'
+					placeholder="Password"
+					onChange={(e) => {
+						setPassword(e.target.value)
+					}}
+				/>
+				{data.message && <p className='text-green-600 text-center'>{data.message}</p>}
+				{data.error && <p className='text-red-600 text-center'>{data.error}</p>}
+				<div className='flex justify-center' style={{ margin: '10px', padding: '10px' }}>
+					<button className="w-1/4  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+						onClick={handleSubmit}>
+						Submit
+					</button>
+				</div>
+			</div>
+			<div className='m-2 w-1/2 overflow-scroll'>
+				<ArticlePreview article={article} />
+			</div>
+		</div>
+	)
 }
