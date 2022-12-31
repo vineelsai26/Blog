@@ -34,8 +34,9 @@ export default function Home() {
         }
         getArticles()
     }, [page, pageLimit])
+
     return (
-        <div>
+        <div className='bg-slate-200'>
             <Head>
                 <title>Vineel Sai | Blog</title>
                 <meta name="description" content="Blog by Vineel Sai"></meta>
@@ -44,23 +45,28 @@ export default function Home() {
 
             <Navbar />
 
-            <div className='main'>
+            <div className='main flex items-center'>
                 {
                     articles.map(article => (
-                        <Link href={"post/" + article.url} className='card' key={article.url}>
-                            <Image src={article.imageUrl} className='image' alt="image" width={50} height={50} />
-                            <h3>{article.title}</h3>
-                            <p>{article.description.substring(0, 100)}</p>
+                        <Link href={"post/" + article.url} className='card bg-white w-4/5 flex flex-row border-2 border-slate-400' key={article.url}>
+                            <Image src={article.imageUrl} alt="image" width={200} height={200} />
+                            <div>
+                                <h2 className='font-bold leading-tight text-3xl m-4'>{article.title}</h2>
+                                <h4 className='m-2 p-2 font-normal leading-tight text-xl'>{article.description.substring(0, 100)}</h4>
+                            </div>
                         </Link>
                     ))
                 }
             </div>
 
-            <Pagination
-                pageCount={pageCount}
-                setPage={setPage}
-                page={page}
-            />
+            {
+                pageCount > 1 &&
+                <Pagination
+                    page={page}
+                    setPage={setPage}
+                    pageCount={pageCount}
+                />
+            }
 
             <Footer />
         </div >

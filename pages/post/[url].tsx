@@ -4,14 +4,17 @@ import Article from '../../models/article'
 import { ArticleType } from '../../types/article'
 import Footer from '../../src/Footer/Footer'
 import ArticlePreview from '../../src/ArticlePreview/ArticlePreview'
+import Navbar from '../../src/Navbar/Navbar'
 
 export default function Post({ article }: { article: ArticleType }) {
     return (
-        <div className='container'>
+        <div>
             <Head>
                 <title>{article.title}</title>
                 <link rel="icon" href="/logo.png" />
             </Head>
+
+            <Navbar />
 
             <ArticlePreview article={article} />
 
