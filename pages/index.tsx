@@ -10,14 +10,22 @@ import Loader from '../src/Loader/Loader'
 import mongoose from 'mongoose'
 import Articles from '../models/article'
 
-export default function Home({ articleProps, pageProps }: { articleProps: ArticleType[], pageProps: number }) {
+export default function Home({ articleProps, pageProps, pageCountProp }: { articleProps: ArticleType[], pageProps: number, pageCountProp: number }) {
 	const [articles, setArticles] = useState<ArticleType[]>(articleProps)
 	const [page, setPage] = useState(pageProps)
 	const [pageLimit, setPageLimit] = useState(10)
-	const [pageCount, setPageCount] = useState(0)
+	const [pageCount, setPageCount] = useState(pageCountProp)
+	const [loading, setLoading] = useState(false)
+
+	useEffect(() => {
+		if (localStorage.getItem('pageLimit')) {
+			setPageLimit(parseInt(localStorage.getItem('pageLimit')!))
+		}
+	}, [])
 
 	useEffect(() => {
 		const getArticles = async () => {
+			setLoading(true)
 			const res = await fetch('/api/articles', {
 				method: 'POST',
 				headers: {
@@ -35,11 +43,12 @@ export default function Home({ articleProps, pageProps }: { articleProps: Articl
 			} else {
 				console.log('error')
 			}
+			setLoading(false)
 		}
 
-		if (page > 0) {
-			getArticles()
-		}
+		getArticles()
+
+		localStorage.setItem('pageLimit', JSON.stringify(pageLimit))
 	}, [page, pageLimit])
 
 	return (
@@ -54,12 +63,19 @@ export default function Home({ articleProps, pageProps }: { articleProps: Articl
 
 			<div className='min-h-screen'>
 				{
-					articles.length > 0 ? (
+					articles.length > 0 && (
 						<div className='main flex items-center'>
 							{
 								articles.map(article => (
 									<Link href={"post/" + article.url} className='card bg-white w-4/5 flex flex-row border-2 border-slate-400' key={article.url}>
-										<Image src={article.imageUrl} alt="image" width={200} height={200} />
+										<Image
+											src={article.imageUrl}
+											alt="image"
+											width={200}
+											height={200}
+											priority
+											style={{width: 'auto', height: 'auto'}}
+										/>
 										<div>
 											<h2 className='font-bold leading-tight text-3xl m-4'>{article.title}</h2>
 											<h4 className='m-2 p-2 font-normal leading-tight text-xl'>{article.description.substring(0, 100)}</h4>
@@ -68,21 +84,22 @@ export default function Home({ articleProps, pageProps }: { articleProps: Articl
 								))
 							}
 						</div>
-					) : (
+					)
+				}
+				{
+					loading && (
 						<Loader />
 					)
 				}
 			</div>
 
 			<div className='flex flex-col'>
-				{
-					pageCount > 1 &&
-					<Pagination
-						page={page}
-						setPage={setPage}
-						pageCount={pageCount}
-					/>
-				}
+				<Pagination
+					page={page}
+					setPage={setPage}
+					pageCount={pageCount}
+					setPageLimit={setPageLimit}
+				/>
 
 				<Footer />
 			</div>
@@ -92,7 +109,7 @@ export default function Home({ articleProps, pageProps }: { articleProps: Articl
 
 export async function getStaticProps() {
 	try {
-		await mongoose.connect(process.env.NEXT_MONGODB_URL!)
+		mongoose.connect(process.env.NEXT_MONGODB_URL!)
 		console.log("connected")
 	} catch (error) {
 		console.log(error)
@@ -100,12 +117,15 @@ export async function getStaticProps() {
 
 	const articles = await Articles.find({}).sort({ createdAt: -1 }).limit(10)
 
-	mongoose.disconnect()
+	const count = await Articles.count({})
+
+	// mongoose.disconnect()
 
 	return {
 		props: {
 			articleProps: JSON.parse(JSON.stringify(articles)),
-			pageProps: 0
+			pageProps: 0,
+			pageCountProp: Math.ceil(count / 10)
 		},
 		revalidate: process.env.NEXT_REVALIDATE_TIMEOUT ? parseInt(process.env.NEXT_REVALIDATE_TIMEOUT) : 60
 	}

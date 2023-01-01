@@ -1,11 +1,25 @@
 import { Dispatch, SetStateAction } from "react"
 import { GrNext, GrPrevious } from 'react-icons/gr'
 
-export default function Pagination({ pageCount, setPage, page }: { pageCount: number, setPage: Dispatch<SetStateAction<number>>, page: number }) {
+export default function Pagination({ pageCount, setPage, page, setPageLimit }: { pageCount: number, setPage: Dispatch<SetStateAction<number>>, page: number, setPageLimit: Dispatch<SetStateAction<number>> }) {
 	return (
-		<div className='w-4/5 m-auto'>
+		<div className='w-4/5 m-auto flex flex-row-reverse'>
+			<select
+				defaultValue={10}
+				className="w-16 m-8 ml-0 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+				onChange={(e) => {
+					setPageLimit(parseInt(e.target.value))
+					setPage(0)
+				}}
+			>
+				<option value={10}>10</option>
+				<option value={20}>20</option>
+				<option value={30}>30</option>
+				<option value={40}>40</option>
+				<option value={50}>50</option>
+			</select>
 			<div
-				className="isolate inline-flex -space-x-px rounded-md shadow-sm m-4 p-4 float-right"
+				className="isolate inline-flex -space-x-px rounded-md m-4 p-4"
 				aria-label="Pagination"
 			>
 				<button

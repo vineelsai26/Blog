@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method === "POST") {
 		try {
-			await mongoose.connect(process.env.NEXT_MONGODB_URL!)
+			mongoose.connect(process.env.NEXT_MONGODB_URL!)
 			console.log("connected")
 		} catch (error) {
 			console.log(error)
@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 		const count = await Articles.count({})
 
-		mongoose.disconnect()
+		// mongoose.disconnect()
 
 		return res.status(200).json({
 			articles: articles,
