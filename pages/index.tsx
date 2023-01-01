@@ -7,10 +7,12 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import Pagination from '../src/Pagination/Pagination'
 import Loader from '../src/Loader/Loader'
+import mongoose from 'mongoose'
+import Articles from '../models/article'
 
-export default function Home() {
-	const [articles, setArticles] = useState<ArticleType[]>([])
-	const [page, setPage] = useState(0)
+export default function Home({ articleProps, pageProps }: { articleProps: ArticleType[], pageProps: number }) {
+	const [articles, setArticles] = useState<ArticleType[]>(articleProps)
+	const [page, setPage] = useState(pageProps)
 	const [pageLimit, setPageLimit] = useState(10)
 	const [pageCount, setPageCount] = useState(0)
 
@@ -34,7 +36,10 @@ export default function Home() {
 				console.log('error')
 			}
 		}
-		getArticles()
+
+		if (page > 0) {
+			getArticles()
+		}
 	}, [page, pageLimit])
 
 	return (
@@ -47,25 +52,27 @@ export default function Home() {
 
 			<Navbar />
 
-			{
-				articles.length > 0 ? (
-					<div className='main flex items-center'>
-						{
-							articles.map(article => (
-								<Link href={"post/" + article.url} className='card bg-white w-4/5 flex flex-row border-2 border-slate-400' key={article.url}>
-									<Image src={article.imageUrl} alt="image" width={200} height={200} />
-									<div>
-										<h2 className='font-bold leading-tight text-3xl m-4'>{article.title}</h2>
-										<h4 className='m-2 p-2 font-normal leading-tight text-xl'>{article.description.substring(0, 100)}</h4>
-									</div>
-								</Link>
-							))
-						}
-					</div>
-				) : (
-					<Loader />
-				)
-			}
+			<div className='min-h-screen'>
+				{
+					articles.length > 0 ? (
+						<div className='main flex items-center'>
+							{
+								articles.map(article => (
+									<Link href={"post/" + article.url} className='card bg-white w-4/5 flex flex-row border-2 border-slate-400' key={article.url}>
+										<Image src={article.imageUrl} alt="image" width={200} height={200} />
+										<div>
+											<h2 className='font-bold leading-tight text-3xl m-4'>{article.title}</h2>
+											<h4 className='m-2 p-2 font-normal leading-tight text-xl'>{article.description.substring(0, 100)}</h4>
+										</div>
+									</Link>
+								))
+							}
+						</div>
+					) : (
+						<Loader />
+					)
+				}
+			</div>
 
 			<div className='flex flex-col'>
 				{
@@ -81,4 +88,25 @@ export default function Home() {
 			</div>
 		</div >
 	)
+}
+
+export async function getStaticProps() {
+	try {
+		await mongoose.connect(process.env.NEXT_MONGODB_URL!)
+		console.log("connected")
+	} catch (error) {
+		console.log(error)
+	}
+
+	const articles = await Articles.find({}).sort({ createdAt: -1 }).limit(10)
+
+	mongoose.disconnect()
+
+	return {
+		props: {
+			articleProps: JSON.parse(JSON.stringify(articles)),
+			pageProps: 0
+		},
+		revalidate: process.env.NEXT_REVALIDATE_TIMEOUT ? parseInt(process.env.NEXT_REVALIDATE_TIMEOUT) : 60
+	}
 }
