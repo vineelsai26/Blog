@@ -8,7 +8,7 @@ import mongoose from 'mongoose'
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method === "POST") {
 		try {
-			mongoose.connect(process.env.NEXT_MONGODB_URL!)
+			await mongoose.connect(process.env.NEXT_MONGODB_URL!)
 			console.log("connected")
 		} catch (error) {
 			console.log(error)
@@ -54,7 +54,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			})
 		}
 
-		// mongoose.disconnect()
+		mongoose.disconnect()
 	} else {
 		res.status(400).json({
 			error: "Invalid request"

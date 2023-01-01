@@ -10,18 +10,13 @@ import Loader from '../src/Loader/Loader'
 import mongoose from 'mongoose'
 import Articles from '../models/article'
 
-export default function Home({ articleProps, pageProps, pageCountProp }: { articleProps: ArticleType[], pageProps: number, pageCountProp: number }) {
+const pageLimit = 10
+
+export default function Home({ articleProps, pageProps, pageCountProp, initialRun }: { articleProps: ArticleType[], pageProps: number, pageCountProp: number, initialRun: boolean }) {
 	const [articles, setArticles] = useState<ArticleType[]>(articleProps)
 	const [page, setPage] = useState(pageProps)
-	const [pageLimit, setPageLimit] = useState(10)
 	const [pageCount, setPageCount] = useState(pageCountProp)
 	const [loading, setLoading] = useState(false)
-
-	useEffect(() => {
-		if (localStorage.getItem('pageLimit')) {
-			setPageLimit(parseInt(localStorage.getItem('pageLimit')!))
-		}
-	}, [])
 
 	useEffect(() => {
 		const getArticles = async () => {
@@ -46,10 +41,10 @@ export default function Home({ articleProps, pageProps, pageCountProp }: { artic
 			setLoading(false)
 		}
 
-		getArticles()
-
-		localStorage.setItem('pageLimit', JSON.stringify(pageLimit))
-	}, [page, pageLimit])
+		if (page > 0) {
+			getArticles()
+		}
+	}, [page])
 
 	return (
 		<div className='bg-slate-200'>
@@ -74,7 +69,7 @@ export default function Home({ articleProps, pageProps, pageCountProp }: { artic
 											width={200}
 											height={200}
 											priority
-											style={{width: 'auto', height: 'auto'}}
+											style={{ width: 'auto', height: 'auto' }}
 										/>
 										<div>
 											<h2 className='font-bold leading-tight text-3xl m-4'>{article.title}</h2>
@@ -94,12 +89,15 @@ export default function Home({ articleProps, pageProps, pageCountProp }: { artic
 			</div>
 
 			<div className='flex flex-col'>
-				<Pagination
-					page={page}
-					setPage={setPage}
-					pageCount={pageCount}
-					setPageLimit={setPageLimit}
-				/>
+				{
+					pageCount > 1 && (
+						<Pagination
+							page={page}
+							setPage={setPage}
+							pageCount={pageCount}
+						/>
+					)
+				}
 
 				<Footer />
 			</div>
@@ -109,7 +107,7 @@ export default function Home({ articleProps, pageProps, pageCountProp }: { artic
 
 export async function getStaticProps() {
 	try {
-		mongoose.connect(process.env.NEXT_MONGODB_URL!)
+		await mongoose.connect(process.env.NEXT_MONGODB_URL!)
 		console.log("connected")
 	} catch (error) {
 		console.log(error)
@@ -119,13 +117,14 @@ export async function getStaticProps() {
 
 	const count = await Articles.count({})
 
-	// mongoose.disconnect()
+	mongoose.disconnect()
 
 	return {
 		props: {
 			articleProps: JSON.parse(JSON.stringify(articles)),
 			pageProps: 0,
-			pageCountProp: Math.ceil(count / 10)
+			pageCountProp: Math.ceil(count / pageLimit),
+			initialRun: true
 		},
 		revalidate: process.env.NEXT_REVALIDATE_TIMEOUT ? parseInt(process.env.NEXT_REVALIDATE_TIMEOUT) : 60
 	}
