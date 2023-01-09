@@ -3228,13 +3228,13 @@ __metadata:
   linkType: hard
 
 "json5@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "json5@npm:1.0.1"
+  version: 1.0.2
+  resolution: "json5@npm:1.0.2"
   dependencies:
     minimist: ^1.2.0
   bin:
     json5: lib/cli.js
-  checksum: e76ea23dbb8fc1348c143da628134a98adf4c5a4e8ea2adaa74a80c455fc2cdf0e2e13e6398ef819bfe92306b610ebb2002668ed9fc1af386d593691ef346fc3
+  checksum: 866458a8c58a95a49bef3adba929c625e82532bcff1fe93f01d29cb02cac7c3fe1f4b79951b7792c2da9de0b32871a8401a6e3c5b36778ad852bf5b8a61165d7
   languageName: node
   linkType: hard
 
@@ -3248,10 +3248,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kareem@npm:2.5.0":
-  version: 2.5.0
-  resolution: "kareem@npm:2.5.0"
-  checksum: 292e80b32fb44e1801c5eb25b150e4b42e6ddf8a9c38ac67f99d4e7164dc7d9e874ea9b6ffaa42d6c3e76c8dd28ae5723643f3b5c8cb5c481af07118ce1475e3
+"kareem@npm:2.5.1":
+  version: 2.5.1
+  resolution: "kareem@npm:2.5.1"
+  checksum: b019a960a7b9e44b6ef224ef85e7583d4e969619f53319e571677fbed7e57e01ee8774589726b29741e42790996567d878003c18e674296742dc343bfbf3efb9
   languageName: node
   linkType: hard
 
@@ -3529,18 +3529,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongoose@npm:^6.8.2":
-  version: 6.8.2
-  resolution: "mongoose@npm:6.8.2"
+"mongoose@npm:^6.8.3":
+  version: 6.8.3
+  resolution: "mongoose@npm:6.8.3"
   dependencies:
     bson: ^4.7.0
-    kareem: 2.5.0
+    kareem: 2.5.1
     mongodb: 4.12.1
     mpath: 0.9.0
     mquery: 4.0.3
     ms: 2.1.3
     sift: 16.0.1
-  checksum: ff1ae68726124855954d24d575c81d9b737abfea6a051c12621acf40d4f044ecf530dabafd29e70cb8bf4aef18de8f1504c872c11d6db85bfd2a32b9d75b2ab2
+  checksum: 86ab11e142c6d8d506d9562a5702188becead576ca7bead9ca4a769013bf4c43bc61788623885a194f6e8b5115bf6a6c6c81738298dcfb8b6e74f62a4aa3875f
   languageName: node
   linkType: hard
 
@@ -3604,9 +3604,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-auth@npm:^4.18.7":
-  version: 4.18.7
-  resolution: "next-auth@npm:4.18.7"
+"next-auth@npm:^4.18.8":
+  version: 4.18.8
+  resolution: "next-auth@npm:4.18.8"
   dependencies:
     "@babel/runtime": ^7.16.3
     "@panva/hkdf": ^1.0.1
@@ -3625,7 +3625,7 @@ __metadata:
   peerDependenciesMeta:
     nodemailer:
       optional: true
-  checksum: 221fc1c4f51a842c1107bc178a09be3ac97c33dd9cd4bd28f049158d79e49880147834a7f693cfce31e02023ecac1f7613bb71808218f4b3d4b32591ed7af44e
+  checksum: 8095346c168c34d3578f71f43bfb607280af8024b2de39c9edff7ddd7f759455501923b738a45e0c85e471a6283130c5060e68bfb534e784d66edff12a88374e
   languageName: node
   linkType: hard
 
@@ -4815,10 +4815,11 @@ __metadata:
     bcrypt: ^5.1.0
     eslint: 8.30.0
     eslint-config-next: 13.1.1
-    mongoose: ^6.8.2
+    mongoose: ^6.8.3
     next: 13.1.1
     next-auth: ^4.18.7
     postcss: ^8.4.21
+    next-auth: ^4.18.8
     react: 18.2.0
     react-dom: 18.2.0
     react-icons: ^4.7.1
