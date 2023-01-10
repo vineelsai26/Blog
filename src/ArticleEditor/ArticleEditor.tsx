@@ -2,7 +2,7 @@ import Editor from "@monaco-editor/react"
 import { ArticleEditorProps, ArticleType } from "../../types/article"
 import ArticlePreview from "../ArticlePreview/ArticlePreview"
 import { useState } from "react"
-import Article from '../Article/Article'
+import Article from '../ArticleCard/ArticleCard'
 import Loader from '../Loader/Loader'
 
 export default function ArticleEditor({

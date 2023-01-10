@@ -7,13 +7,13 @@ import Pagination from '../src/Pagination/Pagination'
 import Loader from '../src/Loader/Loader'
 import mongoose from 'mongoose'
 import Articles from '../models/article'
-import Article from '../src/Article/Article'
+import Article from '../src/ArticleCard/ArticleCard'
 
 const pageLimit = 10
 
 export default function Home({ articleProps, pageProps, pageCountProp, initialRun }: { articleProps: ArticleType[], pageProps: number, pageCountProp: number, initialRun: boolean }) {
 	const [articles, setArticles] = useState<ArticleType[]>(articleProps)
-	const [page, setPage] = useState(pageProps)
+	const [page, setPage] = useState(-1)
 	const [pageCount, setPageCount] = useState(pageCountProp)
 	const [loading, setLoading] = useState(false)
 
@@ -40,7 +40,7 @@ export default function Home({ articleProps, pageProps, pageCountProp, initialRu
 			setLoading(false)
 		}
 
-		if (page > 0) {
+		if (page >= 0) {
 			getArticles()
 		}
 	}, [page])

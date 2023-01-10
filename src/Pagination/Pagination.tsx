@@ -9,8 +9,8 @@ export default function Pagination({ pageCount, setPage, page }: { pageCount: nu
 				aria-label="Pagination"
 			>
 				<button
-					disabled={page === 0}
-					style={{ display: page === 0 ? 'none' : 'inline-flex' }}
+					disabled={page <= 0}
+					style={{ display: page <= 0 ? 'none' : 'inline-flex' }}
 					className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
 					onClick={() => setPage((page) => { return page - 1 })}
 				>
@@ -24,7 +24,9 @@ export default function Pagination({ pageCount, setPage, page }: { pageCount: nu
 							<button
 								key={i}
 								className="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10"
-								onClick={() => setPage(i)}
+								onClick={() => {
+									setPage(i)
+								}}
 							>
 								{i + 1}
 							</button>
@@ -34,8 +36,8 @@ export default function Pagination({ pageCount, setPage, page }: { pageCount: nu
 
 				<button
 					className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
-					disabled={page === pageCount - 1}
-					style={{ display: page === pageCount - 1 ? 'none' : 'inline-flex' }}
+					disabled={page >= pageCount - 1}
+					style={{ display: page >= pageCount - 1 ? 'none' : 'inline-flex' }}
 					onClick={() => {
 						setPage((page) => {
 							return page + 1

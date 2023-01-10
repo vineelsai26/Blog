@@ -32,7 +32,7 @@ export default function Navbar({ showSearch, setArticles, setLoading }: { showSe
 									height={50}
 								/>
 							</div>
-							<div className="sm:ml-6 sm:block">
+							<div className="hidden lg:block sm:ml-6 sm:block">
 								<div className="flex space-x-4">
 									{navigation.map((item: Navigation) => (
 										<a
