@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { Dispatch, SetStateAction } from 'react'
 import { ArticleType } from '../../types/article'
+import Link from 'next/link'
 
 interface Navigation {
 	name: string
@@ -9,7 +10,12 @@ interface Navigation {
 }
 
 const navigation = [
-	{ name: 'Home', href: '/', current: true },
+	{ name: 'Home', href: '/', current: false },
+	{ name: 'Projects', href: '/#projects', current: false },
+	{ name: 'Apps', href: '/apps', current: false },
+	{ name: 'Blog', href: '/blog', current: false },
+	{ name: 'Resume', href: '/resume/resume.pdf', current: false },
+	{ name: 'Contact', href: '/contact', current: false },
 ]
 
 function classNames(...classes: string[]) {
@@ -24,18 +30,20 @@ export default function Navbar({ showSearch, setArticles, setLoading }: { showSe
 					<div className="relative flex h-16 items-center justify-between">
 						<div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
 							<div className="flex flex-shrink-0 items-center">
-								<Image
-									className="h-8 w-auto lg:block"
-									src="/logo.png"
-									alt="Vineel Sai"
-									width={50}
-									height={50}
-								/>
+								<Link href='/'>
+									<Image
+										className="h-8 w-auto lg:block"
+										src="/logo.png"
+										alt="Vineel Sai"
+										width={50}
+										height={50}
+									/>
+								</Link>
 							</div>
 							<div className="hidden lg:block sm:ml-6 sm:block">
 								<div className="flex space-x-4">
 									{navigation.map((item: Navigation) => (
-										<a
+										<Link
 											key={item.name}
 											href={item.href}
 											className={classNames(
@@ -45,7 +53,7 @@ export default function Navbar({ showSearch, setArticles, setLoading }: { showSe
 											aria-current={item.current ? 'page' : undefined}
 										>
 											{item.name}
-										</a>
+										</Link>
 									))}
 								</div>
 							</div>

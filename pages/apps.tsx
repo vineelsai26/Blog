@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Footer from '../src/Footer/Footer'
 import Navbar from '../src/Navbar/Navbar'
 
-export default function Home() {
+export default function Apps() {
 	return (
 		<div className='bg-slate-200'>
 			<Head>
