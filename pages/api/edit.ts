@@ -26,7 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				let article = await Article.findOne({
 					url: { $eq: url }
 				})
-				if (deleteArticle == "true") {
+				if (deleteArticle) {
 					await article.delete()
 					res.status(200).json({
 						message: "Article deleted successfully"

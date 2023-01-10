@@ -31,18 +31,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 					longDescription: content,
 					createdBy: user.email
 				})
-				article.save(function (err: any) {
-					if (err) {
-						console.log(err)
-						res.status(400).json({
-							error: "Error saving article"
-						})
-					} else {
-						res.status(200).json({
-							message: "Article saved successfully"
-						})
-					}
-				})
+				try {
+					await article.save()
+					res.status(200).json({
+						message: "Article saved successfully"
+					})
+				} catch (err) {
+					console.log(err)
+					res.status(400).json({
+						error: "Error saving article"
+					})
+				}
 			} else {
 				res.status(400).json({
 					error: "invalid email or password"

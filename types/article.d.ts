@@ -27,5 +27,7 @@ export type ArticleEditorProps = {
 	setEmail: Dispatch<SetStateAction<string>>,
 	setPassword: Dispatch<SetStateAction<string>>,
 	data: SaveResponse,
-	handleSubmit: () => void
+	handleSubmit: (boolean) => void,
+	loading: boolean,
+	editMode: boolean,
 }

@@ -18,7 +18,12 @@ export default function EditPost({ article }: { article: ArticleType }) {
 
 	const [data, setData] = useState<SaveResponse>({} as SaveResponse)
 
-	const handleSubmit = async () => {
+	const [loading, setLoading] = useState(false)
+
+	const editMode = true
+
+	const handleSubmit = async (deleteArticle: Boolean = false) => {
+		setLoading(true)
 		const request = await fetch('/api/edit', {
 			method: 'POST',
 			headers: {
@@ -31,13 +36,15 @@ export default function EditPost({ article }: { article: ArticleType }) {
 				description: description,
 				content: content,
 				email: email,
-				password: password
+				password: password,
+				deleteArticle: deleteArticle
 			})
 		})
 
 		const response = await request.json()
 
 		setData(response)
+		setLoading(false)
 	}
 	return (
 		<div>
@@ -67,6 +74,8 @@ export default function EditPost({ article }: { article: ArticleType }) {
 				setPassword={setPassword}
 				data={data}
 				handleSubmit={handleSubmit}
+				loading={loading}
+				editMode={editMode}
 			/>
 
 			<Footer />
@@ -76,7 +85,7 @@ export default function EditPost({ article }: { article: ArticleType }) {
 
 export async function getServerSideProps(context: { query: { url: string } }) {
 	try {
-		mongoose.connect(process.env.NEXT_MONGODB_URL!)
+		await mongoose.connect(process.env.NEXT_MONGODB_URL!)
 	} catch (error) {
 		console.log(error)
 	}

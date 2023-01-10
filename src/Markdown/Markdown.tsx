@@ -8,7 +8,7 @@ import { vs } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 export default function Markdown({ article }: { article: ArticleType }) {
 	return (
 		<ReactMarkdown
-			className='prose'
+			className='prose max-w-max'
 			remarkPlugins={[remarkGfm]}
 		components={{
 			code({ node, inline, className, children, ...props }) {

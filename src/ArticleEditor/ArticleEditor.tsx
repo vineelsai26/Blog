@@ -3,6 +3,7 @@ import { ArticleEditorProps, ArticleType } from "../../types/article"
 import ArticlePreview from "../ArticlePreview/ArticlePreview"
 import { useState } from "react"
 import Article from '../Article/Article'
+import Loader from '../Loader/Loader'
 
 export default function ArticleEditor({
 	title,
@@ -18,7 +19,9 @@ export default function ArticleEditor({
 	setEmail,
 	setPassword,
 	data,
-	handleSubmit
+	handleSubmit,
+	loading,
+	editMode
 }: ArticleEditorProps) {
 	const [article, setArticle] = useState<ArticleType>({
 		title: title,
@@ -27,6 +30,7 @@ export default function ArticleEditor({
 		description: description,
 		longDescription: content
 	} as ArticleType)
+
 	return (
 		<div className='flex flex-row'>
 			<div className='m-2 p-2 w-1/2 flex flex-col overflow-hidden'>
@@ -97,14 +101,34 @@ export default function ArticleEditor({
 						setPassword(e.target.value)
 					}}
 				/>
+				{
+					loading && (
+						<Loader />
+					)
+				}
 				{data.message && <p className='text-green-600 text-center'>{data.message}</p>}
 				{data.error && <p className='text-red-600 text-center'>{data.error}</p>}
 				<div className='flex justify-center' style={{ margin: '10px', padding: '10px' }}>
 					<button className="w-1/4  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-						onClick={handleSubmit}>
+						onClick={() => {
+							handleSubmit(false)
+						}}>
 						Submit
 					</button>
 				</div>
+				{
+					editMode && (
+						<div className='flex justify-center' style={{ margin: '10px', padding: '10px' }}>
+							<button className="w-1/4  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+								onClick={() => {
+									handleSubmit(true)
+								}}>
+								Delete
+							</button>
+						</div>
+					)
+				}
+
 			</div>
 			<div className='p-2 w-1/2 overflow-scroll bg-slate-200'>
 				<h1 className='text-2xl text-center'>Home Page Preview</h1>

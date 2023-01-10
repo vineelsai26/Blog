@@ -16,7 +16,12 @@ export default function New() {
 
 	const [data, setData] = useState<SaveResponse>({} as SaveResponse)
 
+	const [loading, setLoading] = useState(false)
+
+	const editMode = false
+
 	const handleSubmit = async () => {
+		setLoading(true)
 		const request = await fetch('/api/add', {
 			method: 'POST',
 			headers: {
@@ -36,6 +41,7 @@ export default function New() {
 		const response = await request.json()
 
 		setData(response)
+		setLoading(false)
 	}
 	return (
 		<div>
@@ -44,7 +50,7 @@ export default function New() {
 				<link rel="icon" href="/logo.png" />
 			</Head>
 
-			<Navbar />
+			<Navbar showSearch={false} setArticles={null} setLoading={null} />
 
 			<ArticleEditor
 				title={title}
@@ -61,6 +67,8 @@ export default function New() {
 				setPassword={setPassword}
 				data={data}
 				handleSubmit={handleSubmit}
+				loading={loading}
+				editMode={editMode}
 			/>
 
 			<Footer />
