@@ -14,7 +14,11 @@ export default function Post({ article }: { article: ArticleType }) {
 				<link rel="icon" href="/logo.png" />
 			</Head>
 
-			<Navbar />
+			<Navbar
+				showSearch={false}
+				setArticles={null}
+				setLoading={null}
+			/>
 
 			<ArticlePreview article={article} />
 
@@ -25,12 +29,14 @@ export default function Post({ article }: { article: ArticleType }) {
 
 export async function getServerSideProps(context: { query: { url: string } }) {
 	try {
-		mongoose.connect(process.env.NEXT_MONGODB_URL!)
+		await mongoose.connect(process.env.NEXT_MONGODB_URL!)
 	} catch (error) {
 		console.log(error)
 	}
 
 	const article = await Article.findOne({ url: context.query.url })
+
+	mongoose.disconnect()
 	return {
 		props: {
 			article: JSON.parse(JSON.stringify(article)) as ArticleType

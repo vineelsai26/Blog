@@ -46,7 +46,11 @@ export default function EditPost({ article }: { article: ArticleType }) {
 				<link rel="icon" href="/logo.png" />
 			</Head>
 
-			<Navbar />
+			<Navbar
+				showSearch={false}
+				setArticles={null}
+				setLoading={null}
+			/>
 
 			<ArticleEditor
 				title={title}

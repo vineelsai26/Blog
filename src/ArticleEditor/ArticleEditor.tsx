@@ -2,6 +2,7 @@ import Editor from "@monaco-editor/react"
 import { ArticleEditorProps, ArticleType } from "../../types/article"
 import ArticlePreview from "../ArticlePreview/ArticlePreview"
 import { useState } from "react"
+import Article from '../Article/Article'
 
 export default function ArticleEditor({
 	title,
@@ -105,7 +106,12 @@ export default function ArticleEditor({
 					</button>
 				</div>
 			</div>
-			<div className='m-2 w-1/2 overflow-scroll'>
+			<div className='p-2 w-1/2 overflow-scroll bg-slate-200'>
+				<h1 className='text-2xl text-center'>Home Page Preview</h1>
+				<div className='flex justify-center'>
+					<Article article={article} />
+				</div>
+				<h1 className='text-2xl text-center m-5'>Article Preview</h1>
 				<ArticlePreview article={article} />
 			</div>
 		</div>

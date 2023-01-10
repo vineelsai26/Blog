@@ -1,14 +1,13 @@
 import Head from 'next/head'
 import { ArticleType } from '../types/article'
-import Link from 'next/link'
 import Footer from '../src/Footer/Footer'
 import Navbar from '../src/Navbar/Navbar'
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import Pagination from '../src/Pagination/Pagination'
 import Loader from '../src/Loader/Loader'
 import mongoose from 'mongoose'
 import Articles from '../models/article'
+import Article from '../src/Article/Article'
 
 const pageLimit = 10
 
@@ -54,7 +53,7 @@ export default function Home({ articleProps, pageProps, pageCountProp, initialRu
 				<link rel="icon" href="/logo.png" />
 			</Head>
 
-			<Navbar />
+			<Navbar showSearch={true} setArticles={setArticles} setLoading={setLoading} />
 
 			<div className='min-h-screen'>
 				{
@@ -62,20 +61,7 @@ export default function Home({ articleProps, pageProps, pageCountProp, initialRu
 						<div className='main flex items-center'>
 							{
 								articles.map(article => (
-									<Link href={"post/" + article.url} className='card bg-white w-4/5 flex flex-row border-2 border-slate-400' key={article.url}>
-										<Image
-											src={article.imageUrl}
-											alt="image"
-											width={200}
-											height={200}
-											priority
-											style={{ width: 'auto', height: 'auto' }}
-										/>
-										<div>
-											<h2 className='font-bold leading-tight text-3xl m-4'>{article.title}</h2>
-											<h4 className='m-2 p-2 font-normal leading-tight text-xl'>{article.description.substring(0, 100)}</h4>
-										</div>
-									</Link>
+									<Article key={article.url} article={article} />
 								))
 							}
 						</div>

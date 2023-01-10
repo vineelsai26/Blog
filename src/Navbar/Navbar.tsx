@@ -1,4 +1,6 @@
 import Image from "next/image"
+import { Dispatch, SetStateAction } from 'react'
+import { ArticleType } from '../../types/article'
 
 interface Navigation {
 	name: string
@@ -14,7 +16,7 @@ function classNames(...classes: string[]) {
 	return classes.filter(Boolean).join(' ')
 }
 
-export default function Navbar() {
+export default function Navbar({ showSearch, setArticles, setLoading }: { showSearch: boolean, setArticles: Dispatch<SetStateAction<ArticleType[]>> | null, setLoading: Dispatch<SetStateAction<boolean>> | null }) {
 	return (
 		<>
 			<div className='bg-gray-800'>
@@ -48,13 +50,26 @@ export default function Navbar() {
 								</div>
 							</div>
 						</div>
-						<div>
-							<input
-								type="text"
-								className="px-3 py-2 block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-								placeholder="Search"
-							/>
-						</div>
+						{showSearch && (
+							<div>
+								<input
+									type="text"
+									className="px-3 py-2 block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+									placeholder="Search"
+									onChange={(e) => {
+										if (setArticles) {
+											setLoading && setLoading(true)
+											fetch(`/api/search?query=${e.target.value}`)
+												.then(res => res.json())
+												.then(data => {
+													setArticles(data)
+													setLoading && setLoading(false)
+												})
+										}
+									}}
+								/>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>
