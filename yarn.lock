@@ -1276,6 +1276,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/nprogress@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@types/nprogress@npm:0.2.0"
+  checksum: 561384775008ae58111f038f8f9468b3de8987cd753feef9bf6d07af0e1343390d492a078bb08a7b53ac7370208e31e06ac069cb852c435d49f5fe218e9769c4
+  languageName: node
+  linkType: hard
+
 "@types/prop-types@npm:*, @types/prop-types@npm:^15.0.0":
   version: 15.7.5
   resolution: "@types/prop-types@npm:15.7.5"
@@ -1741,6 +1748,42 @@ __metadata:
   checksum: ccd267956c58d2315f5d3ea6757cf09863c5fc703e50fbeb13a7dc849b812ef76e3cf9ca8f35a0c48498776a7478d7b4a0418e1e2b8cb9cb9731f2922aaad7f8
   languageName: node
   linkType: hard
+
+"blog@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "blog@workspace:."
+  dependencies:
+    "@monaco-editor/react": ^4.4.6
+    "@next/font": 13.1.1
+    "@tailwindcss/typography": ^0.5.8
+    "@types/bcrypt": ^5.0.0
+    "@types/node": 18.11.18
+    "@types/react": 18.0.26
+    "@types/react-dom": 18.0.10
+    "@types/react-syntax-highlighter": ^15.5.6
+    "@types/showdown": ^2.0.0
+    autoprefixer: ^10.4.13
+    axios: ^1.2.2
+    bcrypt: ^5.1.0
+    eslint: 8.31.0
+    eslint-config-next: 13.1.1
+    mongoose: ^6.8.3
+    next: 13.1.1
+    next-auth: ^4.18.8
+    nextjs-progressbar: ^0.0.16
+    postcss: ^8.4.20
+    react: 18.2.0
+    react-dom: 18.2.0
+    react-icons: ^4.7.1
+    react-markdown: ^8.0.4
+    react-syntax-highlighter: ^15.5.0
+    remark-gfm: ^3.0.1
+    showdown: ^2.1.0
+    tailwindcss: ^3.2.4
+    typescript: 4.9.4
+    typewriter-effect: ^2.19.0
+  languageName: unknown
+  linkType: soft
 
 "bowser@npm:^2.11.0":
   version: 2.11.0
@@ -4632,6 +4675,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nextjs-progressbar@npm:^0.0.16":
+  version: 0.0.16
+  resolution: "nextjs-progressbar@npm:0.0.16"
+  dependencies:
+    "@types/nprogress": ^0.2.0
+    nprogress: ^0.2.0
+    prop-types: ^15.8.1
+  peerDependencies:
+    next: ">= 6.0.0"
+    react: ">= 16.0.0"
+  checksum: b75f7bd1f336765aab203613e028ba5cb7e89590add46e4df435cc868bad042c2c5c6fe8c2cf1b127b1cae66eaae6e10d061b2908d7d4b6a9dcd79ad4e41bbcd
+  languageName: node
+  linkType: hard
+
 "node-addon-api@npm:^5.0.0":
   version: 5.0.0
   resolution: "node-addon-api@npm:5.0.0"
@@ -4739,6 +4796,13 @@ __metadata:
     gauge: ^4.0.3
     set-blocking: ^2.0.0
   checksum: ae238cd264a1c3f22091cdd9e2b106f684297d3c184f1146984ecbe18aaa86343953f26b9520dedd1b1372bc0316905b736c1932d778dbeb1fcf5a1001390e2a
+  languageName: node
+  linkType: hard
+
+"nprogress@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "nprogress@npm:0.2.0"
+  checksum: 66b7bec5d563ecf2d1c3d2815e6d5eb74ed815eee8563e0afa63d3f185ab1b9cf2ddd97e1ded263b9995c5019d26d600320e849e50f3747984daa033744619dc
   languageName: node
   linkType: hard
 
@@ -4977,6 +5041,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"performance-now@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "performance-now@npm:2.1.0"
+  checksum: 534e641aa8f7cba160f0afec0599b6cecefbb516a2e837b512be0adbe6c1da5550e89c78059c7fabc5c9ffdf6627edabe23eb7c518c4500067a898fa65c2b550
+  languageName: node
+  linkType: hard
+
 "picocolors@npm:^1.0.0":
   version: 1.0.0
   resolution: "picocolors@npm:1.0.0"
@@ -5163,7 +5234,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.0.0, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.0.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -5215,6 +5286,15 @@ __metadata:
   version: 5.1.1
   resolution: "quick-lru@npm:5.1.1"
   checksum: a516faa25574be7947969883e6068dbe4aa19e8ef8e8e0fd96cddd6d36485e9106d85c0041a27153286b0770b381328f4072aa40d3b18a19f5f7d2b78b94b5ed
+  languageName: node
+  linkType: hard
+
+"raf@npm:^3.4.0":
+  version: 3.4.1
+  resolution: "raf@npm:3.4.1"
+  dependencies:
+    performance-now: ^2.1.0
+  checksum: 50ba284e481c8185dbcf45fc4618ba3aec580bb50c9121385d5698cb6012fe516d2015b1df6dd407a7b7c58d44be8086108236affbce1861edd6b44637c8cd52
   languageName: node
   linkType: hard
 
@@ -5911,40 +5991,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"test@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "test@workspace:."
-  dependencies:
-    "@monaco-editor/react": ^4.4.6
-    "@next/font": 13.1.1
-    "@tailwindcss/typography": ^0.5.8
-    "@types/bcrypt": ^5.0.0
-    "@types/node": 18.11.18
-    "@types/react": 18.0.26
-    "@types/react-dom": 18.0.10
-    "@types/react-syntax-highlighter": ^15.5.6
-    "@types/showdown": ^2.0.0
-    autoprefixer: ^10.4.13
-    axios: ^1.2.2
-    bcrypt: ^5.1.0
-    eslint: 8.31.0
-    eslint-config-next: 13.1.1
-    mongoose: ^6.8.3
-    next: 13.1.1
-    next-auth: ^4.18.8
-    postcss: ^8.4.20
-    react: 18.2.0
-    react-dom: 18.2.0
-    react-icons: ^4.7.1
-    react-markdown: ^8.0.4
-    react-syntax-highlighter: ^15.5.0
-    remark-gfm: ^3.0.1
-    showdown: ^2.1.0
-    tailwindcss: ^3.2.4
-    typescript: 4.9.4
-  languageName: unknown
-  linkType: soft
-
 "text-table@npm:^0.2.0":
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
@@ -6082,6 +6128,19 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 1caaea6cb7f813e64345190fddc4e6c924d0b698ab81189b503763c4a18f7f5501c69362979d36e19c042d89d936443e768a78b0675690b35eb663d19e0eae71
+  languageName: node
+  linkType: hard
+
+"typewriter-effect@npm:^2.19.0":
+  version: 2.19.0
+  resolution: "typewriter-effect@npm:2.19.0"
+  dependencies:
+    prop-types: ^15.6.2
+    raf: ^3.4.0
+  peerDependencies:
+    react: ^17.x || ^18.x
+    react-dom: ^17.x || ^18.x
+  checksum: e1caa8cc9fe3d6290cf194730812b8591ffbb1a7a2028fb5413d90a3b85b489fbd9c4ef45ed63f818458aa36b152f1c60fc485b187452d391f60c4d29e910dce
   languageName: node
   linkType: hard
 

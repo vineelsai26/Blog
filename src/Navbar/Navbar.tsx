@@ -12,7 +12,6 @@ interface Navigation {
 const navigation = [
 	{ name: 'Home', href: '/', current: false },
 	{ name: 'Projects', href: '/#projects', current: false },
-	{ name: 'Apps', href: '/apps', current: false },
 	{ name: 'Blog', href: '/blog', current: false },
 	{ name: 'Resume', href: '/resume/resume.pdf', current: false },
 	{ name: 'Contact', href: '/contact', current: false },
