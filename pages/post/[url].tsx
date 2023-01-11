@@ -12,6 +12,7 @@ export default function Post({ article }: { article: ArticleType }) {
 			<Head>
 				<title>{article.title}</title>
 				<link rel="icon" href="/logo.png" />
+				<meta name="description" content={article.description} />
 			</Head>
 
 			<Navbar
