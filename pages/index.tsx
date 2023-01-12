@@ -49,7 +49,7 @@ export default function Home() {
 				<div id='projects' className='min-h-screen w-full'>
 					<div className='w-full'>
 						<h1 className='text-4xl text-center font-semibold p-2 m-5'>My Projects</h1>
-						<div className='grid w-full' style={{ margin: 0, width: '100%' }}>
+						<div className='flex items-center justify-center flex-wrap w-full' style={{ margin: 0, width: '100%' }}>
 							{
 								projects.map((project, index) => {
 									return <ProjectCard key={index} project={project} />

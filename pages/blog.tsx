@@ -58,7 +58,7 @@ export default function Blog({ articleProps, pageProps, pageCountProp, initialRu
 			<div className='min-h-screen'>
 				{
 					articles.length > 0 && (
-						<div className='main flex items-center'>
+						<div className='flex flex-col items-center'>
 							{
 								articles.map(article => (
 									<Article key={article.url} article={article} />
