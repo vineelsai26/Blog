@@ -6,7 +6,6 @@ import Typewriter from 'typewriter-effect'
 import { Kalam } from '@next/font/google'
 
 import projects from '../data/projects'
-import { useState } from 'react'
 import ProjectCard from '../src/ProjectCard/ProjectCard'
 
 const kalam = Kalam({

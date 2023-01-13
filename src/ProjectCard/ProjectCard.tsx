@@ -10,7 +10,7 @@ export default function ProjectCard({ project }: { project: any }) {
 					{
 						project.downloadUrl && (
 							<button
-								className="w-1/4 relative bg-transparent hover:bg-blue-500 text-blue-700 font-semibold duration-300 hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+								className="w-1/3 relative bg-transparent hover:bg-blue-500 text-blue-700 font-semibold duration-300 hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
 								onClick={() => window.open(project.downloadUrl, '_blank')}
 								hidden={!showButtons}
 							>
@@ -21,7 +21,7 @@ export default function ProjectCard({ project }: { project: any }) {
 					{
 						project.previewUrl && (
 							<button
-								className="w-1/4 relative bg-transparent hover:bg-blue-500 text-blue-700 font-semibold duration-300 hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+								className="w-1/3 relative bg-transparent hover:bg-blue-500 text-blue-700 font-semibold duration-300 hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
 								onClick={() => window.open(project.previewUrl, '_blank')}
 								hidden={!showButtons}
 							>
@@ -30,7 +30,7 @@ export default function ProjectCard({ project }: { project: any }) {
 						)
 					}
 					<button
-						className="w-1/4 relative bg-transparent hover:bg-blue-500 text-blue-700 font-semibold duration-300 hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+						className="w-1/3 relative bg-transparent hover:bg-blue-500 text-blue-700 font-semibold duration-300 hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
 						onClick={() => window.open(project.gitUrl, '_blank')}
 						hidden={!showButtons}
 					>
