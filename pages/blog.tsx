@@ -8,6 +8,7 @@ import Loader from '../src/Loader/Loader'
 import mongoose from 'mongoose'
 import Articles from '../models/article'
 import Article from '../src/ArticleCard/ArticleCard'
+import GoogleAdSense from '../src/Ads/GoogleAdSense'
 
 const pageLimit = 10
 
@@ -51,6 +52,7 @@ export default function Blog({ articleProps, pageProps, pageCountProp, initialRu
 				<title>Vineel Sai | Blog</title>
 				<meta name="description" content="Blog by Vineel Sai"></meta>
 				<link rel="icon" href="/logo.png" />
+				<GoogleAdSense />
 			</Head>
 
 			<Navbar showSearch={true} setArticles={setArticles} setLoading={setLoading} />

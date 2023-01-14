@@ -5,6 +5,7 @@ import { ArticleType } from '../../types/article'
 import Footer from '../../src/Footer/Footer'
 import ArticlePreview from '../../src/ArticlePreview/ArticlePreview'
 import Navbar from '../../src/Navbar/Navbar'
+import GoogleAdSense from '../../src/Ads/GoogleAdSense'
 
 export default function Post({ article }: { article: ArticleType }) {
 	return (
@@ -13,6 +14,7 @@ export default function Post({ article }: { article: ArticleType }) {
 				<title>{article.title}</title>
 				<link rel="icon" href="/logo.png" />
 				<meta name="description" content={article.description} />
+				<GoogleAdSense />
 			</Head>
 
 			<Navbar
