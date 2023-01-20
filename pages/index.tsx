@@ -28,9 +28,17 @@ export default function Home() {
 			</div>
 
 			<div className='min-h-screen'>
-				<div className='min-h-screen w-full bg-fixed' style={{ backgroundImage: 'url(/background.jpg)'}}>
+				<div className='min-h-screen w-full bg-fixed' style={{ backgroundImage: 'url(/background.jpg)' }}>
 					<div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
-						<Image src='/profile.png' alt='Vineel Sai' width={200} height={200} className='m-auto w-40 rounded-full' priority />
+						<Image
+							src='/profile.png'
+							alt='Vineel Sai'
+							width={160}
+							height={160}
+							sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+							className='m-auto w-40 h-auto rounded-full'
+							priority
+						/>
 						<h1 className='text-4xl text-center font-semibold text-orange-600 p-2'>Vineel Sai</h1>
 						<span className='text-white text-center text-xl my-1'>
 							<Typewriter

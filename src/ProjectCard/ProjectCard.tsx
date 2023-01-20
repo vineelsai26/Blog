@@ -41,13 +41,14 @@ export default function ProjectCard({ project }: { project: any }) {
 					src={project.image}
 					alt={project.name}
 					fill
+					sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
 					className='rounded-t-md relative w-full h-full object-cover'
 				/>
 			</div>
 			<div className='p-10 pt-0' style={{ height: '450px' }}>
 				<h1 className='text-6xl font-semibold text-center my-10'>{project.name}</h1>
 				<p className='text-2xl text-center my-10 font-semibold'>{project.description}</p>
-				<Image src={`https://skillicons.dev/icons?i=${project.tags}`} alt={''} width={400} height={100} className='h-14 m-auto' />
+				<Image src={`https://skillicons.dev/icons?i=${project.tags}`} alt={project.tags} width={400} height={100} className='h-12 m-auto' />
 			</div>
 		</div>
 	)
