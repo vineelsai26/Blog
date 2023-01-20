@@ -4,7 +4,7 @@ import { useState } from 'react'
 export default function ProjectCard({ project }: { project: any }) {
 	const [showButtons, setShowButtons] = useState(false)
 	return (
-		<div className='relative bg-white rounded-lg flex flex-col w-full md:w-2/5 lg:w-3/12 m-10 h-auto' >
+		<div className='relative bg-white rounded-lg flex flex-col w-full md:w-2/5 lg:w-3/12 m-10 h-auto overflow-hidden' >
 			<div className='relative h-64' onMouseEnter={() => { setShowButtons(true) }} onMouseLeave={() => { setShowButtons(false) }}>
 				<div className='flex flex-row justify-evenly p-4 absolute z-10 w-full top-1/2 -translate-y-1/2' >
 					{
@@ -40,8 +40,7 @@ export default function ProjectCard({ project }: { project: any }) {
 				<Image
 					src={project.image}
 					alt={project.name}
-					width={1000}
-					height={540}
+					fill
 					className='rounded-t-md relative w-full h-full object-cover'
 				/>
 			</div>

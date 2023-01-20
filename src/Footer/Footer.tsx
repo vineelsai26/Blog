@@ -7,7 +7,7 @@ export default function Footer() {
 			</span>
 			<ul className="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
 				<li>
-					<Link href="/contact" className="mr-4 hover:underline md:mr-6 ">Contact</Link>
+					<Link href="/#contact" className="mr-4 hover:underline md:mr-6 ">Contact</Link>
 				</li>
 			</ul>
 		</footer>

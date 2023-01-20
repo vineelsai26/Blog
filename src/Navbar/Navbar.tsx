@@ -15,7 +15,7 @@ const navigation = [
 	{ name: 'Blog', href: '/blog', current: false },
 	{ name: 'Resume', href: '/resume/resume.pdf', current: false },
 	{ name: 'GitHub', href: 'https://github.com/vineelsai26', current: false },
-	{ name: 'Contact', href: '/contact', current: false },
+	{ name: 'Contact', href: '/#contact', current: false },
 	{ name: 'Archive', href: '/archive', current: false },
 ]
 
