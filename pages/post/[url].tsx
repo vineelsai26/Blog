@@ -37,11 +37,11 @@ export async function getStaticPaths() {
 		console.log(error)
 	}
 
-	const article = await Article.find({}).select({ url: 1 })
+	const articles = await Article.find({}).select({ url: 1 })
 
 	let paths: { params: { url: string } }[] = []
 
-	article.forEach(article => {
+	articles.forEach(article => {
 		paths.push({ params: { url: article.url } })
 	})
 
@@ -49,7 +49,7 @@ export async function getStaticPaths() {
 
 	return {
 		paths: paths,
-		fallback: true,
+		fallback: false,
 	}
 }
 
