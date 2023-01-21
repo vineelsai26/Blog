@@ -5,13 +5,14 @@ import { Kalam } from '@next/font/google'
 
 import archive from '../data/archive'
 import ProjectCard from '../src/ProjectCard/ProjectCard'
+import { Dispatch, SetStateAction } from 'react'
 
 const kalam = Kalam({
 	weight: '400',
 	subsets: ['latin'],
 })
 
-export default function Home() {
+export default function Archive({ analytics, setAnalytics }: { analytics: boolean, setAnalytics: Dispatch<SetStateAction<boolean>> }) {
 	return (
 		<div className={`${kalam.className} bg-slate-200`}>
 			<Head>
@@ -20,7 +21,7 @@ export default function Home() {
 				<link rel="icon" href="/logo.png" />
 			</Head>
 
-			<Navbar showSearch={false} setArticles={null} setLoading={null} />
+			<Navbar showSearch={false} setArticles={null} setLoading={null} analytics={analytics} setAnalytics={setAnalytics} />
 
 			<div className='min-h-screen'>
 				<div id='projects' className='min-h-screen w-full'>

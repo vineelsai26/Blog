@@ -3,11 +3,11 @@ import mongoose from 'mongoose'
 import Article from '../../models/article'
 import { ArticleType, SaveResponse } from '../../types/article'
 import Footer from '../../src/Footer/Footer'
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import Navbar from '../../src/Navbar/Navbar'
 import ArticleEditor from '../../src/ArticleEditor/ArticleEditor'
 
-export default function EditPost({ article }: { article: ArticleType }) {
+export default function EditPost({ article, analytics, setAnalytics }: { article: ArticleType, analytics: boolean, setAnalytics: Dispatch<SetStateAction<boolean>> }) {
 	const [title, setTitle] = useState(article.title)
 	const [url, setUrl] = useState(article.url)
 	const [imageUrl, setImageUrl] = useState(article.imageUrl)
@@ -57,6 +57,8 @@ export default function EditPost({ article }: { article: ArticleType }) {
 				showSearch={false}
 				setArticles={null}
 				setLoading={null}
+				analytics={analytics}
+				setAnalytics={setAnalytics}
 			/>
 
 			<ArticleEditor
