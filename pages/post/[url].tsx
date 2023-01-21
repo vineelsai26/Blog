@@ -30,19 +30,43 @@ export default function Post({ article }: { article: ArticleType }) {
 	)
 }
 
-export async function getServerSideProps(context: { query: { url: string } }) {
+export async function getStaticPaths() {
 	try {
 		await mongoose.connect(process.env.NEXT_MONGODB_URL!)
 	} catch (error) {
 		console.log(error)
 	}
 
-	const article = await Article.findOne({ url: context.query.url })
+	const article = await Article.find({}).select({ url: 1 })
+
+	let paths: { params: { url: string } }[] = []
+
+	article.forEach(article => {
+		paths.push({ params: { url: article.url } })
+	})
+
+	mongoose.disconnect()
+
+	return {
+		paths: paths,
+		fallback: true,
+	}
+}
+
+export async function getStaticProps(context: { params: { url: string } }) {
+	try {
+		await mongoose.connect(process.env.NEXT_MONGODB_URL!)
+	} catch (error) {
+		console.log(error)
+	}
+
+	const article = await Article.findOne({ url: context.params.url })
 
 	mongoose.disconnect()
 	return {
 		props: {
 			article: JSON.parse(JSON.stringify(article)) as ArticleType
-		}
+		},
+		revalidate: process.env.NEXT_REVALIDATE_TIMEOUT ? parseInt(process.env.NEXT_REVALIDATE_TIMEOUT) : 60
 	}
 }

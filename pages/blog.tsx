@@ -101,7 +101,7 @@ export async function getStaticProps() {
 		console.log(error)
 	}
 
-	const articles = await Articles.find({}).sort({ createdAt: -1 }).limit(10)
+	const articles = await Articles.find({}).select({ _id: 0, longDescription: 0 }).sort({ createdAt: -1 }).limit(10)
 
 	const count = await Articles.count({})
 

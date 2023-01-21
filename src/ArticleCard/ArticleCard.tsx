@@ -25,7 +25,7 @@ export default function Article({ article }: { article: ArticleType }) {
 						{new Date(article.createdAt).toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' })}
 					</p>
 				</div>
-				<h4 className='m-2 p-2 font-normal text-xl'>{article.description.substring(0,150)}</h4>
+				<p className='m-2 p-2 font-normal text-xl'>{article.description.substring(0,150)}</p>
 			</div>
 		</Link>
 	)

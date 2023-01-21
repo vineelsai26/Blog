@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 		const { page, pageLimit } = req.body
 
-		const articles = await Articles.find({}).sort({ createdAt: -1 }).skip(page * pageLimit).limit(pageLimit)
+		const articles = await Articles.find({}).select({_id: 0, longDescription: 0}).sort({ createdAt: -1 }).skip(page * pageLimit).limit(pageLimit)
 
 		const count = await Articles.count({})
 
