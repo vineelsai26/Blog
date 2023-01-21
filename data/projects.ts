@@ -8,6 +8,14 @@ const projects = [
 		tags: 'cpp,visualstudio,powershell,linux'
 	},
 	{
+		name: 'Arch WSL',
+		image: '/images/projects/arch-wsl.png',
+		description: 'Arch WSL is a project that aims to bring the Arch Linux distribution to Windows Subsystem for Linux (WSL).',
+		downloadUrl: 'https://www.microsoft.com/store/apps/9MZNMNKSM73X',
+		gitUrl: 'https://github.com/VsTechDev/Arch-WSL',
+		tags: 'cpp,visualstudio,powershell,linux'
+	},
+	{
 		name: 'RCE',
 		image: '/images/projects/rce.webp',
 		description: 'Remote Code Execution API written in GO. That runs code in a docker container and returns the output.',

@@ -55,7 +55,10 @@ export default function Blog({ articleProps, pageProps, pageCountProp, initialRu
 				<GoogleAdSense />
 			</Head>
 
-			<Navbar showSearch={true} setArticles={setArticles} setLoading={setLoading} />
+			<div className='w-full sticky top-0 z-50'>
+				<Navbar showSearch={true} setArticles={setArticles} setLoading={setLoading} />
+			</div>
+
 
 			<div className='min-h-screen'>
 				{

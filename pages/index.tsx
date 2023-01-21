@@ -23,7 +23,7 @@ export default function Home() {
 				<link rel="icon" href="/logo.png" />
 			</Head>
 
-			<div className='absolute w-full'>
+			<div className='w-full sticky top-0 z-50'>
 				<Navbar showSearch={false} setArticles={null} setLoading={null} />
 			</div>
 

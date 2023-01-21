@@ -17,11 +17,9 @@ export default function Post({ article }: { article: ArticleType }) {
 				<GoogleAdSense />
 			</Head>
 
-			<Navbar
-				showSearch={false}
-				setArticles={null}
-				setLoading={null}
-			/>
+			<div className='w-full sticky top-0 z-50'>
+				<Navbar showSearch={false} setArticles={null} setLoading={null} />
+			</div>
 
 			<ArticlePreview article={article} />
 

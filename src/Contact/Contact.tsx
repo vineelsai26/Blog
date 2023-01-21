@@ -43,14 +43,14 @@ export default function Contact() {
 	}
 
 	return (
-		<div className='m-10'>
+		<div id='contact' className='m-10'>
 			<div>
 				<h1 className='text-center font-bold text-5xl m-2'>
 					Contact
 				</h1>
 				<p className='text-center text-xl m-2 mb-10'>Hear is the way to contact me.</p>
 			</div>
-			<form className='p-10 h-auto w-full md:w-4/5 lg:w-2/3 m-auto bg-white mt-10 rounded-lg shadow-lg flex flex-col lg:flex-row' onSubmit={(e) => {
+			<form className='p-10 h-auto w-full md:w-4/5 lg:w-5/6 m-auto bg-white mt-10 rounded-lg shadow-lg flex flex-col lg:flex-row' onSubmit={(e) => {
 				e.preventDefault()
 				handleContact()
 			}}>
