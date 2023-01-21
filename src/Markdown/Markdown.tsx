@@ -3,6 +3,7 @@ import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { ArticleType } from '../../types/article'
 import { vs } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import Image from 'next/image'
 
 export default function Markdown({ article }: { article: ArticleType }) {
 	return (
@@ -25,6 +26,17 @@ export default function Markdown({ article }: { article: ArticleType }) {
 						<code className={className} {...props}>
 							{children}
 						</code>
+					)
+				},
+				img({ node, className, children, ...props }) {
+					return (
+						<Image
+							src={props.src!}
+							alt={props.alt!}
+							width={600}
+							height={300}
+							className={`${className} h-auto w-full`}
+						/>
 					)
 				}
 			}}
