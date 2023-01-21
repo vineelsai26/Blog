@@ -33,8 +33,8 @@ export default function Markdown({ article }: { article: ArticleType }) {
 						<Image
 							src={props.src!}
 							alt={props.alt!}
-							width={600}
-							height={300}
+							width={1200}
+							height={600}
 							className={`${className} h-auto w-full`}
 						/>
 					)
