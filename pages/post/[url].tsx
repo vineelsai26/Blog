@@ -5,20 +5,19 @@ import { ArticleType } from '../../types/article'
 import Footer from '../../src/Footer/Footer'
 import ArticlePreview from '../../src/ArticlePreview/ArticlePreview'
 import Navbar from '../../src/Navbar/Navbar'
-import GoogleAdSense from '../../src/Ads/GoogleAdSense'
+import { Dispatch, SetStateAction } from 'react'
 
-export default function Post({ article }: { article: ArticleType }) {
+export default function Post({ article, analytics, setAnalytics }: { article: ArticleType, analytics: boolean, setAnalytics: Dispatch<SetStateAction<boolean>> }) {
 	return (
 		<div>
 			<Head>
 				<title>{article.title}</title>
 				<link rel="icon" href="/logo.png" />
 				<meta name="description" content={article.description} />
-				<GoogleAdSense />
 			</Head>
 
 			<div className='w-full sticky top-0 z-50'>
-				<Navbar showSearch={false} setArticles={null} setLoading={null} />
+				<Navbar showSearch={false} setArticles={null} setLoading={null} analytics={analytics} setAnalytics={setAnalytics} />
 			</div>
 
 			<ArticlePreview article={article} />

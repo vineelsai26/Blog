@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import Footer from '../src/Footer/Footer'
 import Navbar from '../src/Navbar/Navbar'
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { SaveResponse } from '../types/article'
 import ArticleEditor from '../src/ArticleEditor/ArticleEditor'
 
-export default function New() {
+export default function New({ analytics, setAnalytics }: { analytics: boolean, setAnalytics: Dispatch<SetStateAction<boolean>> }) {
 	const [title, setTitle] = useState('')
 	const [url, setUrl] = useState('')
 	const [imageUrl, setImageUrl] = useState('')
@@ -50,7 +50,7 @@ export default function New() {
 				<link rel="icon" href="/logo.png" />
 			</Head>
 
-			<Navbar showSearch={false} setArticles={null} setLoading={null} />
+			<Navbar showSearch={false} setArticles={null} setLoading={null} analytics={analytics} setAnalytics={setAnalytics} />
 
 			<ArticleEditor
 				title={title}

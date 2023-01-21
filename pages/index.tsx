@@ -8,13 +8,14 @@ import { Kalam } from '@next/font/google'
 import projects from '../data/projects'
 import ProjectCard from '../src/ProjectCard/ProjectCard'
 import Contact from '../src/Contact/Contact'
+import { Dispatch, SetStateAction } from 'react'
 
 const kalam = Kalam({
 	weight: '400',
 	subsets: ['latin'],
 })
 
-export default function Home() {
+export default function Home({ analytics, setAnalytics }: { analytics: boolean, setAnalytics: Dispatch<SetStateAction<boolean>> }) {
 	return (
 		<div className={`${kalam.className} bg-slate-200`}>
 			<Head>
@@ -24,7 +25,7 @@ export default function Home() {
 			</Head>
 
 			<div className='w-full sticky top-0 z-50'>
-				<Navbar showSearch={false} setArticles={null} setLoading={null} />
+				<Navbar showSearch={false} setArticles={null} setLoading={null} analytics={analytics} setAnalytics={setAnalytics} />
 			</div>
 
 			<div className='min-h-screen'>

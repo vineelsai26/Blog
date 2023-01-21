@@ -2,17 +2,16 @@ import Head from 'next/head'
 import { ArticleType } from '../types/article'
 import Footer from '../src/Footer/Footer'
 import Navbar from '../src/Navbar/Navbar'
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Pagination from '../src/Pagination/Pagination'
 import Loader from '../src/Loader/Loader'
 import mongoose from 'mongoose'
 import Articles from '../models/article'
 import Article from '../src/ArticleCard/ArticleCard'
-import GoogleAdSense from '../src/Ads/GoogleAdSense'
 
 const pageLimit = 10
 
-export default function Blog({ articleProps, pageProps, pageCountProp, initialRun }: { articleProps: ArticleType[], pageProps: number, pageCountProp: number, initialRun: boolean }) {
+export default function Blog({ articleProps, pageCountProp, analytics, setAnalytics }: { articleProps: ArticleType[], pageCountProp: number, analytics: boolean, setAnalytics: Dispatch<SetStateAction<boolean>> }) {
 	const [articles, setArticles] = useState<ArticleType[]>(articleProps)
 	const [page, setPage] = useState(-1)
 	const [pageCount, setPageCount] = useState(pageCountProp)
@@ -52,11 +51,10 @@ export default function Blog({ articleProps, pageProps, pageCountProp, initialRu
 				<title>Vineel Sai | Blog</title>
 				<meta name="description" content="Blog by Vineel Sai"></meta>
 				<link rel="icon" href="/logo.png" />
-				<GoogleAdSense />
 			</Head>
 
 			<div className='w-full sticky top-0 z-50'>
-				<Navbar showSearch={true} setArticles={setArticles} setLoading={setLoading} />
+				<Navbar showSearch={true} setArticles={setArticles} setLoading={setLoading} analytics={analytics} setAnalytics={setAnalytics} />
 			</div>
 
 
@@ -113,9 +111,7 @@ export async function getStaticProps() {
 	return {
 		props: {
 			articleProps: JSON.parse(JSON.stringify(articles)),
-			pageProps: 0,
 			pageCountProp: Math.ceil(count / pageLimit),
-			initialRun: true
 		},
 		revalidate: process.env.NEXT_REVALIDATE_TIMEOUT ? parseInt(process.env.NEXT_REVALIDATE_TIMEOUT) : 60
 	}
