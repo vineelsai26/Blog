@@ -14,7 +14,7 @@ const kalam = Kalam({
 
 export default function Archive({ analytics, setAnalytics }: { analytics: boolean, setAnalytics: Dispatch<SetStateAction<boolean>> }) {
 	return (
-		<div className={`${kalam.className} bg-slate-200`}>
+		<div className={`${kalam.className} bg-slate-200 dark:bg-gray-600`}>
 			<Head>
 				<title>Vineel Sai</title>
 				<meta name="description" content="Portfolio of Vineel Sai" />

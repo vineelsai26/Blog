@@ -46,7 +46,7 @@ export default function Blog({ articleProps, pageCountProp, analytics, setAnalyt
 	}, [page])
 
 	return (
-		<div className='bg-slate-200'>
+		<div className='bg-slate-200 dark:bg-gray-600'>
 			<Head>
 				<title>Vineel Sai | Blog</title>
 				<meta name="description" content="Blog by Vineel Sai"></meta>

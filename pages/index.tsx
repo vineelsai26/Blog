@@ -17,7 +17,7 @@ const kalam = Kalam({
 
 export default function Home({ analytics, setAnalytics }: { analytics: boolean, setAnalytics: Dispatch<SetStateAction<boolean>> }) {
 	return (
-		<div className={`${kalam.className} bg-slate-200`}>
+		<div className={`${kalam.className} bg-slate-200 dark:bg-gray-600`}>
 			<Head>
 				<title>Vineel Sai</title>
 				<meta name="description" content="Portfolio of Vineel Sai" />
@@ -55,7 +55,7 @@ export default function Home({ analytics, setAnalytics }: { analytics: boolean, 
 
 				<div id='projects' className='min-h-screen w-full'>
 					<div className='w-full'>
-						<h1 className='text-4xl text-center font-semibold p-2 m-5'>My Projects</h1>
+						<h1 className='text-4xl text-center font-semibold p-2 m-5 dark:text-white'>My Projects</h1>
 						<div className='flex items-center justify-center flex-wrap w-full' style={{ margin: 0, width: '100%' }}>
 							{
 								projects.map((project, index) => {

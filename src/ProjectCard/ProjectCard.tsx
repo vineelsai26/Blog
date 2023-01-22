@@ -4,7 +4,7 @@ import { useState } from 'react'
 export default function ProjectCard({ project }: { project: any }) {
 	const [showButtons, setShowButtons] = useState(false)
 	return (
-		<div className='relative bg-white rounded-lg flex flex-col w-full md:w-2/5 lg:w-3/12 m-10 h-auto overflow-hidden' >
+		<div className='relative bg-white rounded-lg flex flex-col w-full md:w-2/5 lg:w-3/12 m-10 h-auto overflow-hidden dark:bg-gray-800' >
 			<div className='relative h-64' onMouseEnter={() => { setShowButtons(true) }} onMouseLeave={() => { setShowButtons(false) }}>
 				<div className='flex flex-row justify-evenly p-4 absolute z-10 w-full top-1/2 -translate-y-1/2' >
 					{
@@ -46,8 +46,8 @@ export default function ProjectCard({ project }: { project: any }) {
 				/>
 			</div>
 			<div className='p-10 pt-0' style={{ height: '450px' }}>
-				<h1 className='text-6xl font-semibold text-center my-10'>{project.name}</h1>
-				<p className='text-2xl text-center my-10 font-semibold'>{project.description}</p>
+				<h1 className='text-6xl font-semibold text-center my-10 dark:text-white'>{project.name}</h1>
+				<p className='text-2xl text-center my-10 font-semibold dark:text-white'>{project.description}</p>
 				<Image src={`https://skillicons.dev/icons?i=${project.tags}`} alt={project.tags} width={400} height={100} className='h-12 m-auto' />
 			</div>
 		</div>
