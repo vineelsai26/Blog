@@ -1,6 +1,3 @@
-import Head from 'next/head'
-import Footer from '../Footer/Footer'
-import Navbar from '../Navbar/Navbar'
 import Image from 'next/image'
 import { useState } from 'react'
 import Loader from '../Loader/Loader'

@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import { ArticleType } from '../../types/article'
 import Link from 'next/link'
 

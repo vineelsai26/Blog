@@ -2,7 +2,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { ArticleType } from '../../types/article'
-import { vs, vsDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { vs } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import Image from 'next/image'
 
 export default function Markdown({ article }: { article: ArticleType }) {
@@ -15,7 +15,7 @@ export default function Markdown({ article }: { article: ArticleType }) {
 					const match = /language-(\w+)/.exec(className || '')
 					return !inline && match ? (
 						<SyntaxHighlighter
-							style={vsDark as any}
+							style={vs as any}
 							language={match[1]}
 							PreTag="div"
 							{...props}

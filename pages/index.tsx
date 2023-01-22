@@ -56,6 +56,7 @@ export default function Home({ analytics, setAnalytics }: { analytics: boolean, 
 				<div id='projects' className='min-h-screen w-full'>
 					<div className='w-full'>
 						<h1 className='text-4xl text-center font-semibold p-2 m-5 dark:text-white'>My Projects</h1>
+						<p className='text-center text-xl m-2 dark:text-white'>Hear are the Projects I Worked on.</p>
 						<div className='flex items-center justify-center flex-wrap w-full' style={{ margin: 0, width: '100%' }}>
 							{
 								projects.map((project, index) => {
