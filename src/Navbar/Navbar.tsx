@@ -27,7 +27,7 @@ export default function Navbar({ showSearch, setArticles, setLoading, analytics,
 	const handleAnalyticsChange = () => {
 		setAnalytics(analytics => {
 			localStorage.setItem('analytics', String(!analytics))
-			if (!analytics === false) {
+			if (analytics !== false) {
 				window.location.reload()
 			}
 			return !analytics

@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import Articles from '../../models/article'
 import mongoose from 'mongoose'
+import _ from 'lodash'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	try {
@@ -13,9 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		})
 	}
 
-	const { query } = req.query
-
-	const searchExpression = new RegExp(query?.toString()!, 'i')
+	const searchExpression = new RegExp(_.escapeRegExp(req.query?.toString()!), 'i')
 
 	const articles = await Articles.find({ title: { $regex: searchExpression } }).limit(5)
 
@@ -23,9 +22,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	const searchTags = await Articles.find({ tags: { $in: [searchExpression] } }).limit(5)
 
-	searchDescription.map((article) => {
+	searchDescription.forEach((article) => {
 		let canBeAdded = true
-		articles.map((article2) => {
+		articles.forEach((article2) => {
 			if (article2.url === article.url) {
 				canBeAdded = false
 			}
@@ -35,9 +34,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		}
 	})
 
-	searchTags.map((article) => {
+	searchTags.forEach((article) => {
 		let canBeAdded = true
-		articles.map((article2) => {
+		articles.forEach((article2) => {
 			if (article2.url === article.url) {
 				canBeAdded = false
 			}
