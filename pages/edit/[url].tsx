@@ -1,11 +1,10 @@
 import Head from 'next/head'
-import mongoose from 'mongoose'
-import Article from '../../models/article'
 import { ArticleType, SaveResponse } from '../../types/article'
 import Footer from '../../src/Footer/Footer'
 import { Dispatch, SetStateAction, useState } from 'react'
 import Navbar from '../../src/Navbar/Navbar'
 import ArticleEditor from '../../src/ArticleEditor/ArticleEditor'
+import { PrismaClient } from '@prisma/client'
 
 export default function EditPost({ article, analytics, setAnalytics }: { article: ArticleType, analytics: boolean, setAnalytics: Dispatch<SetStateAction<boolean>> }) {
 	const [title, setTitle] = useState(article.title)
@@ -86,13 +85,13 @@ export default function EditPost({ article, analytics, setAnalytics }: { article
 }
 
 export async function getServerSideProps(context: { query: { url: string } }) {
-	try {
-		await mongoose.connect(process.env.NEXT_MONGODB_URL!)
-	} catch (error) {
-		console.log(error)
-	}
+	const prisma = new PrismaClient()
 
-	const article = await Article.findOne({ url: context.query.url })
+	const article = await prisma.articles.findUnique({
+		where: {
+			url: context.query.url
+		}
+	})
 	return {
 		props: {
 			article: JSON.parse(JSON.stringify(article))

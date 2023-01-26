@@ -1,11 +1,10 @@
 import Head from 'next/head'
-import mongoose from 'mongoose'
-import Article from '../../models/article'
 import { ArticleType } from '../../types/article'
 import Footer from '../../src/Footer/Footer'
 import ArticlePreview from '../../src/ArticlePreview/ArticlePreview'
 import Navbar from '../../src/Navbar/Navbar'
 import { Dispatch, SetStateAction } from 'react'
+import prisma from '../../src/prisma'
 
 export default function Post({ article, analytics, setAnalytics }: { article: ArticleType, analytics: boolean, setAnalytics: Dispatch<SetStateAction<boolean>> }) {
 	return (
@@ -28,21 +27,17 @@ export default function Post({ article, analytics, setAnalytics }: { article: Ar
 }
 
 export async function getStaticPaths() {
-	try {
-		await mongoose.connect(process.env.NEXT_MONGODB_URL!)
-	} catch (error) {
-		console.log(error)
-	}
-
-	const articles = await Article.find({}).select({ url: 1 })
+	const articles = await prisma.articles.findMany({
+		select: {
+			url: true
+		}
+	})
 
 	let paths: { params: { url: string } }[] = []
 
 	articles.forEach(article => {
 		paths.push({ params: { url: article.url } })
 	})
-
-	mongoose.disconnect()
 
 	return {
 		paths: paths,
@@ -51,15 +46,12 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context: { params: { url: string } }) {
-	try {
-		await mongoose.connect(process.env.NEXT_MONGODB_URL!)
-	} catch (error) {
-		console.log(error)
-	}
+	const article = await prisma.articles.findUnique({
+		where: {
+			url: context.params.url
+		}
+	})
 
-	const article = await Article.findOne({ url: context.params.url })
-
-	mongoose.disconnect()
 	return {
 		props: {
 			article: JSON.parse(JSON.stringify(article)) as ArticleType

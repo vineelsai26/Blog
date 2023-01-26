@@ -1,26 +1,27 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import Articles from '../../models/article'
-import mongoose from 'mongoose'
+import prisma from '../../src/prisma'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method === "POST") {
-		try {
-			await mongoose.connect(process.env.NEXT_MONGODB_URL!)
-			console.log("connected")
-		} catch (error) {
-			console.log(error)
-			return res.status(500).json({
-				error: "Error connecting to database"
-			})
-		}
-
 		const { page, pageLimit } = req.body
 
-		const articles = await Articles.find({}).select({_id: 0, longDescription: 0}).sort({ createdAt: -1 }).skip(page * pageLimit).limit(pageLimit)
+		const articles = await prisma.articles.findMany({
+			select: {
+				title: true,
+				url: true,
+				imageUrl: true,
+				description: true,
+				createdAt: true,
+				createdBy: true
+			},
+			orderBy: {
+				createdAt: "desc"
+			},
+			skip: page * pageLimit,
+			take: pageLimit
+		})
 
-		const count = await Articles.count({})
-
-		mongoose.disconnect()
+		const count = await prisma.articles.count()
 
 		return res.status(200).json({
 			articles: articles,

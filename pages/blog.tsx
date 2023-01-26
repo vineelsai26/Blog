@@ -5,9 +5,8 @@ import Navbar from '../src/Navbar/Navbar'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Pagination from '../src/Pagination/Pagination'
 import Loader from '../src/Loader/Loader'
-import mongoose from 'mongoose'
-import Articles from '../models/article'
 import Article from '../src/ArticleCard/ArticleCard'
+import prisma from '../src/prisma'
 
 const pageLimit = 10
 
@@ -95,23 +94,28 @@ export default function Blog({ articleProps, pageCountProp, analytics, setAnalyt
 }
 
 export async function getStaticProps() {
-	try {
-		await mongoose.connect(process.env.NEXT_MONGODB_URL!)
-		console.log("connected")
-	} catch (error) {
-		console.log(error)
-	}
+	const articles = await prisma.articles.findMany({
+		select: {
+			title: true,
+			url: true,
+			imageUrl: true,
+			description: true,
+			createdAt: true,
+			createdBy: true
+		},
+		orderBy: {
+			createdAt: "desc"
+		},
+		skip: 0,
+		take: pageLimit
+	})
 
-	const articles = await Articles.find({}).select({ _id: 0, longDescription: 0 }).sort({ createdAt: -1 }).limit(10)
-
-	const count = await Articles.count({})
-
-	mongoose.disconnect()
+	const pageCount = await prisma.articles.count()
 
 	return {
 		props: {
 			articleProps: JSON.parse(JSON.stringify(articles)),
-			pageCountProp: Math.ceil(count / pageLimit),
+			pageCountProp: pageCount,
 		},
 		revalidate: process.env.NEXT_REVALIDATE_TIMEOUT ? parseInt(process.env.NEXT_REVALIDATE_TIMEOUT) : 60
 	}
