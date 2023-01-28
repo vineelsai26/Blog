@@ -4,7 +4,7 @@ import Footer from '../../src/Footer/Footer'
 import ArticlePreview from '../../src/ArticlePreview/ArticlePreview'
 import Navbar from '../../src/Navbar/Navbar'
 import { Dispatch, SetStateAction } from 'react'
-import prisma from '../../src/prisma'
+import prisma from '../../prisma/prisma'
 
 export default function Post({ article, analytics, setAnalytics }: { article: ArticleType, analytics: boolean, setAnalytics: Dispatch<SetStateAction<boolean>> }) {
 	return (

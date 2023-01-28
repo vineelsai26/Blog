@@ -6,7 +6,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Pagination from '../src/Pagination/Pagination'
 import Loader from '../src/Loader/Loader'
 import Article from '../src/ArticleCard/ArticleCard'
-import prisma from '../src/prisma'
+import prisma from '../prisma/prisma'
 
 const pageLimit = 10
 
