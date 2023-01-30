@@ -50,11 +50,20 @@ export async function getStaticProps(context: { params: { url: string } }) {
 		where: {
 			url: context.params.url
 		}
+	}) as ArticleType
+
+	const user = await prisma.users.findUnique({
+		where: {
+			email: article?.createdBy
+		}
 	})
+
+	article!.createdBy = user!
 
 	return {
 		props: {
-			article: JSON.parse(JSON.stringify(article)) as ArticleType
+			article: JSON.parse(JSON.stringify(article)) as ArticleType,
+			user: JSON.parse(JSON.stringify(user))
 		},
 		revalidate: process.env.NEXT_REVALIDATE_TIMEOUT ? parseInt(process.env.NEXT_REVALIDATE_TIMEOUT) : 60
 	}

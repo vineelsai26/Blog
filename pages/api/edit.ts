@@ -5,7 +5,7 @@ import prisma from '../../prisma/prisma'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method === "POST") {
-		const { email, password, url, title, imageUrl, description, content, deleteArticle } = req.body
+		const { email, password, url, title, imageUrl, description, content, deleteArticle, tags } = req.body
 
 		const user = await prisma.users.findUnique({
 			where: {
@@ -34,6 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 							imageUrl: imageUrl,
 							description: description,
 							longDescription: content,
+							tags: tags,
 							createdBy: user.email,
 							createdAt: new Date(),
 						}

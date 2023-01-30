@@ -13,6 +13,7 @@ export default function New({ analytics, setAnalytics }: { analytics: boolean, s
 	const [content, setContent] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+	const [tags, setTags] = useState([])
 
 	const [data, setData] = useState<SaveResponse>({} as SaveResponse)
 
@@ -31,6 +32,7 @@ export default function New({ analytics, setAnalytics }: { analytics: boolean, s
 				title: title,
 				url: url,
 				imageUrl: imageUrl,
+				tags: tags,
 				description: description,
 				content: content,
 				email: email,
@@ -69,6 +71,8 @@ export default function New({ analytics, setAnalytics }: { analytics: boolean, s
 				handleSubmit={handleSubmit}
 				loading={loading}
 				editMode={editMode}
+				tags={tags}
+				setTags={setTags}
 			/>
 
 			<Footer />

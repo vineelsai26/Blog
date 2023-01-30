@@ -12,6 +12,7 @@ export default function EditPost({ article, analytics, setAnalytics }: { article
 	const [imageUrl, setImageUrl] = useState(article.imageUrl)
 	const [description, setDescription] = useState(article.description)
 	const [content, setContent] = useState(article.longDescription)
+	const [tags, setTags] = useState(article.tags)
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
@@ -32,6 +33,7 @@ export default function EditPost({ article, analytics, setAnalytics }: { article
 				title: title,
 				url: url,
 				imageUrl: imageUrl,
+				tags: tags,
 				description: description,
 				content: content,
 				email: email,
@@ -67,6 +69,8 @@ export default function EditPost({ article, analytics, setAnalytics }: { article
 				setUrl={setUrl}
 				imageUrl={imageUrl}
 				setImageUrl={setImageUrl}
+				tags={tags}
+				setTags={setTags}
 				description={description}
 				setDescription={setDescription}
 				content={content}

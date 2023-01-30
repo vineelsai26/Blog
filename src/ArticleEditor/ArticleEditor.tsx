@@ -12,6 +12,8 @@ export default function ArticleEditor({
 	setUrl,
 	imageUrl,
 	setImageUrl,
+	tags,
+	setTags,
 	description,
 	setDescription,
 	content,
@@ -28,7 +30,8 @@ export default function ArticleEditor({
 		url: url,
 		imageUrl: imageUrl,
 		description: description,
-		longDescription: content
+		longDescription: content,
+		tags: tags,
 	} as ArticleType)
 
 	return (
@@ -61,6 +64,15 @@ export default function ArticleEditor({
 						setArticle({ ...article, imageUrl: e.target.value })
 					}}
 				/>
+				<input
+					className='m-2 p-3  border-black border-2 rounded'
+					placeholder="Tags"
+					defaultValue={tags.join(',')}
+					onChange={(e) => {
+						setTags(e.target.value.split(','))
+						setArticle({ ...article, tags: e.target.value.split(',') })
+					}}
+				 />
 				<textarea
 					className='m-2 p-3  border-black border-2 rounded'
 					rows={5}

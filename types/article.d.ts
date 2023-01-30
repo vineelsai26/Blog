@@ -1,3 +1,5 @@
+import { Prisma } from '@prisma/client'
+
 export type ArticleType = {
 	url: string
 	title: string
@@ -5,7 +7,8 @@ export type ArticleType = {
 	longDescription: string
 	imageUrl: string
 	createdAt: Date
-	createdBy: string
+	createdBy: string | Prisma.users
+	tags: string[]
 }
 
 export type SaveResponse = {
@@ -20,6 +23,8 @@ export type ArticleEditorProps = {
 	setUrl: Dispatch<SetStateAction<string>>,
 	imageUrl: string,
 	setImageUrl: Dispatch<SetStateAction<string>>,
+	tags: string[],
+	setTags: Dispatch<SetStateAction<string[]>>,
 	description: string,
 	setDescription: Dispatch<SetStateAction<string>>,
 	content: string,
