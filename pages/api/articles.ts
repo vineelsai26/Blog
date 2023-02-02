@@ -12,7 +12,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				imageUrl: true,
 				description: true,
 				createdAt: true,
-				createdBy: true
+				createdBy: true,
+				tags: true
 			},
 			orderBy: {
 				createdAt: "desc"

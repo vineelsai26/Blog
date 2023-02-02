@@ -25,6 +25,19 @@ export default function Article({ article }: { article: ArticleType }) {
 						{new Date(article.createdAt).toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' })}
 					</p>
 				</div>
+				<div className='flex col my-4'>
+					{
+						article.tags.length > 0 && article.tags.map((tag, index) => {
+							return (
+								<span
+									key={index}
+									className="px-4 py-2 mx-4 rounded-full text-gray-500 bg-gray-200 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-gray-300 transition duration-300 ease">
+									{tag}
+								</span>
+							)
+						})
+					}
+				</div>
 				<p className='m-2 p-2 font-normal text-xl dark:text-white'>{article.description.substring(0,150)}</p>
 			</div>
 		</Link>

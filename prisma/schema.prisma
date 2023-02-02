@@ -15,7 +15,7 @@ model articles {
   description     String
   imageUrl        String
   longDescription String
-  tags            String[]
+  tags            String[] @default([])
   title           String
   url             String   @unique(map: "url_1")
 }

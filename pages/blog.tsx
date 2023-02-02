@@ -100,6 +100,7 @@ export async function getStaticProps() {
 			url: true,
 			imageUrl: true,
 			description: true,
+			tags: true,
 			createdAt: true,
 			createdBy: true
 		},
