@@ -17,13 +17,16 @@ export default function Markdown({ article }: { article: ArticleType }) {
 						<SyntaxHighlighter
 							style={vs as any}
 							language={match[1]}
-							PreTag="div"
+							PreTag='div'
 							{...props}
 						>
 							{String(children).replace(/\n$/, '')}
 						</SyntaxHighlighter>
 					) : (
-						<code className={className} {...props}>
+						<code
+							className={className}
+							{...props}
+						>
 							{children}
 						</code>
 					)
@@ -38,7 +41,7 @@ export default function Markdown({ article }: { article: ArticleType }) {
 							className={`${className} h-auto w-full`}
 						/>
 					)
-				}
+				},
 			}}
 		>
 			{article.longDescription}

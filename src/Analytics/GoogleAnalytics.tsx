@@ -3,9 +3,12 @@ import Script from 'next/script'
 export default function GoogleAnalytics() {
 	return (
 		<>
-			<Script async src="https://www.googletagmanager.com/gtag/js?id=G-BG3V6WRM1Z" />
 			<Script
-				id="google-analytics"
+				async
+				src='https://www.googletagmanager.com/gtag/js?id=G-BG3V6WRM1Z'
+			/>
+			<Script
+				id='google-analytics'
 				strategy='afterInteractive'
 				dangerouslySetInnerHTML={{
 					__html: `
@@ -15,7 +18,7 @@ export default function GoogleAnalytics() {
 						gtag('config', 'G-BG3V6WRM1Z', {
 							page_path: window.location.pathname,
 						});
-					`
+					`,
 				}}
 			/>
 		</>

@@ -5,7 +5,13 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import { SaveResponse } from '../types/article'
 import ArticleEditor from '../src/ArticleEditor/ArticleEditor'
 
-export default function New({ analytics, setAnalytics }: { analytics: boolean, setAnalytics: Dispatch<SetStateAction<boolean>> }) {
+export default function New({
+	analytics,
+	setAnalytics,
+}: {
+	analytics: boolean
+	setAnalytics: Dispatch<SetStateAction<boolean>>
+}) {
 	const [title, setTitle] = useState('')
 	const [url, setUrl] = useState('')
 	const [imageUrl, setImageUrl] = useState('')
@@ -26,7 +32,7 @@ export default function New({ analytics, setAnalytics }: { analytics: boolean, s
 		const request = await fetch('/api/add', {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
 				title: title,
@@ -36,8 +42,8 @@ export default function New({ analytics, setAnalytics }: { analytics: boolean, s
 				description: description,
 				content: content,
 				email: email,
-				password: password
-			})
+				password: password,
+			}),
 		})
 
 		const response = await request.json()
@@ -49,10 +55,19 @@ export default function New({ analytics, setAnalytics }: { analytics: boolean, s
 		<div>
 			<Head>
 				<title>New Article</title>
-				<link rel="icon" href="/logo.png" />
+				<link
+					rel='icon'
+					href='/logo.png'
+				/>
 			</Head>
 
-			<Navbar showSearch={false} setArticles={null} setLoading={null} analytics={analytics} setAnalytics={setAnalytics} />
+			<Navbar
+				showSearch={false}
+				setArticles={null}
+				setLoading={null}
+				analytics={analytics}
+				setAnalytics={setAnalytics}
+			/>
 
 			<ArticleEditor
 				title={title}
@@ -76,6 +91,6 @@ export default function New({ analytics, setAnalytics }: { analytics: boolean, s
 			/>
 
 			<Footer />
-		</div >
+		</div>
 	)
 }

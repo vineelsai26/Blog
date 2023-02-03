@@ -6,7 +6,15 @@ import Navbar from '../../src/Navbar/Navbar'
 import ArticleEditor from '../../src/ArticleEditor/ArticleEditor'
 import { PrismaClient } from '@prisma/client'
 
-export default function EditPost({ article, analytics, setAnalytics }: { article: ArticleType, analytics: boolean, setAnalytics: Dispatch<SetStateAction<boolean>> }) {
+export default function EditPost({
+	article,
+	analytics,
+	setAnalytics,
+}: {
+	article: ArticleType
+	analytics: boolean
+	setAnalytics: Dispatch<SetStateAction<boolean>>
+}) {
 	const [title, setTitle] = useState(article.title)
 	const [url, setUrl] = useState(article.url)
 	const [imageUrl, setImageUrl] = useState(article.imageUrl)
@@ -27,7 +35,7 @@ export default function EditPost({ article, analytics, setAnalytics }: { article
 		const request = await fetch('/api/edit', {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
 				title: title,
@@ -38,8 +46,8 @@ export default function EditPost({ article, analytics, setAnalytics }: { article
 				content: content,
 				email: email,
 				password: password,
-				deleteArticle: deleteArticle
-			})
+				deleteArticle: deleteArticle,
+			}),
 		})
 
 		const response = await request.json()
@@ -51,7 +59,10 @@ export default function EditPost({ article, analytics, setAnalytics }: { article
 		<div>
 			<Head>
 				<title>New Article</title>
-				<link rel="icon" href="/logo.png" />
+				<link
+					rel='icon'
+					href='/logo.png'
+				/>
 			</Head>
 
 			<Navbar
@@ -84,7 +95,7 @@ export default function EditPost({ article, analytics, setAnalytics }: { article
 			/>
 
 			<Footer />
-		</div >
+		</div>
 	)
 }
 
@@ -93,12 +104,12 @@ export async function getServerSideProps(context: { query: { url: string } }) {
 
 	const article = await prisma.articles.findUnique({
 		where: {
-			url: context.query.url
-		}
+			url: context.query.url,
+		},
 	})
 	return {
 		props: {
-			article: JSON.parse(JSON.stringify(article))
-		}
+			article: JSON.parse(JSON.stringify(article)),
+		},
 	}
 }

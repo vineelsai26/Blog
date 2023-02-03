@@ -1,7 +1,7 @@
-import Editor from "@monaco-editor/react"
-import { ArticleEditorProps, ArticleType } from "../../types/article"
-import ArticlePreview from "../ArticlePreview/ArticlePreview"
-import { useState } from "react"
+import Editor from '@monaco-editor/react'
+import { ArticleEditorProps, ArticleType } from '../../types/article'
+import ArticlePreview from '../ArticlePreview/ArticlePreview'
+import { useState } from 'react'
 import Article from '../ArticleCard/ArticleCard'
 import Loader from '../Loader/Loader'
 
@@ -23,7 +23,7 @@ export default function ArticleEditor({
 	data,
 	handleSubmit,
 	loading,
-	editMode
+	editMode,
 }: ArticleEditorProps) {
 	const [article, setArticle] = useState<ArticleType>({
 		title: title,
@@ -36,10 +36,10 @@ export default function ArticleEditor({
 
 	return (
 		<div className='flex flex-row'>
-			<div className='m-2 p-2 w-1/2 flex flex-col overflow-hidden'>
+			<div className='m-2 flex w-1/2 flex-col overflow-hidden p-2'>
 				<input
-					className='m-2 p-3 border-black border-2 rounded'
-					placeholder="Title"
+					className='m-2 rounded border-2 border-black p-3'
+					placeholder='Title'
 					defaultValue={title}
 					onChange={(e) => {
 						setTitle(e.target.value)
@@ -47,8 +47,8 @@ export default function ArticleEditor({
 					}}
 				/>
 				<input
-					className='m-2 p-3  border-black border-2 rounded'
-					placeholder="Url"
+					className='m-2 rounded  border-2 border-black p-3'
+					placeholder='Url'
 					defaultValue={url}
 					onChange={(e) => {
 						setUrl(e.target.value)
@@ -56,8 +56,8 @@ export default function ArticleEditor({
 					}}
 				/>
 				<input
-					className='m-2 p-3  border-black border-2 rounded'
-					placeholder="Image Url"
+					className='m-2 rounded  border-2 border-black p-3'
+					placeholder='Image Url'
 					defaultValue={imageUrl}
 					onChange={(e) => {
 						setImageUrl(e.target.value)
@@ -65,18 +65,21 @@ export default function ArticleEditor({
 					}}
 				/>
 				<input
-					className='m-2 p-3  border-black border-2 rounded'
-					placeholder="Tags"
+					className='m-2 rounded  border-2 border-black p-3'
+					placeholder='Tags'
 					defaultValue={tags.join(',')}
 					onChange={(e) => {
 						setTags(e.target.value.split(','))
-						setArticle({ ...article, tags: e.target.value.split(',') })
+						setArticle({
+							...article,
+							tags: e.target.value.split(','),
+						})
 					}}
-				 />
+				/>
 				<textarea
-					className='m-2 p-3  border-black border-2 rounded'
+					className='m-2 rounded  border-2 border-black p-3'
 					rows={5}
-					placeholder="Description"
+					placeholder='Description'
 					defaultValue={description}
 					onChange={(e) => {
 						setDescription(e.target.value)
@@ -84,9 +87,9 @@ export default function ArticleEditor({
 					}}
 				/>
 				<Editor
-					className="m-2 p-3 border-black border-2 rounded"
-					height="50vh"
-					width="-webkit-fill-available"
+					className='m-2 rounded border-2 border-black p-3'
+					height='50vh'
+					width='-webkit-fill-available'
 					defaultValue={content}
 					onChange={(value) => {
 						setContent(value)
@@ -95,59 +98,66 @@ export default function ArticleEditor({
 					options={{
 						minimap: { enabled: false },
 					}}
-					defaultLanguage="markdown"
+					defaultLanguage='markdown'
 				/>
 				<input
-					type="email"
-					className='m-2 p-3  border-black border-2 rounded'
-					placeholder="Email"
+					type='email'
+					className='m-2 rounded  border-2 border-black p-3'
+					placeholder='Email'
 					onChange={(e) => {
 						setEmail(e.target.value)
 					}}
 				/>
 				<input
-					type="password"
-					className='m-2 p-3  border-black border-2 rounded'
-					placeholder="Password"
+					type='password'
+					className='m-2 rounded  border-2 border-black p-3'
+					placeholder='Password'
 					onChange={(e) => {
 						setPassword(e.target.value)
 					}}
 				/>
-				{
-					loading && (
-						<Loader />
-					)
-				}
-				{data.message && <p className='text-green-600 text-center'>{data.message}</p>}
-				{data.error && <p className='text-red-600 text-center'>{data.error}</p>}
-				<div className='flex justify-center' style={{ margin: '10px', padding: '10px' }}>
-					<button className="w-1/4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+				{loading && <Loader />}
+				{data.message && (
+					<p className='text-center text-green-600'>{data.message}</p>
+				)}
+				{data.error && (
+					<p className='text-center text-red-600'>{data.error}</p>
+				)}
+				<div
+					className='flex justify-center'
+					style={{ margin: '10px', padding: '10px' }}
+				>
+					<button
+						className='w-1/4 rounded border border-blue-500 bg-transparent py-2 px-4 font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white'
 						onClick={() => {
 							handleSubmit(false)
-						}}>
+						}}
+					>
 						Submit
 					</button>
 				</div>
-				{
-					editMode && (
-						<div className='flex justify-center' style={{ margin: '10px', padding: '10px' }}>
-							<button className="w-1/4  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-								onClick={() => {
-									handleSubmit(true)
-								}}>
-								Delete
-							</button>
-						</div>
-					)
-				}
-
+				{editMode && (
+					<div
+						className='flex justify-center'
+						style={{ margin: '10px', padding: '10px' }}
+					>
+						<button
+							className='w-1/4  rounded border border-blue-500 bg-transparent py-2 px-4 font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white'
+							onClick={() => {
+								handleSubmit(true)
+							}}
+						>
+							Delete
+						</button>
+					</div>
+				)}
 			</div>
-			<div className='p-2 w-1/2 overflow-scroll bg-slate-200'>
-				<h1 className='text-2xl text-center'>Home Page Preview</h1>
+			<div className='w-1/2 overflow-scroll bg-slate-200 p-2'>
+				<h1 className='text-center text-2xl'>Home Page Preview</h1>
 				<div className='flex justify-center'>
 					<Article article={article} />
 				</div>
-				<h1 className='text-2xl text-center m-5'>Article Preview</h1>
+				<h1 className='m-5 text-center text-2xl'>Article Preview</h1>
 				<ArticlePreview article={article} />
 			</div>
 		</div>
