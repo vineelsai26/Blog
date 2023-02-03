@@ -8,7 +8,10 @@ import { useEffect, useState } from 'react'
 export default function MyApp({ Component, pageProps }: AppProps) {
 	const [analytics, setAnalytics] = useState(false)
 	useEffect(() => {
-		if (localStorage.getItem('analytics') === 'true' || localStorage.getItem('analytics') === null) {
+		if (
+			localStorage.getItem('analytics') === 'true' ||
+			localStorage.getItem('analytics') === null
+		) {
 			setAnalytics(true)
 		} else {
 			setAnalytics(false)
@@ -17,15 +20,17 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<>
 			<NextNProgress />
-			{
-				analytics === true ? (
-					<>
-						<GoogleAnalytics />
-						<GoogleAdSense />
-					</>
-				) : null
-			}
-			<Component {...pageProps} analytics={analytics} setAnalytics={setAnalytics} />
+			{analytics === true ? (
+				<>
+					<GoogleAnalytics />
+					<GoogleAdSense />
+				</>
+			) : null}
+			<Component
+				{...pageProps}
+				analytics={analytics}
+				setAnalytics={setAnalytics}
+			/>
 		</>
 	)
 }
