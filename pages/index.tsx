@@ -26,14 +26,7 @@ export default function Home({
 		<div className={`${kalam.className} bg-slate-200 dark:bg-gray-600`}>
 			<Head>
 				<title>Vineel Sai</title>
-				<meta
-					name='description'
-					content='Portfolio of Vineel Sai'
-				/>
-				<link
-					rel='icon'
-					href='/logo.png'
-				/>
+				<meta name='description' content='Portfolio of Vineel Sai' />
 			</Head>
 
 			<div className='sticky top-0 z-50 w-full'>
@@ -82,10 +75,7 @@ export default function Home({
 					</div>
 				</div>
 
-				<div
-					id='projects'
-					className='min-h-screen w-full'
-				>
+				<div id='projects' className='min-h-screen w-full'>
 					<div className='w-full'>
 						<h1 className='m-5 p-2 text-center text-4xl font-semibold dark:text-white'>
 							My Projects

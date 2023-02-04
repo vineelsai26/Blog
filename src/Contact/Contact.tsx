@@ -23,7 +23,7 @@ export default function Contact() {
 			},
 			body: JSON.stringify({
 				username: 'Contact Form',
-				avatar_url: 'https://vineelsai.com/logo.png',
+				avatar_url: 'https://vineelsai.com/logo-light.png',
 				content: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
 			}),
 		})
@@ -41,10 +41,7 @@ export default function Contact() {
 	}
 
 	return (
-		<div
-			id='contact'
-			className='m-10'
-		>
+		<div id='contact' className='m-10'>
 			<div>
 				<h1 className='m-2 text-center text-5xl font-bold dark:text-white'>
 					Contact
@@ -183,10 +180,7 @@ export default function Contact() {
 							href='mailto:mail@vineelsai.com'
 							aria-label='instagram'
 						>
-							<FcInvite
-								className='m-2'
-								size={40}
-							/>
+							<FcInvite className='m-2' size={40} />
 						</Link>
 					</div>
 				</div>

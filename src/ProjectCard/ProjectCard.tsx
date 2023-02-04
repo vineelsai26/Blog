@@ -53,10 +53,7 @@ export default function ProjectCard({ project }: { project: any }) {
 					className='relative h-full w-full rounded-t-md object-cover'
 				/>
 			</div>
-			<div
-				className='p-10 pt-0'
-				style={{ height: '450px' }}
-			>
+			<div className='p-10 pt-0' style={{ height: '450px' }}>
 				<h1 className='my-10 text-center text-6xl font-semibold dark:text-white'>
 					{project.name}
 				</h1>

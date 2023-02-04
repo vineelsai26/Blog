@@ -23,14 +23,7 @@ export default function Archive({
 		<div className={`${kalam.className} bg-slate-200 dark:bg-gray-600`}>
 			<Head>
 				<title>Vineel Sai</title>
-				<meta
-					name='description'
-					content='Portfolio of Vineel Sai'
-				/>
-				<link
-					rel='icon'
-					href='/logo.png'
-				/>
+				<meta name='description' content='Archive of Portfolios of Vineel Sai' />
 			</Head>
 
 			<Navbar
@@ -42,10 +35,7 @@ export default function Archive({
 			/>
 
 			<div className='min-h-screen'>
-				<div
-					id='projects'
-					className='min-h-screen w-full'
-				>
+				<div id='projects' className='min-h-screen w-full'>
 					<div className='w-full'>
 						<h1 className='m-5 p-2 text-center text-4xl font-semibold'>
 							My Projects

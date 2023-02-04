@@ -19,14 +19,7 @@ export default function Post({
 		<div>
 			<Head>
 				<title>{article.title}</title>
-				<link
-					rel='icon'
-					href='/logo.png'
-				/>
-				<meta
-					name='description'
-					content={article.description}
-				/>
+				<meta name='description' content={article.description} />
 			</Head>
 
 			<div className='sticky top-0 z-50 w-full'>
