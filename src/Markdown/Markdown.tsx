@@ -23,10 +23,7 @@ export default function Markdown({ article }: { article: ArticleType }) {
 							{String(children).replace(/\n$/, '')}
 						</SyntaxHighlighter>
 					) : (
-						<code
-							className={className}
-							{...props}
-						>
+						<code className={className} {...props}>
 							{children}
 						</code>
 					)

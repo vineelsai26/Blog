@@ -55,10 +55,6 @@ export default function New({
 		<div>
 			<Head>
 				<title>New Article</title>
-				<link
-					rel='icon'
-					href='/logo.png'
-				/>
 			</Head>
 
 			<Navbar

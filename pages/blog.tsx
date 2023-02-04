@@ -58,14 +58,7 @@ export default function Blog({
 		<div className='bg-slate-200 dark:bg-gray-600'>
 			<Head>
 				<title>Vineel Sai | Blog</title>
-				<meta
-					name='description'
-					content='Blog by Vineel Sai'
-				></meta>
-				<link
-					rel='icon'
-					href='/logo.png'
-				/>
+				<meta name='description' content='Blog by Vineel Sai'></meta>
 			</Head>
 
 			<div className='sticky top-0 z-50 w-full'>
@@ -82,10 +75,7 @@ export default function Blog({
 				{articles.length > 0 && (
 					<div className='flex flex-col items-center'>
 						{articles.map((article) => (
-							<Article
-								key={article.url}
-								article={article}
-							/>
+							<Article key={article.url} article={article} />
 						))}
 					</div>
 				)}
