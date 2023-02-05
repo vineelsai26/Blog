@@ -4,7 +4,7 @@ import Footer from '../../src/Footer/Footer'
 import { Dispatch, SetStateAction, useState } from 'react'
 import Navbar from '../../src/Navbar/Navbar'
 import ArticleEditor from '../../src/ArticleEditor/ArticleEditor'
-import { PrismaClient } from '@prisma/client'
+import prisma from '../../prisma/prisma'
 
 export default function EditPost({
 	article,
@@ -95,17 +95,52 @@ export default function EditPost({
 	)
 }
 
-export async function getServerSideProps(context: { query: { url: string } }) {
-	const prisma = new PrismaClient()
-
-	const article = await prisma.articles.findUnique({
-		where: {
-			url: context.query.url,
+export async function getStaticPaths() {
+	const articles = await prisma.articles.findMany({
+		select: {
+			url: true,
 		},
 	})
+
+	let paths: { params: { url: string } }[] = []
+
+	articles.forEach((article) => {
+		paths.push({ params: { url: article.url } })
+	})
+
 	return {
-		props: {
-			article: JSON.parse(JSON.stringify(article)),
-		},
+		paths: paths,
+		fallback: false,
 	}
 }
+
+export async function getStaticProps(context: { params: { url: string } }) {
+	const article = (await prisma.articles.findUnique({
+		where: {
+			url: context.params.url,
+		},
+	})) as ArticleType
+
+	const user = await prisma.users.findUnique({
+		where: {
+			email: article?.createdBy,
+		},
+		select: {
+			email: true,
+			name: true,
+			profilePicture: true,
+			password: false,
+		}
+	})
+
+	article!.createdBy = user!
+
+	return {
+		props: {
+			article: JSON.parse(JSON.stringify(article)) as ArticleType,
+			user: JSON.parse(JSON.stringify(user)),
+		},
+		revalidate: 1,
+	}
+}
+
