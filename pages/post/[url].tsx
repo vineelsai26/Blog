@@ -69,6 +69,12 @@ export async function getStaticProps(context: { params: { url: string } }) {
 		where: {
 			email: article?.createdBy,
 		},
+		select: {
+			email: true,
+			name: true,
+			profilePicture: true,
+			password: false,
+		}
 	})
 
 	article!.createdBy = user!
