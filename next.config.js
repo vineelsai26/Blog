@@ -5,6 +5,7 @@ const nextConfig = {
 	images: {
 		domains: ['skillicons.dev', 'vineelsai.com'],
 		dangerouslyAllowSVG: true,
+		unoptimized: true
 	},
 }
 
