@@ -13,6 +13,12 @@ export default function Footer() {
 			<ul className='mt-3 flex flex-wrap items-center text-sm text-gray-500 dark:text-gray-400 sm:mt-0'>
 				<li>
 					<Link
+						href='https://github.com/vineelsai26/Blog'
+						className='mr-4 hover:underline md:mr-6 '
+					>
+						GitHub
+					</Link>
+					<Link
 						href='/#contact'
 						className='mr-4 hover:underline md:mr-6 '
 					>

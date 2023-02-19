@@ -115,7 +115,7 @@ export async function getStaticProps() {
 		take: pageLimit,
 	})
 
-	const pageCount = await prisma.articles.count()
+	const pageCount = ((await prisma.articles.count()) / pageLimit) + 1
 
 	return {
 		props: {

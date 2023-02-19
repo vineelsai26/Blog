@@ -60,7 +60,7 @@ export default function Contact() {
 				<div className='flex w-full flex-col lg:w-5/12'>
 					<input
 						type='text'
-						className='my-3 box-border rounded-lg border-2 p-3 dark:bg-gray-600'
+						className='my-3 box-border rounded-lg border-2 p-3 dark:bg-gray-600 dark:text-white'
 						placeholder='Name'
 						onChange={(e) => {
 							setName(e.target.value)
@@ -70,7 +70,7 @@ export default function Contact() {
 
 					<input
 						type='email'
-						className='my-3 box-border rounded-lg border-2 p-3 dark:bg-gray-600'
+						className='my-3 box-border rounded-lg border-2 p-3 dark:bg-gray-600 dark:text-white'
 						placeholder='Email'
 						onChange={(e) => {
 							setEmail(e.target.value)
@@ -80,7 +80,7 @@ export default function Contact() {
 
 					<textarea
 						rows={5}
-						className='box-border-2 my-3 rounded-lg border p-3 dark:bg-gray-600'
+						className='box-border-2 my-3 rounded-lg border p-3 dark:bg-gray-600 dark:text-white'
 						placeholder='Write something..'
 						onChange={(e) => {
 							setMessage(e.target.value)

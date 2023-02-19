@@ -1,7 +1,7 @@
 import Editor from '@monaco-editor/react'
 import { ArticleEditorProps, ArticleType } from '../../types/article'
 import ArticlePreview from '../ArticlePreview/ArticlePreview'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Article from '../ArticleCard/ArticleCard'
 import Loader from '../Loader/Loader'
 
@@ -34,11 +34,21 @@ export default function ArticleEditor({
 		tags: tags,
 	} as ArticleType)
 
+	const [theme, setTheme] = useState('light')
+
+	useEffect(() => {
+		window.matchMedia("(prefers-color-scheme: dark)").matches ? setTheme('dark') : setTheme('light')
+
+		window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', (e) => {
+			e.matches ? setTheme('dark') : setTheme('light')
+		})
+	}, [])
+
 	return (
-		<div className='flex flex-row'>
+		<div className='flex flex-row bg-slate-200 dark:bg-slate-600'>
 			<div className='m-2 flex w-1/2 flex-col overflow-hidden p-2'>
 				<input
-					className='m-2 rounded border-2 border-black p-3'
+					className='m-2 rounded border-2 border-black dark:border-white p-3 dark:bg-gray-600 dark:text-white'
 					placeholder='Title'
 					defaultValue={title}
 					onChange={(e) => {
@@ -47,7 +57,7 @@ export default function ArticleEditor({
 					}}
 				/>
 				<input
-					className='m-2 rounded  border-2 border-black p-3'
+					className='m-2 rounded  border-2 border-black dark:border-white p-3 dark:bg-gray-600 dark:text-white'
 					placeholder='Url'
 					defaultValue={url}
 					onChange={(e) => {
@@ -56,7 +66,7 @@ export default function ArticleEditor({
 					}}
 				/>
 				<input
-					className='m-2 rounded  border-2 border-black p-3'
+					className='m-2 rounded  border-2 border-black dark:border-white p-3 dark:bg-gray-600 dark:text-white'
 					placeholder='Image Url'
 					defaultValue={imageUrl}
 					onChange={(e) => {
@@ -65,7 +75,7 @@ export default function ArticleEditor({
 					}}
 				/>
 				<input
-					className='m-2 rounded  border-2 border-black p-3'
+					className='m-2 rounded  border-2 border-black dark:border-white p-3 dark:bg-gray-600 dark:text-white'
 					placeholder='Tags'
 					defaultValue={tags.join(',')}
 					onChange={(e) => {
@@ -77,7 +87,7 @@ export default function ArticleEditor({
 					}}
 				/>
 				<textarea
-					className='m-2 rounded  border-2 border-black p-3'
+					className='m-2 rounded  border-2 border-black dark:border-white p-3 dark:bg-gray-600 dark:text-white'
 					rows={5}
 					placeholder='Description'
 					defaultValue={description}
@@ -87,7 +97,7 @@ export default function ArticleEditor({
 					}}
 				/>
 				<Editor
-					className='m-2 rounded border-2 border-black p-3'
+					className='m-2 rounded border-2 border-black dark:border-white  dark:bg-gray-600'
 					height='50vh'
 					width='-webkit-fill-available'
 					defaultValue={content}
@@ -98,11 +108,12 @@ export default function ArticleEditor({
 					options={{
 						minimap: { enabled: false },
 					}}
+					theme={theme === 'dark' ? 'vs-dark' : 'vs'}
 					defaultLanguage='markdown'
 				/>
 				<input
 					type='email'
-					className='m-2 rounded  border-2 border-black p-3'
+					className='m-2 rounded  border-2 border-black dark:border-white p-3 dark:bg-gray-600 dark:text-white'
 					placeholder='Email'
 					onChange={(e) => {
 						setEmail(e.target.value)
@@ -110,7 +121,7 @@ export default function ArticleEditor({
 				/>
 				<input
 					type='password'
-					className='m-2 rounded  border-2 border-black p-3'
+					className='m-2 rounded  border-2 border-black dark:border-white p-3 dark:bg-gray-600 dark:text-white'
 					placeholder='Password'
 					onChange={(e) => {
 						setPassword(e.target.value)
@@ -152,12 +163,12 @@ export default function ArticleEditor({
 					</div>
 				)}
 			</div>
-			<div className='w-1/2 overflow-scroll bg-slate-200 p-2'>
-				<h1 className='text-center text-2xl'>Home Page Preview</h1>
+			<div className='w-1/2 overflow-scroll p-2'>
+				<h1 className='text-center text-2xl dark:text-white'>Home Page Preview</h1>
 				<div className='flex justify-center'>
 					<Article article={article} />
 				</div>
-				<h1 className='m-5 text-center text-2xl'>Article Preview</h1>
+				<h1 className='m-5 text-center text-2xl dark:text-white'>Article Preview</h1>
 				<ArticlePreview article={article} />
 			</div>
 		</div>
