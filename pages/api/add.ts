@@ -8,7 +8,7 @@ export default async function handler(
 	res: NextApiResponse
 ) {
 	if (req.method === 'POST') {
-		const { email, password, url, title, imageUrl, description, content } =
+		const { email, password, url, title, imageUrl, description, content, tags } =
 			req.body
 
 		const user = await prisma.users.findUnique({
@@ -25,6 +25,7 @@ export default async function handler(
 						title: title as string,
 						url: url as string,
 						imageUrl: imageUrl as string,
+						tags: tags as string[],
 						description: description as string,
 						longDescription: content as string,
 						createdBy: user.email as string,
