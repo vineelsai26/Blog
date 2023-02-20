@@ -4,9 +4,11 @@ const nextConfig = {
 	productionBrowserSourceMaps: true,
 	images: {
 		domains: ['skillicons.dev', 'vineelsai.com'],
-		dangerouslyAllowSVG: true,
-		unoptimized: true
+		dangerouslyAllowSVG: true
+	},
+	experimental: {
+		appDir: true,
 	},
 }
 
-module.exports = nextConfig
+export default nextConfig
