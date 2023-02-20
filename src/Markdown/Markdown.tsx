@@ -46,7 +46,7 @@ export default function Markdown({ article }: { article: ArticleType }) {
 				},
 			}}
 		>
-			{article.longDescription}
+			{article.longDescription!}
 		</ReactMarkdown>
 	)
 }

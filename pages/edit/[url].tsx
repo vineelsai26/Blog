@@ -80,7 +80,7 @@ export default function EditPost({
 				setTags={setTags}
 				description={description}
 				setDescription={setDescription}
-				content={content}
+				content={content!}
 				setContent={setContent}
 				setEmail={setEmail}
 				setPassword={setPassword}
