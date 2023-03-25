@@ -1,5 +1,14 @@
 const projects = [
 	{
+		name: 'Arch WSL',
+		image: '/images/projects/arch-wsl.png',
+		description:
+			'Arch WSL is a project that aims to bring the Arch Linux distribution to Windows Subsystem for Linux (WSL).',
+		downloadUrl: 'https://www.microsoft.com/store/apps/9MZNMNKSM73X',
+		gitUrl: 'https://github.com/VsTechDev/Arch-WSL',
+		tags: 'cpp,visualstudio,powershell,linux',
+	},
+	{
 		name: 'Fedora WSL',
 		image: '/images/projects/fedora-wsl.png',
 		description:
@@ -9,13 +18,13 @@ const projects = [
 		tags: 'cpp,visualstudio,powershell,linux',
 	},
 	{
-		name: 'Arch WSL',
-		image: '/images/projects/arch-wsl.png',
+		name: 'VMN',
+		image: '/images/projects/vmn.jpg',
 		description:
-			'Arch WSL is a project that aims to bring the Arch Linux distribution to Windows Subsystem for Linux (WSL).',
-		downloadUrl: 'https://www.microsoft.com/store/apps/9MZNMNKSM73X',
-		gitUrl: 'https://github.com/VsTechDev/Arch-WSL',
-		tags: 'cpp,visualstudio,powershell,linux',
+			'Version Manager for Node.js. A simple CLI tool to manage multiple versions of Node.js.',
+		downloadUrl: 'https://github.com/vineelsai26/VMN/releases',
+		gitUrl: 'https://github.com/vineelsai26/VMN',
+		tags: 'go,powershell,linux,bash',
 	},
 	{
 		name: 'RCE',
