@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Footer from '../src/Footer/Footer'
 import Navbar from '../src/Navbar/Navbar'
-import { Kalam } from '@next/font/google'
+import { Kalam } from "next/font/google"
 
 import archive from '../data/archive'
 import ProjectCard from '../src/ProjectCard/ProjectCard'

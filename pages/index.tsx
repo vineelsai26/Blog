@@ -3,7 +3,7 @@ import Footer from '../src/Footer/Footer'
 import Navbar from '../src/Navbar/Navbar'
 import Image from 'next/image'
 import Typewriter from 'typewriter-effect'
-import { Kalam } from '@next/font/google'
+import { Kalam } from "next/font/google"
 
 import projects from '../data/projects'
 import ProjectCard from '../src/ProjectCard/ProjectCard'
