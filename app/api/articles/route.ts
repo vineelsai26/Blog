@@ -1,10 +1,10 @@
-import { NextApiRequest } from 'next'
 import prisma from '../../../prisma/prisma'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 
-export async function POST(req: NextApiRequest) {
-	const { page, pageLimit } = req.body
+export async function POST(req: NextRequest) {
+	const body = await new Response(req.body).json()
+	const { page, pageLimit } = body
 
 	const articles = await prisma.articles.findMany({
 		select: {

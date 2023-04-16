@@ -1,26 +1,26 @@
-import { NextApiRequest } from 'next'
 import prisma from '../../../prisma/prisma'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET(req: NextApiRequest) {
+export async function GET(req: NextRequest) {
+	const { searchParams } = new URL(req.url)
 	const articles = await prisma.articles.findMany({
 		where: {
 			OR: [
 				{
 					title: {
-						contains: req.query.query?.toString().toLowerCase()!,
+						contains: searchParams.get('query')?.toString().toLowerCase()!,
 						mode: 'insensitive',
 					},
 				},
 				{
 					description: {
-						contains: req.query.query?.toString().toLowerCase()!,
+						contains: searchParams.get('query')?.toString().toLowerCase()!,
 						mode: 'insensitive',
 					},
 				},
 				{
 					tags: {
-						has: req.query.query?.toString().toLowerCase()!,
+						has: searchParams.get('query')?.toString().toLowerCase()!,
 					},
 				},
 			],

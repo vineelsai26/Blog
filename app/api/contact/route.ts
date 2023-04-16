@@ -4,30 +4,24 @@ export const config = {
 	runtime: 'edge'
 }
 
-export default async function handler(req: NextRequest) {
-	if (req.method === 'POST') {
-		const body = await new Response(req.body).json()
+export async function POST(req: NextRequest) {
+	const body = await new Response(req.body).json()
 
-		const response = await fetch(process.env.NEXT_DISCORD_WEBHOOK!, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(body),
+	const response = await fetch(process.env.NEXT_DISCORD_WEBHOOK!, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(body),
+	})
+
+	if (response.status === 204 || response.status === 200) {
+		return NextResponse.json({
+			message: 'Successfully Sent, I will get back to you soon!',
 		})
-
-		if (response.status === 204 || response.status === 200) {
-			return NextResponse.json({
-				message: 'Successfully Sent, I will get back to you soon!',
-			})
-		} else {
-			return NextResponse.json({
-				error: 'Error! Please try again later.',
-			})
-		}
 	} else {
 		return NextResponse.json({
-			error: 'Invalid request',
+			error: 'Error! Please try again later.',
 		})
 	}
 }
