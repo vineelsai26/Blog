@@ -1,6 +1,6 @@
 "use client"
 
-import { Kalam } from '@next/font/google'
+import { Kalam } from 'next/font/google'
 import { useEffect, useState } from 'react'
 import GoogleAdSense from '../src/Ads/GoogleAdSense'
 import GoogleAnalytics from '../src/Analytics/GoogleAnalytics'

@@ -1,44 +1,13 @@
-import Head from 'next/head'
-import Footer from '../src/Footer/Footer'
-import Navbar from '../src/Navbar/Navbar'
 import Image from 'next/image'
-import Typewriter from 'typewriter-effect'
-import { Kalam } from '@next/font/google'
 
 import projects from '../data/projects'
-import ProjectCard from '../src/ProjectCard/ProjectCard'
 import Contact from '../src/Contact/Contact'
-import { Dispatch, SetStateAction } from 'react'
+import ProjectCard from '../src/ProjectCard/ProjectCard'
+import TypeWriter from '../src/TypeWriter/TypeWriter'
 
-const kalam = Kalam({
-	weight: '400',
-	subsets: ['latin'],
-})
-
-export default function Home({
-	analytics,
-	setAnalytics,
-}: {
-	analytics: boolean
-	setAnalytics: Dispatch<SetStateAction<boolean>>
-}) {
+export default function Home() {
 	return (
-		<div className={`${kalam.className} bg-slate-200 dark:bg-gray-600`}>
-			<Head>
-				<title>Vineel Sai</title>
-				<meta name='description' content='Portfolio of Vineel Sai' />
-			</Head>
-
-			<div className='sticky top-0 z-50 w-full'>
-				<Navbar
-					showSearch={false}
-					setArticles={null}
-					setLoading={null}
-					analytics={analytics}
-					setAnalytics={setAnalytics}
-				/>
-			</div>
-
+		<div >
 			<div className='min-h-screen'>
 				<div
 					className='min-h-screen w-full bg-fixed'
@@ -57,21 +26,7 @@ export default function Home({
 						<h1 className='p-2 text-center text-4xl font-semibold text-orange-600'>
 							Vineel Sai
 						</h1>
-						<span className='my-1 text-center text-xl text-white'>
-							<Typewriter
-								options={{
-									strings: [
-										'Software Engineer',
-										'Full Stack Web Developer',
-										'Open Source Contributor',
-										'Blogger',
-										'Linux Enthusiast',
-									],
-									autoStart: true,
-									loop: true,
-								}}
-							/>
-						</span>
+						<TypeWriter />
 					</div>
 				</div>
 
@@ -101,8 +56,6 @@ export default function Home({
 			</div>
 
 			<Contact />
-
-			<Footer />
 		</div>
 	)
 }
