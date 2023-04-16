@@ -1,6 +1,11 @@
 import archive from '../../data/archive'
 import ProjectCard from '../../src/ProjectCard/ProjectCard'
 
+export const metadata = {
+    title: 'Archive of My Portfolios',
+    description: 'Archive of Portfolio`s of Vineel Sai',
+}
+
 export default function Archive() {
     return (
         <div className='min-h-screen'>

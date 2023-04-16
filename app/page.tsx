@@ -5,6 +5,11 @@ import Contact from '../src/Contact/Contact'
 import ProjectCard from '../src/ProjectCard/ProjectCard'
 import TypeWriter from '../src/TypeWriter/TypeWriter'
 
+export const metadata = {
+	title: 'Vineel Sai',
+	description: 'Portfolio of Vineel Sai',
+}
+
 export default function Home() {
 	return (
 		<div >

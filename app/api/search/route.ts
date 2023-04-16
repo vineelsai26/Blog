@@ -1,10 +1,8 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '../../prisma/prisma'
+import { NextApiRequest } from 'next'
+import prisma from '../../../prisma/prisma'
+import { NextResponse } from 'next/server'
 
-export default async function handler(
-	req: NextApiRequest,
-	res: NextApiResponse
-) {
+export async function GET(req: NextApiRequest) {
 	const articles = await prisma.articles.findMany({
 		where: {
 			OR: [
@@ -29,5 +27,5 @@ export default async function handler(
 		},
 	})
 
-	return res.status(200).json(articles)
+	return NextResponse.json(articles)
 }

@@ -1,42 +1,17 @@
 import prisma from '../../prisma/prisma'
 import Article from '../../src/ArticleCard/ArticleCard'
+import Pagination from '../../src/Pagination/Pagination'
 import { ArticleType } from '../../types/article'
 
-const pageLimit = 10
+const pageLimit = 100
+
+export const metadata = {
+	title: 'Vineel Sai',
+	description: 'Blog by Vineel Sai',
+}
 
 export default async function Blog() {
-	// const [articles, setArticles] = useState<ArticleType[]>(articleProps)
-	// const [page, setPage] = useState(-1)
-	// const [pageCount, setPageCount] = useState(pageCountProp)
-	// const [loading, setLoading] = useState(false)
-
-	// useEffect(() => {
-	// 	const getArticles = async () => {
-	// 		setLoading(true)
-	// 		const res = await fetch('/api/articles', {
-	// 			method: 'POST',
-	// 			headers: {
-	// 				'Content-Type': 'application/json',
-	// 			},
-	// 			body: JSON.stringify({
-	// 				page: page,
-	// 				pageLimit: pageLimit,
-	// 			}),
-	// 		})
-	// 		if (res.ok) {
-	// 			const data = await res.json()
-	// 			setArticles(data.articles)
-	// 			setPageCount(data.pageCount)
-	// 		} else {
-	// 			console.log('error')
-	// 		}
-	// 		setLoading(false)
-	// 	}
-
-	// 	if (page >= 0) {
-	// 		getArticles()
-	// 	}
-	// }, [page])
+	const page = 1
 
 	const articles = await prisma.articles.findMany({
 		select: {
@@ -55,7 +30,7 @@ export default async function Blog() {
 		take: pageLimit,
 	})
 
-	// const pageCount = ((await prisma.articles.count()) / pageLimit) + 1
+	const pageCount = Math.round((await prisma.articles.count()) / pageLimit) + 1
 
 	return (
 		<div>
@@ -67,17 +42,15 @@ export default async function Blog() {
 						))}
 					</div>
 				)}
-				{/* {loading && <Loader />} */}
 			</div>
 
 			<div className='flex flex-col'>
-				{/* {pageCount > 1 && (
+				{pageCount > 1 && (
 					<Pagination
 						page={page}
-						setPage={setPage}
 						pageCount={pageCount}
 					/>
-				)} */}
+				)}
 			</div>
 		</div>
 	)
