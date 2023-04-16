@@ -2,6 +2,8 @@ import { ArticleType } from '../../../types/article'
 import ArticlePreview from '../../../src/ArticlePreview/ArticlePreview'
 import prisma from '../../../prisma/prisma'
 
+export const revalidate = 3600
+
 export default async function Post({
 	params
 } : {
@@ -9,7 +11,6 @@ export default async function Post({
 		url: string
 	}
 }) {
-	console.log(params)
 	const article = (await prisma.articles.findUnique({
 		where: {
 			url: params.url,

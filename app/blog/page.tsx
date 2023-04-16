@@ -10,6 +10,8 @@ export const metadata = {
 	description: 'Blog by Vineel Sai',
 }
 
+export const revalidate = 3600
+
 export default async function Blog() {
 	const page = 1
 

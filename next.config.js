@@ -9,6 +9,7 @@ const nextConfig = {
 	experimental: {
 		appDir: true,
 	},
+	swcMinify: true,
 }
 
 export default nextConfig

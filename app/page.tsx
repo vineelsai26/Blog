@@ -10,6 +10,8 @@ export const metadata = {
 	description: 'Portfolio of Vineel Sai',
 }
 
+export const revalidate = 3600
+
 export default function Home() {
 	return (
 		<div >
