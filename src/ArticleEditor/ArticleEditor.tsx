@@ -7,7 +7,13 @@ import { useEffect, useState } from 'react'
 import Article from '../ArticleCard/ArticleCard'
 import Loader from '../Loader/Loader'
 
-export default function ArticleEditor({ articleFetch, editMode }: { articleFetch: ArticleType, editMode: Boolean }) {
+export default function ArticleEditor({
+	articleFetch,
+	editMode
+}: {
+	articleFetch: ArticleType,
+	editMode: Boolean
+}) {
 	const [title, setTitle] = useState(articleFetch.title)
 	const [url, setUrl] = useState(articleFetch.url)
 	const [imageUrl, setImageUrl] = useState(articleFetch.imageUrl)
@@ -123,7 +129,7 @@ export default function ArticleEditor({ articleFetch, editMode }: { articleFetch
 				<input
 					className='m-2 rounded  border-2 border-black dark:border-white p-3 dark:bg-gray-600 dark:text-white'
 					placeholder='Tags'
-					defaultValue={tags.join(',')}
+					defaultValue={tags && tags.join(',')}
 					onChange={(e) => {
 						setTags(e.target.value.split(','))
 						setArticle({

@@ -8,9 +8,11 @@ export const metadata = {
 
 export default function New() {	
 	return (
-		<ArticleEditor
-			articleFetch={{} as ArticleType}
-			editMode={false}
-		/>
+		<>
+			<ArticleEditor
+				articleFetch={{} as ArticleType}
+				editMode={false}
+			/>
+		</>
 	)
 }
