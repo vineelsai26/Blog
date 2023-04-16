@@ -28,7 +28,7 @@ export default function ArticlePreview({ article }: { article: ArticleType }) {
 					</div>
 				)}
 				<div className='mx-auto my-4 flex w-96 justify-evenly'>
-					{article.tags.map((tag, index) => {
+					{article.tags && article.tags.map((tag, index) => {
 						return (
 							<span
 								key={index}

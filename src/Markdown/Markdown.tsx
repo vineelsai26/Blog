@@ -1,3 +1,5 @@
+"use client"
+
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
@@ -46,7 +48,7 @@ export default function Markdown({ article }: { article: ArticleType }) {
 				},
 			}}
 		>
-			{article.longDescription}
+			{article.longDescription!}
 		</ReactMarkdown>
 	)
 }

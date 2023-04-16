@@ -1,3 +1,5 @@
+"use client"
+
 import { HiOutlineClipboard, HiClipboardCheck } from 'react-icons/hi'
 import { useState } from 'react'
 

@@ -34,7 +34,7 @@ export default function Article({ article }: { article: ArticleType }) {
 					</p>
 				</div>
 				<div className='col my-4 flex'>
-					{article.tags.length > 0 &&
+					{article.tags && article.tags.length > 0 &&
 						article.tags.map((tag, index) => {
 							return (
 								<span
@@ -47,7 +47,7 @@ export default function Article({ article }: { article: ArticleType }) {
 						})}
 				</div>
 				<p className='m-2 p-2 text-xl font-normal dark:text-white'>
-					{article.description.substring(0, 150)}
+					{article.description && article.description.substring(0, 150)}
 				</p>
 			</div>
 		</Link>

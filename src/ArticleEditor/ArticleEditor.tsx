@@ -1,30 +1,82 @@
+"use client"
+
 import Editor from '@monaco-editor/react'
-import { ArticleEditorProps, ArticleType } from '../../types/article'
+import { ArticleType, SaveResponse } from '../../types/article'
 import ArticlePreview from '../ArticlePreview/ArticlePreview'
 import { useEffect, useState } from 'react'
 import Article from '../ArticleCard/ArticleCard'
 import Loader from '../Loader/Loader'
 
 export default function ArticleEditor({
-	title,
-	setTitle,
-	url,
-	setUrl,
-	imageUrl,
-	setImageUrl,
-	tags,
-	setTags,
-	description,
-	setDescription,
-	content,
-	setContent,
-	setEmail,
-	setPassword,
-	data,
-	handleSubmit,
-	loading,
-	editMode,
-}: ArticleEditorProps) {
+	articleFetch,
+	editMode
+}: {
+	articleFetch: ArticleType,
+	editMode: Boolean
+}) {
+	const [title, setTitle] = useState(articleFetch.title)
+	const [url, setUrl] = useState(articleFetch.url)
+	const [imageUrl, setImageUrl] = useState(articleFetch.imageUrl)
+	const [description, setDescription] = useState(articleFetch.description)
+	const [content, setContent] = useState(articleFetch.longDescription!)
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+	const [tags, setTags] = useState<String[]>(articleFetch.tags)
+
+	const [data, setData] = useState<SaveResponse>({} as SaveResponse)
+
+	const [loading, setLoading] = useState(false)
+
+	const handleSubmit = async (deleteArticle: Boolean = false) => {
+		setLoading(true)
+		if (editMode) {
+			const request = await fetch('/api/edit', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					title: title,
+					url: url,
+					imageUrl: imageUrl,
+					tags: tags,
+					description: description,
+					content: content,
+					email: email,
+					password: password,
+					deleteArticle: deleteArticle,
+				}),
+			})
+
+			const response = await request.json()
+
+			setData(response)
+		} else {
+			const request = await fetch('/api/add', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					title: title,
+					url: url,
+					imageUrl: imageUrl,
+					tags: tags,
+					description: description,
+					content: content,
+					email: email,
+					password: password,
+				}),
+			})
+
+			const response = await request.json()
+
+			setData(response)
+		}
+		setLoading(false)
+	}
+
+
 	const [article, setArticle] = useState<ArticleType>({
 		title: title,
 		url: url,
@@ -77,7 +129,7 @@ export default function ArticleEditor({
 				<input
 					className='m-2 rounded  border-2 border-black dark:border-white p-3 dark:bg-gray-600 dark:text-white'
 					placeholder='Tags'
-					defaultValue={tags.join(',')}
+					defaultValue={tags && tags.join(',')}
 					onChange={(e) => {
 						setTags(e.target.value.split(','))
 						setArticle({
@@ -102,7 +154,7 @@ export default function ArticleEditor({
 					width='-webkit-fill-available'
 					defaultValue={content}
 					onChange={(value) => {
-						setContent(value)
+						setContent(value!)
 						setArticle({ ...article, longDescription: value! })
 					}}
 					options={{

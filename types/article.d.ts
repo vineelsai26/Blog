@@ -4,7 +4,7 @@ export type ArticleType = {
 	url: string
 	title: string
 	description: string
-	longDescription: string
+	longDescription: string | undefined
 	imageUrl: string
 	createdAt: Date
 	createdBy: string | Prisma.users
