@@ -1,27 +1,32 @@
-import axios from 'axios'
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server'
 
-export default async function handler(
-	req: NextApiRequest,
-	res: NextApiResponse
-) {
+export const config = {
+	runtime: 'edge'
+}
+
+export default async function handler(req: NextRequest) {
 	if (req.method === 'POST') {
-		const response = await axios.post(
-			process.env.NEXT_DISCORD_WEBHOOK!,
-			req.body
-		)
+		const body = await new Response(req.body).json()
+
+		const response = await fetch(process.env.NEXT_DISCORD_WEBHOOK!, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(body),
+		})
 
 		if (response.status === 204 || response.status === 200) {
-			return res.status(200).json({
+			return NextResponse.json({
 				message: 'Successfully Sent, I will get back to you soon!',
 			})
 		} else {
-			return res.status(400).json({
+			return NextResponse.json({
 				error: 'Error! Please try again later.',
 			})
 		}
 	} else {
-		return res.status(400).json({
+		return NextResponse.json({
 			error: 'Invalid request',
 		})
 	}
