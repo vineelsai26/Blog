@@ -19,6 +19,12 @@ export async function GET(req: NextRequest) {
 					},
 				},
 				{
+					longDescription: {
+						contains: searchParams.get('query')?.toString().toLowerCase()!,
+						mode: 'insensitive',
+					},
+				},
+				{
 					tags: {
 						has: searchParams.get('query')?.toString().toLowerCase()!,
 					},

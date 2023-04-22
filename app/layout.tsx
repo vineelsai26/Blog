@@ -67,9 +67,6 @@ export default function RootLayout({
 				}
 				<div className='sticky top-0 z-50 w-full'>
 					<Navbar
-						showSearch={false}
-						setArticles={null}
-						setLoading={null}
 						analytics={analytics}
 						setAnalytics={setAnalytics}
 					/>

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-export const runtime = 'experimental-edge'
+export const runtime = 'edge'
 
 export async function POST(req: NextRequest) {
 	const body = await new Response(req.body).json()

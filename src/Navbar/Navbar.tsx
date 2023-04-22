@@ -1,7 +1,9 @@
+"use client"
+
 import Image from 'next/image'
 import { Dispatch, SetStateAction } from 'react'
-import { ArticleType } from '../../types/article'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 interface Navigation {
 	name: string
@@ -23,15 +25,9 @@ function classNames(...classes: string[]) {
 }
 
 export default function Navbar({
-	showSearch,
-	setArticles,
-	setLoading,
 	analytics,
 	setAnalytics,
 }: {
-	showSearch: boolean
-	setArticles: Dispatch<SetStateAction<ArticleType[]>> | null
-	setLoading: Dispatch<SetStateAction<boolean>> | null
 	analytics: boolean
 	setAnalytics: Dispatch<SetStateAction<boolean>>
 }) {
@@ -43,6 +39,12 @@ export default function Navbar({
 			}
 			return !analytics
 		})
+	}
+
+	let showSearch = false
+
+	if (usePathname() === '/blog') {
+		showSearch = true
 	}
 
 	return (
@@ -94,18 +96,13 @@ export default function Navbar({
 										className='block w-full rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
 										placeholder='Search'
 										onChange={(e) => {
-											if (setArticles) {
-												setLoading && setLoading(true)
-												fetch(
-													`/api/search?query=${e.target.value}`
-												)
-													.then((res) => res.json())
-													.then((data) => {
-														setArticles(data)
-														setLoading &&
-															setLoading(false)
-													})
-											}
+											fetch(
+												`/api/search?query=${e.target.value}`
+											)
+												.then((res) => res.json())
+												.then((data) => {
+													console.log(data)
+												})
 										}}
 									/>
 								</div>
