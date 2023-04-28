@@ -33,9 +33,7 @@ export default async function Post({
 
 	return (
 		<div>
-
 			<ArticlePreview article={article} />
-
 		</div>
 	)
 }

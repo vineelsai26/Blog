@@ -1,4 +1,3 @@
-import prisma from '../../prisma/prisma'
 import Article from '../../src/ArticleCard/ArticleCard'
 import Pagination from '../../src/Pagination/Pagination'
 import { ArticleType } from '../../types/article'
@@ -11,28 +10,23 @@ export const metadata = {
 }
 
 export const revalidate = 3600
+export const runtime = 'edge'
 
 export default async function Blog() {
-	const page = 1
+	const page = 0
 
-	const articles = await prisma.articles.findMany({
-		select: {
-			title: true,
-			url: true,
-			imageUrl: true,
-			description: true,
-			tags: true,
-			createdAt: true,
-			createdBy: true,
-		},
-		orderBy: {
-			createdAt: 'desc',
-		},
-		skip: 0,
-		take: pageLimit,
+	const response = await fetch('http://localhost:3000/api/articles', {
+		method: 'POST',
+		body: JSON.stringify({
+			page,
+			pageLimit,
+		}),
 	})
 
-	const pageCount = Math.round((await prisma.articles.count()) / pageLimit) + 1
+	const { articles, pageCount } = await response.json() as {
+		articles: ArticleType[],
+		pageCount: number,
+	}
 
 	return (
 		<div>

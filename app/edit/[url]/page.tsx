@@ -9,7 +9,6 @@ export default async function EditPost({
 		url: string
 	}
 }) {
-
 	const article = (await prisma.articles.findUnique({
 		where: {
 			url: params.url,
