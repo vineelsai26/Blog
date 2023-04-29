@@ -15,7 +15,7 @@ export const runtime = 'edge'
 export default async function Blog() {
 	const page = 0
 
-	const response = await fetch('http://localhost:3000/api/articles', {
+	const response = await fetch(`${process.env.NEXT_APP_URL}/api/articles`, {
 		method: 'POST',
 		body: JSON.stringify({
 			page,
