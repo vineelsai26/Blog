@@ -1,14 +1,37 @@
 import { Prisma } from '@prisma/client'
 
 export type ArticleType = {
-	url: string
-	title: string
-	description: string
-	longDescription: string | undefined
-	imageUrl: string
-	createdAt: Date
-	createdBy: string | Prisma.users
-	tags: string[]
+	id: string
+	created_time: string
+	icon: {
+		file: {
+			url: string
+		}
+	}
+	properties: {
+		URL: {
+			url: string
+		}
+		Tags: {
+			multi_select: {
+				name: string
+			}[]
+		}
+		"Mini Description": {
+			rich_text: {
+				text: {
+					content: string
+				}
+			}[0]
+		}
+		Name: {
+			title: {
+				text: {
+					content: string
+				}
+			}[]
+		}
+	}
 }
 
 export type SaveResponse = {

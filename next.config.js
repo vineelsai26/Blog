@@ -3,7 +3,7 @@ const nextConfig = {
 	reactStrictMode: true,
 	productionBrowserSourceMaps: true,
 	images: {
-		domains: ['skillicons.dev', 'vineelsai.com'],
+		domains: ['skillicons.dev', 'vineelsai.com', 's3.us-west-2.amazonaws.com'],
 		dangerouslyAllowSVG: true
 	},
 	experimental: {
