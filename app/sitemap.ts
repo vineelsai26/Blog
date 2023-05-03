@@ -9,15 +9,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
 
     let paths: Sitemap = [
-        { url: '/', lastModified: new Date() },
-        { url: '/blog', lastModified: new Date() },
-        { url: '/resume/resume.pdf', lastModified: new Date() },
-        { url: '/archive', lastModified: new Date() },
+        { url: `${process.env.NEXT_APP_URL}/`, lastModified: new Date() },
+        { url: `${process.env.NEXT_APP_URL}/blog`, lastModified: new Date() },
+        { url: `${process.env.NEXT_APP_URL}/resume/resume.pdf`, lastModified: new Date() },
+        {url: `${process.env.NEXT_APP_URL}/archive`, lastModified: new Date() },
     ]
 
     articles.forEach((article: { url: string }) => {
         paths.push({ 
-            url: `/post/${article.url}`, 
+            url: `${process.env.NEXT_APP_URL}/post/${article.url}`, 
             lastModified: new Date() 
         })
     })
