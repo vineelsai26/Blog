@@ -7,7 +7,7 @@ const nextConfig = {
 		dangerouslyAllowSVG: true
 	},
 	experimental: {
-		appDir: true,
+		serverActions: true,
 	},
 	swcMinify: true,
 }
