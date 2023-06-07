@@ -6,9 +6,6 @@ const nextConfig = {
 		domains: ['skillicons.dev', 'vineelsai.com'],
 		dangerouslyAllowSVG: true
 	},
-	experimental: {
-		serverActions: true,
-	},
 	swcMinify: true,
 }
 
