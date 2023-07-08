@@ -1,8 +1,9 @@
-import { ArticleType } from '../../../types/article'
+import { ArticleURLType, ArticleType } from '../../../types/article'
 import ArticlePreview from '../../../src/ArticlePreview/ArticlePreview'
 import prisma from '../../../prisma/prisma'
 
 export const revalidate = 3600
+// export const runtime = 'edge'
 
 export default async function Post({
 	params
@@ -47,7 +48,7 @@ export async function generateStaticParams() {
 
 	let paths: { params: { url: string } }[] = []
 
-	articles.forEach((article) => {
+	articles.forEach((article: ArticleURLType) => {
 		paths.push({ params: { url: article.url } })
 	})
 

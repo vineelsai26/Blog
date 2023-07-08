@@ -1,4 +1,4 @@
-import { ArticleType } from '../../../types/article'
+import { ArticleType, ArticleURLType } from '../../../types/article'
 import ArticleEditor from '../../../src/ArticleEditor/ArticleEditor'
 import prisma from '../../../prisma/prisma'
 
@@ -48,7 +48,7 @@ export async function generateStaticParams() {
 
 	let paths: { params: { url: string } }[] = []
 
-	articles.forEach((article) => {
+	articles.forEach((article: ArticleURLType) => {
 		paths.push({ params: { url: article.url } })
 	})
 

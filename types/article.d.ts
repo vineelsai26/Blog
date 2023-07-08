@@ -11,6 +11,10 @@ export type ArticleType = {
 	tags: string[]
 }
 
+export type ArticleURLType = {
+	url: string
+}
+
 export type SaveResponse = {
 	message: string | null
 	error: string | null
