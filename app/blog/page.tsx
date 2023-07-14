@@ -5,7 +5,7 @@ import { ArticleType } from '../../types/article'
 const pageLimit = 100
 
 export const metadata = {
-	title: 'Vineel Sai',
+	title: 'Blog',
 	description: 'Blog by Vineel Sai',
 }
 

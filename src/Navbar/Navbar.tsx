@@ -15,6 +15,7 @@ const navigation = [
 	{ name: 'Blog', href: '/blog', current: false },
 	{ name: 'Resume', href: '/resume/resume.pdf', current: false },
 	{ name: 'Archive', href: '/archive', current: false },
+	{ name: 'Tools', href: '/tools', current: false },
 ]
 
 function classNames(...classes: string[]) {

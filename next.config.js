@@ -4,7 +4,7 @@ const nextConfig = {
 	productionBrowserSourceMaps: true,
 	images: {
 		domains: [
-			'skillicons.dev', 
+			'skillicons.dev',
 			'vineelsai.com',
 			'static.vineelsai.com',
 		],
