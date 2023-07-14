@@ -14,7 +14,7 @@ export default function CopyButton({ content }: { content: string }) {
             }, 2000)
         }}>
             {
-                copied ? <HiClipboardCheck className='w-6 h-6 m-2' /> : <HiOutlineClipboard className='w-6 h-6 m-2' />
+                copied ? <HiClipboardCheck className='w-6 h-6 m-2 dark:text-white' /> : <HiOutlineClipboard className='w-6 h-6 m-2 dark:text-white' />
             }
         </button>
     )
