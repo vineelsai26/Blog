@@ -16,17 +16,14 @@
 		"@prisma/client": "^5.0.0",
 		"@tailwindcss/typography": "^0.5.9",
 		"@vercel/analytics": "^1.0.1",
-		"axios": "^1.4.0",
 		"bcrypt": "^5.1.0",
 		"next": "13.4.9",
-		"nextjs-progressbar": "^0.0.16",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
 		"react-icons": "^4.10.1",
 		"react-markdown": "^8.0.7",
 		"react-syntax-highlighter": "^15.5.0",
 		"remark-gfm": "^3.0.1",
-		"sharp": "^0.32.2",
 		"typewriter-effect": "^2.20.1"
 	},
 	"devDependencies": {
