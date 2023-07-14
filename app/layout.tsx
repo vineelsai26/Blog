@@ -2,8 +2,6 @@
 
 import { Kalam } from 'next/font/google'
 import { useEffect, useState } from 'react'
-import GoogleAdSense from '../src/Ads/GoogleAdSense'
-import GoogleAnalytics from '../src/Analytics/GoogleAnalytics'
 import Footer from '../src/Footer/Footer'
 import Navbar from '../src/Navbar/Navbar'
 import { Analytics } from '@vercel/analytics/react'
@@ -20,18 +18,6 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode
 }) {
-	const [analytics, setAnalytics] = useState(false)
-	useEffect(() => {
-		if (
-			localStorage.getItem('analytics') === 'true' ||
-			localStorage.getItem('analytics') === null
-		) {
-			setAnalytics(true)
-		} else {
-			setAnalytics(false)
-		}
-	}, [])
-
 	const [faviconHref, setFaviconHref] = useState("/logo-light.png")
 
 	useEffect(() => {
@@ -58,19 +44,8 @@ export default function RootLayout({
 				<link rel="icon" href={faviconHref} type="image/x-icon" />
 			</head>
 			<body className={`${kalam.className} bg-slate-200 dark:bg-gray-600`}>
-				{
-					analytics === true ? (
-						<>
-							<GoogleAnalytics />
-							<GoogleAdSense />
-						</>
-					) : null
-				}
 				<div className='sticky top-0 z-50 w-full'>
-					<Navbar
-						analytics={analytics}
-						setAnalytics={setAnalytics}
-					/>
+					<Navbar />
 				</div>
 				<div>
 					{children}

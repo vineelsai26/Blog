@@ -1,7 +1,4 @@
-"use client"
-
 import Image from 'next/image'
-import { Dispatch, SetStateAction } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -24,23 +21,7 @@ function classNames(...classes: string[]) {
 	return classes.filter(Boolean).join(' ')
 }
 
-export default function Navbar({
-	analytics,
-	setAnalytics,
-}: {
-	analytics: boolean
-	setAnalytics: Dispatch<SetStateAction<boolean>>
-}) {
-	const handleAnalyticsChange = () => {
-		setAnalytics((analytics) => {
-			localStorage.setItem('analytics', String(!analytics))
-			if (analytics !== false) {
-				window.location.reload()
-			}
-			return !analytics
-		})
-	}
-
+export default function Navbar() {
 	let showSearch = false
 
 	if (usePathname() === '/blog') {
@@ -107,19 +88,6 @@ export default function Navbar({
 									/>
 								</div>
 							)}
-							<label className='relative m-2 inline-flex cursor-pointer items-center'>
-								<input
-									type='checkbox'
-									value=''
-									className='peer sr-only'
-									checked={analytics}
-									onChange={handleAnalyticsChange}
-								/>
-								<div className="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800"></div>
-								<span className='ml-3 text-sm font-medium text-gray-300'>
-									Ads & Analytics
-								</span>
-							</label>
 						</div>
 					</div>
 				</div>
