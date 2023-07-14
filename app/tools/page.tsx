@@ -18,7 +18,7 @@ export default async function Blog() {
 				Hear are Some Usefull Tools I Made.
 			</p>
 			<div
-				className='flex w-full flex-wrap items-center justify-center pt-10'
+				className='flex w-full flex-wrap items-center justify-evenly pt-10'
 				style={{ margin: 0, width: '100%' }}
 			>
 				{

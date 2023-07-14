@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CopyButton from '../../../src/Markdown/CopyButton'
 
 function encode(input: string) {
@@ -18,6 +18,18 @@ function decode(input: string) {
 export default function Blog() {
 	const [input, setInput] = useState('')
 	const [output, setOutput] = useState('')
+
+	useEffect(() => {
+		const cachedInput = window.localStorage.getItem(`${window.location.pathname}/input`)
+		if (cachedInput) {
+			setInput(cachedInput)
+		}
+	}, [])
+
+	useEffect(() => {
+		window.localStorage.setItem(`${window.location.pathname}/input`, input)
+	}, [input])
+
 	return (
 		<div className='min-h-screen'>
 			<h1 className='m-5 p-2 text-center text-4xl font-semibold dark:text-white'>
@@ -35,6 +47,7 @@ export default function Blog() {
 						rows={5}
 						className='w-full p-2 text-xl border-2 border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white'
 						placeholder='Write something...'
+						value={input}
 						onChange={
 							(e) => {
 								setInput(e.target.value)
