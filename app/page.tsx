@@ -3,7 +3,6 @@ import Image from 'next/image'
 import projects from '../data/projects'
 import Contact from '../src/Contact/Contact'
 import ProjectCard from '../src/ProjectCard/ProjectCard'
-import TypeWriter from '../src/TypeWriter/TypeWriter'
 
 export const metadata = {
 	title: 'Vineel Sai',
@@ -11,7 +10,7 @@ export const metadata = {
 }
 
 export const revalidate = 3600
-// export const runtime = 'edge'
+export const runtime = 'edge'
 
 export default function Home() {
 	return (
@@ -34,7 +33,7 @@ export default function Home() {
 						<h1 className='p-2 text-center text-4xl font-semibold text-orange-600'>
 							Vineel Sai
 						</h1>
-						<TypeWriter />
+						<p className='p-2 text-center text-xl font-semibold text-white'>Hi, Welcome to my Portfolio, Scroll down to findout more about me</p>
 					</div>
 				</div>
 

@@ -55,11 +55,13 @@ export default function ProjectCard({ project }: { project: any }) {
 					className='relative h-full w-full rounded-t-md object-cover'
 				/>
 			</div>
-			<div className='p-10 pt-0' style={{ height: '450px' }}>
-				<h1 className='my-10 text-center text-6xl font-semibold dark:text-white'>
+			<div className='p-2'>
+				<h1 className='my-6 text-center text-5xl font-semibold dark:text-white'>
 					{project.name}
 				</h1>
-				<p className='my-10 text-center text-2xl font-semibold dark:text-white'>
+			</div>
+			<div className='p-8 pt-0' style={{ height: '250px' }}>
+				<p className='my-6 text-center text-xl font-semibold dark:text-white'>
 					{project.description}
 				</p>
 				<Image

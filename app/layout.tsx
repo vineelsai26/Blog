@@ -4,7 +4,6 @@ import { Kalam } from 'next/font/google'
 import { useEffect, useState } from 'react'
 import Footer from '../src/Footer/Footer'
 import Navbar from '../src/Navbar/Navbar'
-import { Analytics } from '@vercel/analytics/react'
 import '../styles/globals.css'
 
 const kalam = Kalam({
@@ -51,7 +50,6 @@ export default function RootLayout({
 					{children}
 				</div>
 				<Footer />
-				<Analytics/>
 			</body>
 		</html>
 	)
