@@ -12,7 +12,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@highlight-run/next": "^3.1.4",
+		"@highlight-run/next": "^3.1.6",
 		"@highlight-run/react": "^3.2.1",
 		"@monaco-editor/react": "^4.5.1",
 		"@prisma/client": "^5.0.0",
