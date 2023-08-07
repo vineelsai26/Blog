@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@highlight-run/next':
     specifier: ^3.1.4
-    version: 3.1.4(highlight.run@7.3.11)(next@13.4.12)(react@18.2.0)
+    version: 3.1.4(highlight.run@7.4.0)(next@13.4.12)(react@18.2.0)
   '@highlight-run/react':
     specifier: ^3.2.1
     version: 3.2.1(react-dom@18.2.0)(react@18.2.0)
@@ -24,8 +24,8 @@ dependencies:
     specifier: ^5.1.0
     version: 5.1.0
   highlight.run:
-    specifier: ^7.3.11
-    version: 7.3.11
+    specifier: ^7.4.0
+    version: 7.4.0
   next:
     specifier: 13.4.12
     version: 13.4.12(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)
@@ -229,7 +229,7 @@ packages:
       '@hapi/topo': 5.1.0
     dev: false
 
-  /@highlight-run/next@3.1.4(highlight.run@7.3.11)(next@13.4.12)(react@18.2.0):
+  /@highlight-run/next@3.1.4(highlight.run@7.4.0)(next@13.4.12)(react@18.2.0):
     resolution: {integrity: sha512-T45vufe3GRVIagJxQ1rMHplaI8LO/cslZ5agvuz00ttvcRuhdJDXBwYoTxBOHdnsqzGi5XRHImqKsezj/WcAlA==}
     peerDependencies:
       highlight.run: '>=3.0.0'
@@ -239,7 +239,7 @@ packages:
       '@highlight-run/node': 3.1.4
       '@highlight-run/sourcemap-uploader': 0.5.1
       '@opentelemetry/api': 1.4.1
-      highlight.run: 7.3.11
+      highlight.run: 7.4.0
       next: 13.4.12(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)
       npm-run-all: 4.1.5
       react: 18.2.0
@@ -3372,12 +3372,12 @@ packages:
     resolution: {integrity: sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==}
     dev: false
 
-  /highlight.run@7.3.11:
-    resolution: {integrity: sha512-ThX7dSkLWhV9Pa+BlEVUiDzWVWjUwKT+kyoTGwVtgO4hMTsrTdamnFvJ0h5BGFku1y9JTRy8hiOXkxegLn1iPA==}
-    dev: false
-
   /highlight.run@7.3.9:
     resolution: {integrity: sha512-1gbZ+VZaDMlPwSPlbhakXrSD5iihu4Qyn+R8mlp3kDkHia9qkpiuFbzWiAVw9MkC1VRuOmC1jNvl5KJlwHoPQw==}
+    dev: false
+
+  /highlight.run@7.4.0:
+    resolution: {integrity: sha512-jH39VXdIhVYoWny14+Se2/8SENbvHF2mbgmH51+3dO8GhwR3UZNT+bA2V6N7fmgt6ef7M9thRTrh59aKM2rpqQ==}
     dev: false
 
   /hosted-git-info@2.8.9:
