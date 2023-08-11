@@ -20,7 +20,7 @@ export default function Article({ article }: { article: ArticleType }) {
 				/>
 			</div>
 			<div className='h-full py-10 md:w-5/6 md:py-0'>
-				<h2 className='m-4 mt-0 text-3xl font-bold dark:text-white'>
+				<h2 className='m-4 mt-0 text-3xl font-bold dark:text-white md:mt-4'>
 					{article.title}
 				</h2>
 				<div className='m-4 flex flex-row items-center'>

@@ -2,6 +2,20 @@
 const nextConfig = {
 	reactStrictMode: true,
 	productionBrowserSourceMaps: true,
+	headers: async () => {
+		return [
+			{
+				source: '/:path*',
+				headers: [
+					{
+						key: 'X-Content-Type-Options',
+						value: 'nosniff'
+					}
+				]
+			}
+		]
+	},
+	optimizeFonts: true,
 	images: {
 		domains: [
 			'skillicons.dev',

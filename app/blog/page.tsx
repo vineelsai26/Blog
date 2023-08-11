@@ -1,6 +1,7 @@
 import Article from '../../src/ArticleCard/ArticleCard'
 import Pagination from '../../src/Pagination/Pagination'
 import { ArticleType } from '../../types/article'
+import prisma from '../../prisma/prisma'
 
 const pageLimit = 100
 
@@ -10,23 +11,31 @@ export const metadata = {
 }
 
 export const revalidate = 3600
-export const runtime = 'edge'
+// export const runtime = 'edge'
 
 export default async function Blog() {
 	const page = 0
 
-	const response = await fetch(`${process.env.NEXT_APP_URL}/api/articles`, {
-		method: 'POST',
-		body: JSON.stringify({
-			page,
-			pageLimit,
-		}),
-	})
+	const articles = await prisma.articles.findMany({
+		select: {
+			title: true,
+			url: true,
+			imageUrl: true,
+			description: true,
+			createdAt: true,
+			createdBy: true,
+			tags: true,
+		},
+		orderBy: {
+			createdAt: 'desc',
+		},
+		skip: page * pageLimit,
+		take: pageLimit,
+	}) as ArticleType[]
 
-	const { articles, pageCount } = await response.json() as {
-		articles: ArticleType[],
-		pageCount: number,
-	}
+	const count = await prisma.articles.count()
+
+	const pageCount = Math.ceil(count / pageLimit)
 
 	return (
 		<div>
