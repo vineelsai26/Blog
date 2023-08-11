@@ -5,6 +5,7 @@ const archive = [
 		description: 'My first portfolio website. Built with Jekyll.',
 		previewUrl: 'https://archive1.vineelsai.com',
 		gitUrl: 'https://github.com/vineelsai26/Portfolio-Archive-1',
+		tags: 'html',
 	},
 	{
 		name: 'Archive 2',
@@ -28,6 +29,7 @@ const archive = [
 		description: 'My fourth portfolio website. Built with HUGO.',
 		previewUrl: 'https://archive4.vineelsai.com',
 		gitUrl: 'https://github.com/vineelsai26/Portfolio-Archive-4',
+		tags: 'html',
 	},
 ]
 

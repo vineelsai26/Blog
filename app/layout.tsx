@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Footer from '../src/Footer/Footer'
 import Navbar from '../src/Navbar/Navbar'
 import '../styles/globals.css'
-import { HighlightInit } from '@highlight-run/next/highlight-init'
+import { HighlightInit } from '@highlight-run/next/client'
 
 
 const kalam = Kalam({

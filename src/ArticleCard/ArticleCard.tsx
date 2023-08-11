@@ -39,7 +39,7 @@ export default function Article({ article }: { article: ArticleType }) {
 							return (
 								<span
 									key={index}
-									className='align-center ease mx-4 flex w-max cursor-pointer rounded-full bg-gray-200 px-4 py-2 text-sm font-semibold text-gray-500 transition duration-300 active:bg-gray-300'
+									className='align-center ease mx-4 flex w-max cursor-pointer rounded-full bg-gray-200 px-4 py-2 text-sm font-semibold text-black transition duration-300 active:bg-gray-300'
 								>
 									{tag}
 								</span>

@@ -57,6 +57,7 @@ export default function Blog() {
 					<p className='m-2 dark:text-white'>OR</p>
 					<input
 						type='file'
+						placeholder='Upload File'
 						className='m-4 mt-0 p-2 dark:text-white cursor-pointer'
 						onChange={
 							(e) => {

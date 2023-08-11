@@ -1,14 +1,15 @@
 import { ArticleURLType, ArticleType } from '../../../types/article'
 import ArticlePreview from '../../../src/ArticlePreview/ArticlePreview'
 import prisma from '../../../prisma/prisma'
+import { Metadata } from 'next'
 
 export const revalidate = 3600
 // export const runtime = 'edge'
 
 export default async function Post({
 	params
-} : {
-		params: {
+}: {
+	params: {
 		url: string
 	}
 }) {
@@ -38,6 +39,31 @@ export default async function Post({
 		</div>
 	)
 }
+
+export async function generateMetadata({
+	params
+}: {
+	params: {
+		url: string
+	}
+}): Promise<Metadata> {
+
+	const article = (await prisma.articles.findUnique({
+		where: {
+			url: params.url,
+		},
+		select: {
+			title: true,
+			description: true,
+		}
+	})) as ArticleType
+
+	return {
+		title: article.title,
+		description: article.description
+	}
+}
+
 
 export async function generateStaticParams() {
 	const articles = await prisma.articles.findMany({
