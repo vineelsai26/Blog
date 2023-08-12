@@ -126,7 +126,7 @@ export default function Contact() {
 							aria-label='instagram'
 						>
 							<Image
-								src='https://skillicons.dev/icons?i=instagram'
+								src='https://icons.vineelsai.com/icons?i=instagram'
 								alt={''}
 								width={40}
 								height={40}
@@ -138,7 +138,7 @@ export default function Contact() {
 							aria-label='twitter'
 						>
 							<Image
-								src='https://skillicons.dev/icons?i=twitter'
+								src='https://icons.vineelsai.com/icons?i=twitter'
 								alt={''}
 								width={40}
 								height={40}
@@ -150,7 +150,7 @@ export default function Contact() {
 							aria-label='linkedin'
 						>
 							<Image
-								src='https://skillicons.dev/icons?i=linkedin'
+								src='https://icons.vineelsai.com/icons?i=linkedin'
 								alt={''}
 								width={40}
 								height={40}
@@ -162,7 +162,7 @@ export default function Contact() {
 							aria-label='github'
 						>
 							<Image
-								src='https://skillicons.dev/icons?i=github'
+								src='https://icons.vineelsai.com/icons?i=github'
 								alt={''}
 								width={40}
 								height={40}

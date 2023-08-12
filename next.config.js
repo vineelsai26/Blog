@@ -18,7 +18,7 @@ const nextConfig = {
 	optimizeFonts: true,
 	images: {
 		domains: [
-			'skillicons.dev',
+			'icons.vineelsai.com',
 			'vineelsai.com',
 			'static.vineelsai.com',
 		],

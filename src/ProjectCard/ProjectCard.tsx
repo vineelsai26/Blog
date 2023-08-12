@@ -65,7 +65,7 @@ export default function ProjectCard({ project }: { project: any }) {
 					{project.description}
 				</p>
 				<Image
-					src={`https://skillicons.dev/icons?i=${project.tags}`}
+					src={`https://icons.vineelsai.com/icons?i=${project.tags}`}
 					alt={project.tags}
 					width={400}
 					height={100}
