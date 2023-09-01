@@ -1,4 +1,5 @@
 import { tools } from '../../data/tools'
+import Link from "next/link"
 
 export const metadata = {
 	title: 'Tools',
@@ -24,7 +25,7 @@ export default async function Blog() {
 				{
 					tools.map((tool, index) => {
 						return (
-							<a
+							<Link
 								key={index}
 								className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
 								href={tool.url}
@@ -32,7 +33,7 @@ export default async function Blog() {
 
 							>
 								{tool.name}
-							</a>
+							</Link>
 						)
 					})
 				}

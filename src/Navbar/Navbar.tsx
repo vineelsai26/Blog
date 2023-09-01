@@ -1,6 +1,10 @@
+"use client"
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
+import { ArticleType } from '../../types/article'
 
 interface Navigation {
 	name: string
@@ -9,7 +13,7 @@ interface Navigation {
 }
 
 const navigation = [
-	{ name: 'Home', href: '/', current: false },
+	{ name: 'Home', href: '/#home', current: false },
 	{ name: 'Projects', href: '/#projects', current: false },
 	{ name: 'Contact', href: '/#contact', current: false },
 	{ name: 'Blog', href: '/blog', current: false },
@@ -27,6 +31,22 @@ export default function Navbar() {
 
 	if (usePathname() === '/blog') {
 		showSearch = true
+	}
+
+	const [search, setSearch] = useState<ArticleType[]>([])
+
+	const handleSearch = (value: string) => {
+		if (value.trim().length > 0) {
+			fetch(
+				`/api/search?query=${value}`
+			)
+				.then((res) => res.json())
+				.then((data) => {
+					setSearch(data)
+				})
+		} else {
+			setSearch([])
+		}
 	}
 
 	return (
@@ -52,6 +72,7 @@ export default function Navbar() {
 										<Link
 											key={item.name}
 											href={item.href}
+											scroll={true}
 											className={classNames(
 												item.current
 													? 'bg-gray-900 text-white'
@@ -70,23 +91,52 @@ export default function Navbar() {
 								</div>
 							</div>
 						</div>
-						<div className='hidden lg:flex'>
+						<div className='hidden w-1/3 relative items-center lg:flex'>
 							{showSearch && (
-								<div>
+								<div className='flex w-full flex-col absolute'>
 									<input
+										onBlur={() => {
+											setSearch([])
+										}}
+										onFocus={(e) => {
+											handleSearch(e.target.value)
+										}}
 										type='text'
 										className='block w-full rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
 										placeholder='Search'
 										onChange={(e) => {
-											fetch(
-												`/api/search?query=${e.target.value}`
-											)
-												.then((res) => res.json())
-												.then((data) => {
-													console.log(data)
-												})
+											handleSearch(e.target.value)
 										}}
 									/>
+									<ul className='absolute mt-10'>
+										{
+											search.map((article: ArticleType) => {
+												return (
+													<Link
+														href={`/post/${article.url}`}
+														className='bg-gray-700 w-full flex flex-row h-20 p-2 rounded border-slate-400 border-x border-y-[0.5px]'
+														key={article.url}>
+														<Image
+															src={article.imageUrl}
+															alt={article.title}
+															width={100}
+															height={100}
+														/>
+														<div className='flex flex-col justify-evenly'>
+															<p
+																className='text-gray-300 hover:text-white rounded-md px-2 text-l font-semibold overflow-x-clip'
+															>
+																{article.title}
+															</p>
+															<p className='text-gray-300 hover:text-white rounded-md px-2 text-sm font-medium overflow-x-clip overflow-y-clip'>
+																{article.description.slice(0, 60)}
+															</p>
+														</div>
+													</Link>
+												)
+											})
+										}
+									</ul>
 								</div>
 							)}
 						</div>
