@@ -9,7 +9,7 @@ export const metadata = {
 export const revalidate = 3600
 export const runtime = 'edge'
 
-export default async function Blog() {
+export default async function Tools() {
 	return (
 		<div className='min-h-screen'>
 			<h1 className='m-5 p-2 text-center text-4xl font-semibold dark:text-white'>

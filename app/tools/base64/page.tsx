@@ -15,7 +15,7 @@ function decode(input: string) {
 	}
 }
 
-export default function Blog() {
+export default function Base64() {
 	const [input, setInput] = useState('')
 	const [output, setOutput] = useState('')
 

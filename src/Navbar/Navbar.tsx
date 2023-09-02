@@ -33,7 +33,7 @@ export default function Navbar() {
 		showSearch = true
 	}
 
-	const [search, setSearch] = useState<ArticleType[]>([])
+	const [searchResults, setSearchResults] = useState<ArticleType[]>([])
 
 	const handleSearch = (value: string) => {
 		if (value.trim().length > 0) {
@@ -42,10 +42,10 @@ export default function Navbar() {
 			)
 				.then((res) => res.json())
 				.then((data) => {
-					setSearch(data)
+					setSearchResults(data)
 				})
 		} else {
-			setSearch([])
+			setSearchResults([])
 		}
 	}
 
@@ -96,7 +96,7 @@ export default function Navbar() {
 								<div className='flex w-full flex-col absolute'>
 									<input
 										onBlur={() => {
-											setSearch([])
+											setSearchResults([])
 										}}
 										onFocus={(e) => {
 											handleSearch(e.target.value)
@@ -110,7 +110,7 @@ export default function Navbar() {
 									/>
 									<ul className='absolute mt-10'>
 										{
-											search.map((article: ArticleType) => {
+											searchResults.length > 0 && searchResults.map((article: ArticleType) => {
 												return (
 													<Link
 														href={`/post/${article.url}`}

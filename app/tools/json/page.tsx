@@ -12,7 +12,7 @@ function format(input: string, tabLength: number) {
 	}
 }
 
-export default function Blog() {
+export default function JsonFormator() {
 	const [input, setInput] = useState('')
 	const [tabLength, setTabLength] = useState(4)
 	const [output, setOutput] = useState('{}')
