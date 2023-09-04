@@ -53,8 +53,8 @@ devDependencies:
     specifier: ^5.0.0
     version: 5.0.0
   '@types/node':
-    specifier: 20.5.8
-    version: 20.5.8
+    specifier: 20.5.9
+    version: 20.5.9
   '@types/react':
     specifier: 18.2.21
     version: 18.2.21
@@ -1600,7 +1600,7 @@ packages:
   /@types/bcrypt@5.0.0:
     resolution: {integrity: sha512-agtcFKaruL8TmcvqbndlqHPSJgsolhf/qPWchFlgnW1gECTN/nKbFcoFnvKAQRFfKbh+BO6A3SWdJu9t+xF3Lw==}
     dependencies:
-      '@types/node': 20.5.8
+      '@types/node': 20.5.9
     dev: true
 
   /@types/body-parser@1.19.2:
@@ -1797,6 +1797,11 @@ packages:
 
   /@types/node@20.5.8:
     resolution: {integrity: sha512-eajsR9aeljqNhK028VG0Wuw+OaY5LLxYmxeoXynIoE6jannr9/Ucd1LL0hSSoafk5LTYG+FfqsyGt81Q6Zkybw==}
+    dev: false
+
+  /@types/node@20.5.9:
+    resolution: {integrity: sha512-PcGNd//40kHAS3sTlzKB9C9XL4K0sTup8nbG5lC14kzEteTNuAFh9u5nA0o5TWnSG2r/JNPRXFVcHJIIeRlmqQ==}
+    dev: true
 
   /@types/pg-pool@2.0.3:
     resolution: {integrity: sha512-fwK5WtG42Yb5RxAwxm3Cc2dJ39FlgcaNiXKvtTLAwtCn642X7dgel+w1+cLWwpSOFImR3YjsZtbkfjxbHtFAeg==}
