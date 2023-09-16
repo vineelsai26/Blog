@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@highlight-run/next':
-    specifier: ^4.3.0
-    version: 4.3.0(@highlight-run/node@3.3.0)(highlight.run@7.5.1)(next@13.4.19)(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^4.3.1
+    version: 4.3.1(@highlight-run/node@3.3.1)(highlight.run@7.5.1)(next@13.4.19)(react-dom@18.2.0)(react@18.2.0)
   '@highlight-run/react':
     specifier: ^3.2.1
     version: 3.2.1(react-dom@18.2.0)(react@18.2.0)
@@ -15,8 +15,8 @@ dependencies:
     specifier: ^4.5.2
     version: 4.5.2(monaco-editor@0.38.0)(react-dom@18.2.0)(react@18.2.0)
   '@prisma/client':
-    specifier: ^5.2.0
-    version: 5.2.0(prisma@5.2.0)
+    specifier: ^5.3.1
+    version: 5.3.1(prisma@5.3.1)
   '@tailwindcss/typography':
     specifier: ^0.5.10
     version: 0.5.10(tailwindcss@3.3.3)
@@ -53,8 +53,8 @@ devDependencies:
     specifier: ^5.0.0
     version: 5.0.0
   '@types/node':
-    specifier: 20.6.0
-    version: 20.6.0
+    specifier: 20.6.2
+    version: 20.6.2
   '@types/react':
     specifier: 18.2.21
     version: 18.2.21
@@ -83,8 +83,8 @@ devDependencies:
     specifier: ^0.5.4
     version: 0.5.4(prettier@3.0.3)
   prisma:
-    specifier: ^5.2.0
-    version: 5.2.0
+    specifier: ^5.3.1
+    version: 5.3.1
   tailwindcss:
     specifier: ^3.3.3
     version: 3.3.3
@@ -151,7 +151,7 @@ packages:
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.7.8
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
     dev: false
 
   /@grpc/proto-loader@0.7.8:
@@ -229,15 +229,15 @@ packages:
       '@hapi/topo': 5.1.0
     dev: false
 
-  /@highlight-run/next@4.3.0(@highlight-run/node@3.3.0)(highlight.run@7.5.1)(next@13.4.19)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-2Hf0q+Igrms8x/v47N0th5cygU66AdK+hPJ+E596kwj4U79rysm/oD2S+twyUjZQvQlNngTZSZMt1rsC52WLCQ==}
+  /@highlight-run/next@4.3.1(@highlight-run/node@3.3.1)(highlight.run@7.5.1)(next@13.4.19)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-+GbIZ7suxCMS9kW+M9j2Fkv0CYkoGXS7JcuR9ABvadoN49iYI9kxNj8ALKeDrYD8A+6zdMEPuI50nmooOxcSOg==}
     peerDependencies:
-      '@highlight-run/node': ^3.3.0
+      '@highlight-run/node': ^3.3.1
       highlight.run: ^7.5.1
       next: '>=12'
       react: '>=17'
     dependencies:
-      '@highlight-run/node': 3.3.0
+      '@highlight-run/node': 3.3.1
       '@highlight-run/react': 3.2.1(react-dom@18.2.0)(react@18.2.0)
       '@highlight-run/sourcemap-uploader': 0.5.2
       highlight.run: 7.5.1
@@ -248,8 +248,8 @@ packages:
       - react-dom
     dev: false
 
-  /@highlight-run/node@3.3.0:
-    resolution: {integrity: sha512-LFUHhw65ITl9ppq5MQjT5a57upa1XJ6H8A/AzPMgW1N5Cf/vMiOLltmXjnnvVskwzLnmQzP2kOErmPnBX7xknA==}
+  /@highlight-run/node@3.3.1:
+    resolution: {integrity: sha512-4Ewnkg6jH7tD3GXCoyD7UMdWJWirLs3zx9+eVfQVLMmO8RkeIxkLB56CQ3f4ASLGjF7nMZCy9NS9iJGFI48Spw==}
     dependencies:
       '@opentelemetry/api': 1.4.1
       '@opentelemetry/auto-instrumentations-node': 0.38.0(@opentelemetry/api@1.4.1)
@@ -1486,8 +1486,8 @@ packages:
       tslib: 2.5.0
     dev: true
 
-  /@prisma/client@5.2.0(prisma@5.2.0):
-    resolution: {integrity: sha512-AiTjJwR4J5Rh6Z/9ZKrBBLel3/5DzUNntMohOy7yObVnVoTNVFi2kvpLZlFuKO50d7yDspOtW6XBpiAd0BVXbQ==}
+  /@prisma/client@5.3.1(prisma@5.3.1):
+    resolution: {integrity: sha512-ArOKjHwdFZIe1cGU56oIfy7wRuTn0FfZjGuU/AjgEBOQh+4rDkB6nF+AGHP8KaVpkBIiHGPQh3IpwQ3xDMdO0Q==}
     engines: {node: '>=16.13'}
     requiresBuild: true
     peerDependencies:
@@ -1496,16 +1496,16 @@ packages:
       prisma:
         optional: true
     dependencies:
-      '@prisma/engines-version': 5.2.0-25.2804dc98259d2ea960602aca6b8e7fdc03c1758f
-      prisma: 5.2.0
+      '@prisma/engines-version': 5.3.1-2.61e140623197a131c2a6189271ffee05a7aa9a59
+      prisma: 5.3.1
     dev: false
 
-  /@prisma/engines-version@5.2.0-25.2804dc98259d2ea960602aca6b8e7fdc03c1758f:
-    resolution: {integrity: sha512-jsnKT5JIDIE01lAeCj2ghY9IwxkedhKNvxQeoyLs6dr4ZXynetD0vTy7u6wMJt8vVPv8I5DPy/I4CFaoXAgbtg==}
+  /@prisma/engines-version@5.3.1-2.61e140623197a131c2a6189271ffee05a7aa9a59:
+    resolution: {integrity: sha512-y5qbUi3ql2Xg7XraqcXEdMHh0MocBfnBzDn5GbV1xk23S3Mq8MGs+VjacTNiBh3dtEdUERCrUUG7Z3QaJ+h79w==}
     dev: false
 
-  /@prisma/engines@5.2.0:
-    resolution: {integrity: sha512-dT7FOLUCdZmq+AunLqB1Iz+ZH/IIS1Fz2THmKZQ6aFONrQD/BQ5ecJ7g2wGS2OgyUFf4OaLam6/bxmgdOBDqig==}
+  /@prisma/engines@5.3.1:
+    resolution: {integrity: sha512-6QkILNyfeeN67BNEPEtkgh3Xo2tm6D7V+UhrkBbRHqKw9CTaz/vvTP/ROwYSP/3JT2MtIutZm/EnhxUiuOPVDA==}
     requiresBuild: true
 
   /@protobufjs/aspromise@1.1.2:
@@ -1590,7 +1590,7 @@ packages:
   /@types/accepts@1.3.5:
     resolution: {integrity: sha512-jOdnI/3qTpHABjM5cx1Hc0sKsPoYCp+DP/GJRGtDlPd7fiV9oXGGIcjW/ZOxLIvjGz8MA+uMZI9metHlgqbgwQ==}
     dependencies:
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
     dev: false
 
   /@types/aws-lambda@8.10.81:
@@ -1600,26 +1600,26 @@ packages:
   /@types/bcrypt@5.0.0:
     resolution: {integrity: sha512-agtcFKaruL8TmcvqbndlqHPSJgsolhf/qPWchFlgnW1gECTN/nKbFcoFnvKAQRFfKbh+BO6A3SWdJu9t+xF3Lw==}
     dependencies:
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
     dev: true
 
   /@types/body-parser@1.19.2:
     resolution: {integrity: sha512-ALYone6pm6QmwZoAgeyNksccT9Q4AWZQ6PvfwR37GT6r6FWUPguq6sUmNGSMV2Wr761oQoBxwGGa6DR5o1DC9g==}
     dependencies:
       '@types/connect': 3.4.35
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
     dev: false
 
   /@types/bunyan@1.8.7:
     resolution: {integrity: sha512-jaNt6xX5poSmXuDAkQrSqx2zkR66OrdRDuVnU8ldvn3k/Ci/7Sf5nooKspQWimDnw337Bzt/yirqSThTjvrHkg==}
     dependencies:
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
     dev: false
 
   /@types/connect@3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
     dev: false
 
   /@types/content-disposition@0.5.5:
@@ -1632,7 +1632,7 @@ packages:
       '@types/connect': 3.4.35
       '@types/express': 4.17.17
       '@types/keygrip': 1.0.2
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
     dev: false
 
   /@types/debug@4.1.7:
@@ -1644,7 +1644,7 @@ packages:
   /@types/express-serve-static-core@4.17.35:
     resolution: {integrity: sha512-wALWQwrgiB2AWTT91CB62b6Yt0sNHpznUXeZEcnPU3DRdlDIz74x8Qg1UUYKSVFi+va5vKOLYRBI1bRKiLLKIg==}
     dependencies:
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
       '@types/qs': 6.9.7
       '@types/range-parser': 1.2.4
       '@types/send': 0.17.1
@@ -1688,7 +1688,7 @@ packages:
       '@types/hapi__catbox': 10.2.4
       '@types/hapi__mimos': 4.1.4
       '@types/hapi__shot': 4.1.2
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
       joi: 17.9.2
     dev: false
 
@@ -1701,7 +1701,7 @@ packages:
   /@types/hapi__shot@4.1.2:
     resolution: {integrity: sha512-8wWgLVP1TeGqgzZtCdt+F+k15DWQvLG1Yv6ZzPfb3D5WIo5/S+GGKtJBVo2uNEcqabP5Ifc71QnJTDnTmw1axA==}
     dependencies:
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
     dev: false
 
   /@types/hast@2.3.4:
@@ -1721,7 +1721,7 @@ packages:
   /@types/ioredis@4.28.10:
     resolution: {integrity: sha512-69LyhUgrXdgcNDv7ogs1qXZomnfOEnSmrmMFqKgt1XMJxmoOSG/u3wYy13yACIfKuMJ8IhKgHafDO3sx19zVQQ==}
     dependencies:
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
     dev: false
 
   /@types/json5@0.0.29:
@@ -1748,7 +1748,7 @@ packages:
       '@types/http-errors': 2.0.1
       '@types/keygrip': 1.0.2
       '@types/koa-compose': 3.2.5
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
     dev: false
 
   /@types/koa__router@8.0.7:
@@ -1770,7 +1770,7 @@ packages:
   /@types/memcached@2.2.7:
     resolution: {integrity: sha512-ImJbz1i8pl+OnyhYdIDnHe8jAuM8TOwM/7VsciqhYX3IL0jPPUToAtVxklfcWFGYckahEYZxhd9FS0z3MM1dpA==}
     dependencies:
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
     dev: false
 
   /@types/mime-db@1.43.1:
@@ -1792,11 +1792,11 @@ packages:
   /@types/mysql@2.15.19:
     resolution: {integrity: sha512-wSRg2QZv14CWcZXkgdvHbbV2ACufNy5EgI8mBBxnJIptchv7DBy/h53VMa2jDhyo0C9MO4iowE6z9vF8Ja1DkQ==}
     dependencies:
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
     dev: false
 
-  /@types/node@20.6.0:
-    resolution: {integrity: sha512-najjVq5KN2vsH2U/xyh2opaSEz6cZMR2SetLIlxlj08nOcmPOemJmUK2o4kUzfLqfrWE0PIrNeE16XhYDd3nqg==}
+  /@types/node@20.6.2:
+    resolution: {integrity: sha512-Y+/1vGBHV/cYk6OI1Na/LHzwnlNCAfU3ZNGrc1LdRe/LAIbdDPTTv/HU3M7yXN448aTVDq3eKRm2cg7iKLb8gw==}
 
   /@types/pg-pool@2.0.3:
     resolution: {integrity: sha512-fwK5WtG42Yb5RxAwxm3Cc2dJ39FlgcaNiXKvtTLAwtCn642X7dgel+w1+cLWwpSOFImR3YjsZtbkfjxbHtFAeg==}
@@ -1807,7 +1807,7 @@ packages:
   /@types/pg@8.6.1:
     resolution: {integrity: sha512-1Kc4oAGzAl7uqUStZCDvaLFqZrW9qWSjXOmBfdgyBP5La7Us6Mg4GBvRlSoaZMhQF/zSj1C8CtKMBkoiT8eL8w==}
     dependencies:
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
       pg-protocol: 1.6.0
       pg-types: 2.2.0
     dev: false
@@ -1849,7 +1849,7 @@ packages:
     resolution: {integrity: sha512-Cwo8LE/0rnvX7kIIa3QHCkcuF21c05Ayb0ZfxPiv0W8VRiZiNW/WuRupHKpqqGVGf7SUA44QSOUKaEd9lIrd/Q==}
     dependencies:
       '@types/mime': 1.3.2
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
     dev: false
 
   /@types/serve-static@1.15.2:
@@ -1857,7 +1857,7 @@ packages:
     dependencies:
       '@types/http-errors': 2.0.1
       '@types/mime': 3.0.1
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
     dev: false
 
   /@types/shimmer@1.0.2:
@@ -1867,7 +1867,7 @@ packages:
   /@types/tedious@4.0.9:
     resolution: {integrity: sha512-ipwFvfy9b2m0gjHsIX0D6NAAwGCKokzf5zJqUZHUGt+7uWVlBIy6n2eyMgiKQ8ChLFVxic/zwQUhjLYNzbHDRA==}
     dependencies:
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
     dev: false
 
   /@types/unist@2.0.6:
@@ -4744,13 +4744,13 @@ packages:
     hasBin: true
     dev: true
 
-  /prisma@5.2.0:
-    resolution: {integrity: sha512-FfFlpjVCkZwrqxDnP4smlNYSH1so+CbfjgdpioFzGGqlQAEm6VHAYSzV7jJgC3ebtY9dNOhDMS2+4/1DDSM7bQ==}
+  /prisma@5.3.1:
+    resolution: {integrity: sha512-Wp2msQIlMPHe+5k5Od6xnsI/WNG7UJGgFUJgqv/ygc7kOECZapcSz/iU4NIEzISs3H1W9sFLjAPbg/gOqqtB7A==}
     engines: {node: '>=16.13'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 5.2.0
+      '@prisma/engines': 5.3.1
 
   /prismjs@1.27.0:
     resolution: {integrity: sha512-t13BGPUlFDR7wRB5kQDG4jjl7XeuH6jbJGt11JHPL96qwsEHNX2+68tFXqc1/k+/jALsbSWJKUOT/hcYAZ5LkA==}
@@ -4799,7 +4799,7 @@ packages:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.6.0
+      '@types/node': 20.6.2
       long: 5.2.3
     dev: false
 
