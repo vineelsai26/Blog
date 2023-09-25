@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@highlight-run/next':
     specifier: ^4.3.1
-    version: 4.3.1(@highlight-run/node@3.3.1)(highlight.run@7.5.1)(next@13.4.19)(react-dom@18.2.0)(react@18.2.0)
+    version: 4.3.1(@highlight-run/node@3.3.1)(highlight.run@7.5.3)(next@13.4.19)(react-dom@18.2.0)(react@18.2.0)
   '@highlight-run/react':
     specifier: ^3.2.1
     version: 3.2.1(react-dom@18.2.0)(react@18.2.0)
@@ -24,8 +24,8 @@ dependencies:
     specifier: ^5.1.1
     version: 5.1.1
   highlight.run:
-    specifier: ^7.5.1
-    version: 7.5.1
+    specifier: ^7.5.3
+    version: 7.5.3
   next:
     specifier: 13.4.19
     version: 13.4.19(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)
@@ -229,7 +229,7 @@ packages:
       '@hapi/topo': 5.1.0
     dev: false
 
-  /@highlight-run/next@4.3.1(@highlight-run/node@3.3.1)(highlight.run@7.5.1)(next@13.4.19)(react-dom@18.2.0)(react@18.2.0):
+  /@highlight-run/next@4.3.1(@highlight-run/node@3.3.1)(highlight.run@7.5.3)(next@13.4.19)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-+GbIZ7suxCMS9kW+M9j2Fkv0CYkoGXS7JcuR9ABvadoN49iYI9kxNj8ALKeDrYD8A+6zdMEPuI50nmooOxcSOg==}
     peerDependencies:
       '@highlight-run/node': ^3.3.1
@@ -240,7 +240,7 @@ packages:
       '@highlight-run/node': 3.3.1
       '@highlight-run/react': 3.2.1(react-dom@18.2.0)(react@18.2.0)
       '@highlight-run/sourcemap-uploader': 0.5.2
-      highlight.run: 7.5.1
+      highlight.run: 7.5.3
       next: 13.4.19(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3294,6 +3294,10 @@ packages:
 
   /highlight.run@7.5.1:
     resolution: {integrity: sha512-tBojeSw/AyE7if8+f3A9/uFQG2MsLprlhNmDKBi8lWjT+NAPwhKBRxop9F/FpmPMbpJIjjBBdO7YNoidM1n16g==}
+    dev: false
+
+  /highlight.run@7.5.3:
+    resolution: {integrity: sha512-RXAFZxE95Mgv4paaxqxKNym824jFfJjysqnyZWd++yLtUp3DHqozMnah9eBHdqTQDZ1VgFkYnzOZmRGbefMUEQ==}
     dev: false
 
   /https-proxy-agent@5.0.1:
