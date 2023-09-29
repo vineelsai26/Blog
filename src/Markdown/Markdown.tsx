@@ -14,23 +14,22 @@ export default function Markdown({ article }: { article: ArticleType }) {
 			className='prose max-w-max dark:prose-invert'
 			remarkPlugins={[remarkGfm]}
 			components={{
-				code({ node, inline, className, children, ...props }) {
+				code({ className, children }) {
 					const match = /language-(\w+)/.exec(className || '')
-					return !inline && match ? (
+					return match ? (
 						<div className='flex flex-row overflow-hidden'>
 							<SyntaxHighlighter
 								style={vs as any}
 								language={match[1]}
 								PreTag='div'
 								className='rounded-md w-full'
-								{...props}
 							>
 								{String(children).replace(/\n$/, '')}
 							</SyntaxHighlighter>
 							<CopyButton content={String(children).replace(/\n$/, '')} />
 						</div>
 					) : (
-						<code className={className} {...props}>
+						<code className={className}>
 							{children}
 						</code>
 					)
