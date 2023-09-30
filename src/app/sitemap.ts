@@ -16,9 +16,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ]
 
     articles.forEach((article: { url: string }) => {
-        paths.push({ 
-            url: `${process.env.NEXT_APP_URL}/post/${article.url}`, 
-            lastModified: new Date() 
+        paths.push({
+            url: `${process.env.NEXT_APP_URL}/post/${article.url}`,
+            lastModified: new Date()
         })
     })
 

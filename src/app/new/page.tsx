@@ -1,4 +1,4 @@
-import ArticleEditor from '../../src/ArticleEditor/ArticleEditor'
+import ArticleEditor from '../../components/ArticleEditor/ArticleEditor'
 import { ArticleType } from '../../types/article'
 
 export const metadata = {
@@ -6,7 +6,7 @@ export const metadata = {
 	description: 'Create New Article',
 }
 
-export default function New() {	
+export default function New() {
 	return (
 		<>
 			<ArticleEditor

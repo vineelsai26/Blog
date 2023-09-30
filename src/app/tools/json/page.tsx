@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from 'react'
-import CopyButton from '../../../src/Markdown/CopyButton'
+import CopyButton from '../../../components/Markdown/CopyButton'
 import { Editor } from '@monaco-editor/react'
 
 function format(input: string, tabLength: number) {

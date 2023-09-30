@@ -2,8 +2,8 @@
 
 import { Kalam } from 'next/font/google'
 import { useEffect, useState } from 'react'
-import Footer from '../src/Footer/Footer'
-import Navbar from '../src/Navbar/Navbar'
+import Footer from '../components/Footer/Footer'
+import Navbar from '../components/Navbar/Navbar'
 import '../styles/globals.css'
 import { HighlightInit } from '@highlight-run/next/client'
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from 'react'
-import CopyButton from '../../../src/Markdown/CopyButton'
+import CopyButton from '../../../components/Markdown/CopyButton'
 
 function encode(input: string) {
 	return btoa(input)

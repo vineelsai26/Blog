@@ -1,5 +1,5 @@
-import Article from '../../src/ArticleCard/ArticleCard'
-import Pagination from '../../src/Pagination/Pagination'
+import Article from '../../components/ArticleCard/ArticleCard'
+import Pagination from '../../components/Pagination/Pagination'
 import { ArticleType } from '../../types/article'
 import prisma from '../../prisma/prisma'
 

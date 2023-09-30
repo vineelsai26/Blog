@@ -1,9 +1,13 @@
-import { ArticleType, ArticleURLType } from '../../../types/article'
-import ArticleEditor from '../../../src/ArticleEditor/ArticleEditor'
+import { ArticleURLType, ArticleType } from '../../../types/article'
+import ArticlePreview from '../../../components/ArticlePreview/ArticlePreview'
 import prisma from '../../../prisma/prisma'
+import { Metadata } from 'next'
 
-export default async function EditPost({
-	params,
+export const revalidate = 3600
+// export const runtime = 'edge'
+
+export default async function Post({
+	params
 }: {
 	params: {
 		url: string
@@ -31,13 +35,35 @@ export default async function EditPost({
 
 	return (
 		<div>
-			<ArticleEditor
-				articleFetch={article as ArticleType}
-				editMode={true}
-			/>
+			<ArticlePreview article={article} />
 		</div>
 	)
 }
+
+export async function generateMetadata({
+	params
+}: {
+	params: {
+		url: string
+	}
+}): Promise<Metadata> {
+
+	const article = (await prisma.articles.findUnique({
+		where: {
+			url: params.url,
+		},
+		select: {
+			title: true,
+			description: true,
+		}
+	})) as ArticleType
+
+	return {
+		title: article.title,
+		description: article.description
+	}
+}
+
 
 export async function generateStaticParams() {
 	const articles = await prisma.articles.findMany({
