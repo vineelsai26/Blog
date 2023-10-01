@@ -8,25 +8,37 @@ export async function GET(req: NextRequest) {
 			OR: [
 				{
 					title: {
-						contains: searchParams.get('query')?.toString().toLowerCase()!,
+						contains: searchParams
+							.get('query')
+							?.toString()
+							.toLowerCase()!,
 						mode: 'insensitive',
 					},
 				},
 				{
 					description: {
-						contains: searchParams.get('query')?.toString().toLowerCase()!,
+						contains: searchParams
+							.get('query')
+							?.toString()
+							.toLowerCase()!,
 						mode: 'insensitive',
 					},
 				},
 				{
 					longDescription: {
-						contains: searchParams.get('query')?.toString().toLowerCase()!,
+						contains: searchParams
+							.get('query')
+							?.toString()
+							.toLowerCase()!,
 						mode: 'insensitive',
 					},
 				},
 				{
 					tags: {
-						has: searchParams.get('query')?.toString().toLowerCase()!,
+						has: searchParams
+							.get('query')
+							?.toString()
+							.toLowerCase()!,
 					},
 				},
 			],

@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -37,9 +37,7 @@ export default function Navbar() {
 
 	const handleSearch = (value: string) => {
 		if (value.trim().length > 0) {
-			fetch(
-				`/api/search?query=${value}`
-			)
+			fetch(`/api/search?query=${value}`)
 				.then((res) => res.json())
 				.then((data) => {
 					setSearchResults(data)
@@ -91,9 +89,9 @@ export default function Navbar() {
 								</div>
 							</div>
 						</div>
-						<div className='hidden w-1/3 relative items-center lg:flex'>
+						<div className='relative hidden w-1/3 items-center lg:flex'>
 							{showSearch && (
-								<div className='flex w-full flex-col absolute'>
+								<div className='absolute flex w-full flex-col'>
 									<input
 										onBlur={() => {
 											setSearchResults([])
@@ -109,33 +107,42 @@ export default function Navbar() {
 										}}
 									/>
 									<ul className='absolute mt-10'>
-										{
-											searchResults.length > 0 && searchResults.map((article: ArticleType) => {
-												return (
-													<Link
-														href={`/post/${article.url}`}
-														className='bg-gray-700 w-full flex flex-row h-20 p-2 rounded border-slate-400 border-x border-y-[0.5px]'
-														key={article.url}>
-														<Image
-															src={article.imageUrl}
-															alt={article.title}
-															width={100}
-															height={100}
-														/>
-														<div className='flex flex-col justify-evenly'>
-															<p
-																className='text-gray-300 hover:text-white rounded-md px-2 text-l font-semibold overflow-x-clip'
-															>
-																{article.title}
-															</p>
-															<p className='text-gray-300 hover:text-white rounded-md px-2 text-sm font-medium overflow-x-clip overflow-y-clip'>
-																{article.description.slice(0, 60)}
-															</p>
-														</div>
-													</Link>
-												)
-											})
-										}
+										{searchResults.length > 0 &&
+											searchResults.map(
+												(article: ArticleType) => {
+													return (
+														<Link
+															href={`/post/${article.url}`}
+															className='flex h-20 w-full flex-row rounded border-x border-y-[0.5px] border-slate-400 bg-gray-700 p-2'
+															key={article.url}
+														>
+															<Image
+																src={
+																	article.imageUrl
+																}
+																alt={
+																	article.title
+																}
+																width={100}
+																height={100}
+															/>
+															<div className='flex flex-col justify-evenly'>
+																<p className='text-l overflow-x-clip rounded-md px-2 font-semibold text-gray-300 hover:text-white'>
+																	{
+																		article.title
+																	}
+																</p>
+																<p className='overflow-x-clip overflow-y-clip rounded-md px-2 text-sm font-medium text-gray-300 hover:text-white'>
+																	{article.description.slice(
+																		0,
+																		60
+																	)}
+																</p>
+															</div>
+														</Link>
+													)
+												}
+											)}
 									</ul>
 								</div>
 							)}

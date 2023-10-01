@@ -1,5 +1,5 @@
 {
-  "prisma.fileWatcher": true,
-  "typescript.tsdk": "node_modules\\typescript\\lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true
+	"prisma.fileWatcher": true,
+	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"typescript.enablePromptUseWorkspaceTsdk": true
 }

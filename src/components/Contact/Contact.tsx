@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import Image from 'next/image'
 import { useState } from 'react'
@@ -53,7 +53,7 @@ export default function Contact() {
 				</p>
 			</div>
 			<form
-				className='m-auto mt-10 flex h-auto w-full flex-col rounded-lg bg-white p-10 shadow-lg dark:bg-gray-800 md:w-4/5 lg:w-5/6 lg:flex-row'
+				className='m-auto mt-10  flex h-auto w-full flex-col rounded-lg bg-white p-10 shadow-lg dark:bg-gray-800 md:w-4/5 lg:w-5/6 lg:flex-row'
 				onSubmit={(e) => {
 					e.preventDefault()
 					handleContact()
@@ -104,7 +104,7 @@ export default function Contact() {
 					)}
 
 					<div className='flex justify-center'>
-						<button className='m-3 w-2/4 rounded border border-blue-500 bg-transparent py-2 px-4 font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white lg:w-1/4'>
+						<button className='m-3 w-2/4 rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white lg:w-1/4'>
 							Submit
 						</button>
 					</div>

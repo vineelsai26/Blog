@@ -7,7 +7,7 @@ export const revalidate = 3600
 // export const runtime = 'edge'
 
 export default async function Post({
-	params
+	params,
 }: {
 	params: {
 		url: string
@@ -28,7 +28,7 @@ export default async function Post({
 			name: true,
 			profilePicture: true,
 			password: false,
-		}
+		},
 	})
 
 	article!.createdBy = user!
@@ -41,13 +41,12 @@ export default async function Post({
 }
 
 export async function generateMetadata({
-	params
+	params,
 }: {
 	params: {
 		url: string
 	}
 }): Promise<Metadata> {
-
 	const article = (await prisma.articles.findUnique({
 		where: {
 			url: params.url,
@@ -55,15 +54,14 @@ export async function generateMetadata({
 		select: {
 			title: true,
 			description: true,
-		}
+		},
 	})) as ArticleType
 
 	return {
 		title: article.title,
-		description: article.description
+		description: article.description,
 	}
 }
-
 
 export async function generateStaticParams() {
 	const articles = await prisma.articles.findMany({

@@ -14,13 +14,13 @@ export const runtime = 'edge'
 
 export default function Home() {
 	return (
-		<div >
+		<div>
 			<div className='min-h-screen'>
 				<div
 					className='min-h-screen w-full bg-fixed'
 					style={{ backgroundImage: 'url(/background.webp)' }}
 				>
-					<div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform'>
+					<div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform'>
 						<Image
 							src='/profile.webp'
 							alt='Vineel Sai'
@@ -33,7 +33,10 @@ export default function Home() {
 						<h1 className='p-2 text-center text-4xl font-semibold text-orange-600'>
 							Vineel Sai
 						</h1>
-						<p className='p-2 text-center text-xl font-semibold text-white'>Hi, Welcome to my Portfolio, Scroll down to findout more about me</p>
+						<p className='p-2 text-center text-xl font-semibold text-white'>
+							Hi, Welcome to my Portfolio, Scroll down to findout
+							more about me
+						</p>
 					</div>
 				</div>
 

@@ -9,10 +9,10 @@ const nextConfig = {
 				headers: [
 					{
 						key: 'X-Content-Type-Options',
-						value: 'nosniff'
-					}
-				]
-			}
+						value: 'nosniff',
+					},
+				],
+			},
 		]
 	},
 	optimizeFonts: true,
@@ -22,7 +22,7 @@ const nextConfig = {
 			'vineelsai.com',
 			'static.vineelsai.com',
 		],
-		dangerouslyAllowSVG: true
+		dangerouslyAllowSVG: true,
 	},
 	swcMinify: true,
 }

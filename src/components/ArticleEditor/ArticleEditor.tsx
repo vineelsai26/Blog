@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import Editor from '@monaco-editor/react'
 import { ArticleType, SaveResponse } from '../../types/article'
@@ -9,9 +9,9 @@ import Loader from '../Loader/Loader'
 
 export default function ArticleEditor({
 	articleFetch,
-	editMode
+	editMode,
 }: {
-	articleFetch: ArticleType,
+	articleFetch: ArticleType
 	editMode: Boolean
 }) {
 	const [title, setTitle] = useState(articleFetch.title)
@@ -76,7 +76,6 @@ export default function ArticleEditor({
 		setLoading(false)
 	}
 
-
 	const [article, setArticle] = useState<ArticleType>({
 		title: title,
 		url: url,
@@ -89,18 +88,22 @@ export default function ArticleEditor({
 	const [theme, setTheme] = useState('light')
 
 	useEffect(() => {
-		window.matchMedia("(prefers-color-scheme: dark)").matches ? setTheme('dark') : setTheme('light')
+		window.matchMedia('(prefers-color-scheme: dark)').matches
+			? setTheme('dark')
+			: setTheme('light')
 
-		window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', (e) => {
-			e.matches ? setTheme('dark') : setTheme('light')
-		})
+		window
+			.matchMedia('(prefers-color-scheme: dark)')
+			.addEventListener('change', (e) => {
+				e.matches ? setTheme('dark') : setTheme('light')
+			})
 	}, [])
 
 	return (
 		<div className='flex flex-row bg-slate-200 dark:bg-slate-600'>
 			<div className='m-2 flex w-1/2 flex-col overflow-hidden p-2'>
 				<input
-					className='m-2 rounded border-2 border-black dark:border-white p-3 dark:bg-gray-600 dark:text-white'
+					className='m-2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
 					placeholder='Title'
 					defaultValue={title}
 					onChange={(e) => {
@@ -109,7 +112,7 @@ export default function ArticleEditor({
 					}}
 				/>
 				<input
-					className='m-2 rounded  border-2 border-black dark:border-white p-3 dark:bg-gray-600 dark:text-white'
+					className='m-2 rounded  border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
 					placeholder='Url'
 					defaultValue={url}
 					onChange={(e) => {
@@ -118,7 +121,7 @@ export default function ArticleEditor({
 					}}
 				/>
 				<input
-					className='m-2 rounded  border-2 border-black dark:border-white p-3 dark:bg-gray-600 dark:text-white'
+					className='m-2 rounded  border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
 					placeholder='Image Url'
 					defaultValue={imageUrl}
 					onChange={(e) => {
@@ -127,7 +130,7 @@ export default function ArticleEditor({
 					}}
 				/>
 				<input
-					className='m-2 rounded  border-2 border-black dark:border-white p-3 dark:bg-gray-600 dark:text-white'
+					className='m-2 rounded  border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
 					placeholder='Tags'
 					defaultValue={tags && tags.join(',')}
 					onChange={(e) => {
@@ -139,7 +142,7 @@ export default function ArticleEditor({
 					}}
 				/>
 				<textarea
-					className='m-2 rounded  border-2 border-black dark:border-white p-3 dark:bg-gray-600 dark:text-white'
+					className='m-2 rounded  border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
 					rows={5}
 					placeholder='Description'
 					defaultValue={description}
@@ -165,7 +168,7 @@ export default function ArticleEditor({
 				/>
 				<input
 					type='email'
-					className='m-2 rounded  border-2 border-black dark:border-white p-3 dark:bg-gray-600 dark:text-white'
+					className='m-2 rounded  border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
 					placeholder='Email'
 					onChange={(e) => {
 						setEmail(e.target.value)
@@ -173,7 +176,7 @@ export default function ArticleEditor({
 				/>
 				<input
 					type='password'
-					className='m-2 rounded  border-2 border-black dark:border-white p-3 dark:bg-gray-600 dark:text-white'
+					className='m-2 rounded  border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
 					placeholder='Password'
 					onChange={(e) => {
 						setPassword(e.target.value)
@@ -191,7 +194,7 @@ export default function ArticleEditor({
 					style={{ margin: '10px', padding: '10px' }}
 				>
 					<button
-						className='w-1/4 rounded border border-blue-500 bg-transparent py-2 px-4 font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white'
+						className='w-1/4 rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white'
 						onClick={() => {
 							handleSubmit(false)
 						}}
@@ -205,7 +208,7 @@ export default function ArticleEditor({
 						style={{ margin: '10px', padding: '10px' }}
 					>
 						<button
-							className='w-1/4  rounded border border-blue-500 bg-transparent py-2 px-4 font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white'
+							className='w-1/4  rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white'
 							onClick={() => {
 								handleSubmit(true)
 							}}
@@ -216,11 +219,15 @@ export default function ArticleEditor({
 				)}
 			</div>
 			<div className='w-1/2 overflow-scroll p-2'>
-				<h1 className='text-center text-2xl dark:text-white'>Home Page Preview</h1>
+				<h1 className='text-center text-2xl dark:text-white'>
+					Home Page Preview
+				</h1>
 				<div className='flex justify-center'>
 					<Article article={article} />
 				</div>
-				<h1 className='m-5 text-center text-2xl dark:text-white'>Article Preview</h1>
+				<h1 className='m-5 text-center text-2xl dark:text-white'>
+					Article Preview
+				</h1>
 				<ArticlePreview article={article} />
 			</div>
 		</div>

@@ -24,7 +24,7 @@ export default async function EditPost({
 			name: true,
 			profilePicture: true,
 			password: false,
-		}
+		},
 	})
 
 	article!.createdBy = user!

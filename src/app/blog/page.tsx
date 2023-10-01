@@ -16,7 +16,7 @@ export const revalidate = 3600
 export default async function Blog() {
 	const page = 0
 
-	const articles = await prisma.articles.findMany({
+	const articles = (await prisma.articles.findMany({
 		select: {
 			title: true,
 			url: true,
@@ -31,7 +31,7 @@ export default async function Blog() {
 		},
 		skip: page * pageLimit,
 		take: pageLimit,
-	}) as ArticleType[]
+	})) as ArticleType[]
 
 	const count = await prisma.articles.count()
 
@@ -43,7 +43,10 @@ export default async function Blog() {
 				{articles.length > 0 && (
 					<div className='flex flex-col items-center'>
 						{articles.map((article) => (
-							<Article key={article.url} article={article as ArticleType} />
+							<Article
+								key={article.url}
+								article={article as ArticleType}
+							/>
 						))}
 					</div>
 				)}
@@ -51,10 +54,7 @@ export default async function Blog() {
 
 			<div className='flex flex-col'>
 				{pageCount > 1 && (
-					<Pagination
-						page={page}
-						pageCount={pageCount}
-					/>
+					<Pagination page={page} pageCount={pageCount} />
 				)}
 			</div>
 		</div>

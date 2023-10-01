@@ -1,9 +1,9 @@
 import Loader from '../components/Loader/Loader'
 
 export default function Loading() {
-    return (
-        <div className='h-screen flex justify-center items-center'>
-            <Loader />
-        </div>
-    )
+	return (
+		<div className='flex h-screen items-center justify-center'>
+			<Loader />
+		</div>
+	)
 }

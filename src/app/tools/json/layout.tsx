@@ -1,19 +1,15 @@
 export const metadata = {
-    title: 'JSON Formatter',
-    description: 'Beautify JSON',
+	title: 'JSON Formatter',
+	description: 'Beautify JSON',
 }
 
 export const revalidate = 3600
 export const runtime = 'edge'
 
 export default function RootLayout({
-    children,
+	children,
 }: {
-    children: React.ReactNode
+	children: React.ReactNode
 }) {
-    return (
-        <>
-            {children}
-        </>
-    )
+	return <>{children}</>
 }

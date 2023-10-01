@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -22,16 +22,16 @@ export default function Markdown({ article }: { article: ArticleType }) {
 								style={vs as any}
 								language={match[1]}
 								PreTag='div'
-								className='rounded-md w-full'
+								className='w-full rounded-md'
 							>
 								{String(children).replace(/\n$/, '')}
 							</SyntaxHighlighter>
-							<CopyButton content={String(children).replace(/\n$/, '')} />
+							<CopyButton
+								content={String(children).replace(/\n$/, '')}
+							/>
 						</div>
 					) : (
-						<code className={className}>
-							{children}
-						</code>
+						<code className={className}>{children}</code>
 					)
 				},
 				img({ node, className, children, ...props }) {
