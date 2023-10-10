@@ -22,6 +22,7 @@ export default function ArticleEditor({
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [tags, setTags] = useState<String[]>(articleFetch.tags)
+	const [privateArticle, setPrivateArticle] = useState(articleFetch.private)
 
 	const [data, setData] = useState<SaveResponse>({} as SaveResponse)
 
@@ -37,7 +38,7 @@ export default function ArticleEditor({
 				},
 				body: JSON.stringify({
 					title: title,
-					url: url,
+					url: url.replaceAll(' ', '-').toLowerCase(),
 					imageUrl: imageUrl,
 					tags: tags,
 					description: description,
@@ -45,6 +46,7 @@ export default function ArticleEditor({
 					email: email,
 					password: password,
 					deleteArticle: deleteArticle,
+					isPrivate: privateArticle,
 				}),
 			})
 
@@ -59,13 +61,14 @@ export default function ArticleEditor({
 				},
 				body: JSON.stringify({
 					title: title,
-					url: url,
+					url: url.replaceAll(' ', '-').toLowerCase(),
 					imageUrl: imageUrl,
 					tags: tags,
 					description: description,
 					content: content,
 					email: email,
 					password: password,
+					isPrivate: privateArticle,
 				}),
 			})
 
@@ -83,6 +86,7 @@ export default function ArticleEditor({
 		description: description,
 		longDescription: content,
 		tags: tags,
+		createdAt: new Date(),
 	} as ArticleType)
 
 	const [theme, setTheme] = useState('light')
@@ -116,6 +120,7 @@ export default function ArticleEditor({
 					placeholder='Url'
 					defaultValue={url}
 					onChange={(e) => {
+						e.target.value = e.target.value.replaceAll(' ', '-')
 						setUrl(e.target.value)
 						setArticle({ ...article, url: e.target.value })
 					}}
@@ -180,6 +185,14 @@ export default function ArticleEditor({
 					placeholder='Password'
 					onChange={(e) => {
 						setPassword(e.target.value)
+					}}
+				/>
+				<input
+					type='checkbox'
+					defaultChecked={privateArticle}
+					className='m-2 rounded  border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
+					onChange={(e) => {
+						setPrivateArticle(e.target.checked)
 					}}
 				/>
 				{loading && <Loader />}

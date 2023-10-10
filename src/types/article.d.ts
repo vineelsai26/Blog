@@ -9,6 +9,7 @@ export type ArticleType = {
 	createdAt: Date
 	createdBy: string | Prisma.users
 	tags: string[]
+	private: boolean
 }
 
 export type ArticleURLType = {

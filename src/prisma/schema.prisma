@@ -18,6 +18,8 @@ model articles {
   tags            String[] @default([])
   title           String
   url             String   @unique(map: "url_1")
+  // updatedAt       DateTime @db.Date @updatedAt @default(now())
+  private         Boolean  @default(false)
 }
 
 model users {
