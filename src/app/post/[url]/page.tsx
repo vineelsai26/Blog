@@ -5,8 +5,9 @@ import { Metadata } from 'next'
 import { cookies } from 'next/headers'
 import bcrypt from 'bcrypt'
 
-export const revalidate = 3600
+// export const revalidate = 3600
 // export const runtime = 'edge'
+export const dynamic = "force-dynamic"
 
 export default async function Post({
 	params,
@@ -37,27 +38,21 @@ export default async function Post({
 		},
 	})) as ArticleType
 
-	if (!article) {
-		return (
-			<div className='relative'>
-				<h1 className='text-center text-3xl dark:text-white '>404</h1>
-			</div>
-		)
+	if (article) {
+		const user = await prisma.users.findUnique({
+			where: {
+				email: article?.createdBy,
+			},
+			select: {
+				email: true,
+				name: true,
+				profilePicture: true,
+				password: false,
+			},
+		})
+
+		article!.createdBy = user!
 	}
-
-	const user = await prisma.users.findUnique({
-		where: {
-			email: article?.createdBy,
-		},
-		select: {
-			email: true,
-			name: true,
-			profilePicture: true,
-			password: false,
-		},
-	})
-
-	article!.createdBy = user!
 
 	return (
 		<div>
