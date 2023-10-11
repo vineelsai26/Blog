@@ -1,7 +1,7 @@
 'use client'
 
 import { Kalam } from 'next/font/google'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Footer from '../components/Footer/Footer'
 import Navbar from '../components/Navbar/Navbar'
 import '../styles/globals.css'
@@ -20,6 +20,21 @@ export default function RootLayout({
 }) {
 	const [faviconHref, setFaviconHref] = useState('/logo-light.png')
 
+	const handleKeyPress = useCallback((event: KeyboardEvent) => {
+		if (window.location.pathname.startsWith('/post')) {
+			if (event.key === '.') {
+				window.location.href = window.location.href.replace(
+					'post',
+					'edit'
+				)
+			}
+		} else if (window.location.pathname === '/blog') {
+			if (event.key === 'n') {
+				window.location.href = '/new'
+			}
+		}
+	}, [])
+
 	useEffect(() => {
 		const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)')
 
@@ -36,7 +51,12 @@ export default function RootLayout({
 		} else {
 			setFaviconHref('/logo-dark.png')
 		}
-	}, [])
+
+		document.addEventListener('keydown', handleKeyPress)
+		return () => {
+			document.removeEventListener('keydown', handleKeyPress)
+		}
+	}, [handleKeyPress])
 
 	return (
 		<>

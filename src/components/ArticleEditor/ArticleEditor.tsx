@@ -14,18 +14,13 @@ export default function ArticleEditor({
 	articleFetch: ArticleType
 	editMode: Boolean
 }) {
-	const [title, setTitle] = useState(articleFetch.title)
-	const [url, setUrl] = useState(articleFetch.url)
-	const [imageUrl, setImageUrl] = useState(articleFetch.imageUrl)
-	const [description, setDescription] = useState(articleFetch.description)
-	const [content, setContent] = useState(articleFetch.longDescription!)
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
-	const [tags, setTags] = useState<String[]>(articleFetch.tags)
-	const [privateArticle, setPrivateArticle] = useState(articleFetch.private)
-
 	const [currentTab, setCurrentTab] = useState<Number>(0)
 	const tabs = ['Editor', 'Preview']
+
+	const [article, setArticle] = useState<ArticleType>({} as ArticleType)
+
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
 
 	const [data, setData] = useState<SaveResponse>({} as SaveResponse)
 
@@ -40,16 +35,16 @@ export default function ArticleEditor({
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
-					title: title,
-					url: url.replaceAll(' ', '-').toLowerCase(),
-					imageUrl: imageUrl,
-					tags: tags,
-					description: description,
-					content: content,
+					title: article.title,
+					url: article.url.replaceAll(' ', '-').toLowerCase(),
+					imageUrl: article.imageUrl,
+					tags: article.tags,
+					description: article.description,
+					content: article.longDescription,
 					email: email,
 					password: password,
 					deleteArticle: deleteArticle,
-					isPrivate: privateArticle,
+					isPrivate: article.private,
 				}),
 			})
 
@@ -63,15 +58,15 @@ export default function ArticleEditor({
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
-					title: title,
-					url: url.replaceAll(' ', '-').toLowerCase(),
-					imageUrl: imageUrl,
-					tags: tags,
-					description: description,
-					content: content,
+					title: article.title,
+					url: article.url.replaceAll(' ', '-').toLowerCase(),
+					imageUrl: article.imageUrl,
+					tags: article.tags,
+					description: article.description,
+					content: article.longDescription,
 					email: email,
 					password: password,
-					isPrivate: privateArticle,
+					isPrivate: article.private,
 				}),
 			})
 
@@ -81,16 +76,6 @@ export default function ArticleEditor({
 		}
 		setLoading(false)
 	}
-
-	const [article, setArticle] = useState<ArticleType>({
-		title: title,
-		url: url,
-		imageUrl: imageUrl,
-		description: description,
-		longDescription: content,
-		tags: tags,
-		createdAt: new Date(),
-	} as ArticleType)
 
 	const [theme, setTheme] = useState('light')
 
@@ -104,7 +89,23 @@ export default function ArticleEditor({
 			.addEventListener('change', (e) => {
 				e.matches ? setTheme('dark') : setTheme('light')
 			})
+
+		if (window.localStorage.getItem(window.location.pathname)) {
+			const article = JSON.parse(
+				window.localStorage.getItem(window.location.pathname)!
+			)
+			setArticle(article)
+		} else {
+			setArticle(articleFetch)
+		}
 	}, [])
+
+	const handleLocalStorage = (article: ArticleType) => {
+		window.localStorage.setItem(
+			window.location.pathname,
+			JSON.stringify(article)
+		)
+	}
 
 	return (
 		<div>
@@ -133,49 +134,64 @@ export default function ArticleEditor({
 						<input
 							className='m-2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
 							placeholder='Title'
-							defaultValue={title}
+							value={article.title}
 							onChange={(e) => {
-								setTitle(e.target.value)
-								setArticle({
-									...article,
-									title: e.target.value,
+								setArticle((article) => {
+									article = {
+										...article,
+										title: e.target.value,
+									} as ArticleType
+									handleLocalStorage(article)
+									return article
 								})
 							}}
 						/>
 						<input
 							className='m-2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
 							placeholder='Url'
-							defaultValue={url}
+							value={article.url}
 							onChange={(e) => {
 								e.target.value = e.target.value.replaceAll(
 									' ',
 									'-'
 								)
-								setUrl(e.target.value)
-								setArticle({ ...article, url: e.target.value })
+								setArticle((article) => {
+									article = {
+										...article,
+										url: e.target.value,
+									} as ArticleType
+									handleLocalStorage(article)
+									return article
+								})
 							}}
 						/>
 						<input
 							className='m-2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
 							placeholder='Image Url'
-							defaultValue={imageUrl}
+							value={article.imageUrl}
 							onChange={(e) => {
-								setImageUrl(e.target.value)
-								setArticle({
-									...article,
-									imageUrl: e.target.value,
+								setArticle((article) => {
+									article = {
+										...article,
+										imageUrl: e.target.value,
+									} as ArticleType
+									handleLocalStorage(article)
+									return article
 								})
 							}}
 						/>
 						<input
 							className='m-2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
 							placeholder='Tags'
-							defaultValue={tags && tags.join(',')}
+							value={article.tags && article.tags.join(',')}
 							onChange={(e) => {
-								setTags(e.target.value.split(','))
-								setArticle({
-									...article,
-									tags: e.target.value.split(','),
+								setArticle((article) => {
+									article = {
+										...article,
+										tags: e.target.value.split(','),
+									} as ArticleType
+									handleLocalStorage(article)
+									return article
 								})
 							}}
 						/>
@@ -183,26 +199,34 @@ export default function ArticleEditor({
 							className='m-2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
 							rows={5}
 							placeholder='Description'
-							defaultValue={description}
+							value={article.description}
 							onChange={(e) => {
-								setDescription(e.target.value)
-								setArticle({
-									...article,
-									description: e.target.value,
+								setArticle((article) => {
+									article = {
+										...article,
+										description: e.target.value,
+									} as ArticleType
+									handleLocalStorage(article)
+									return article
 								})
+
 							}}
 						/>
 						<Editor
 							className='m-2 rounded border-2 border-black dark:border-white  dark:bg-gray-600'
 							height='90vh'
 							width='-webkit-fill-available'
-							defaultValue={content}
+							value={article.longDescription}
 							onChange={(value) => {
-								setContent(value!)
-								setArticle({
-									...article,
-									longDescription: value!,
+								setArticle((article) => {
+									article = {
+										...article,
+										longDescription: value,
+									} as ArticleType
+									handleLocalStorage(article)
+									return article
 								})
+
 							}}
 							options={{
 								minimap: { enabled: false },
@@ -229,10 +253,18 @@ export default function ArticleEditor({
 						/>
 						<input
 							type='checkbox'
-							defaultChecked={privateArticle}
+							checked={article.private}
 							className='m-2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
 							onChange={(e) => {
-								setPrivateArticle(e.target.checked)
+								setArticle((article) => {
+									article = {
+										...article,
+										private: e.target.checked,
+									} as ArticleType
+									handleLocalStorage(article)
+									return article
+								})
+
 							}}
 						/>
 						{loading && <Loader />}
