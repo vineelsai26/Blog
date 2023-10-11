@@ -7,7 +7,7 @@ import bcrypt from 'bcrypt'
 
 // export const revalidate = 3600
 // export const runtime = 'edge'
-export const dynamic = "force-dynamic"
+export const dynamic = 'force-dynamic'
 
 export default async function Post({
 	params,

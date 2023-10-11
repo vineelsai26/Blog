@@ -4,7 +4,7 @@ import prisma from '../../../prisma/prisma'
 import { cookies } from 'next/headers'
 import bcrypt from 'bcrypt'
 
-export const dynamic = "force-dynamic"
+export const dynamic = 'force-dynamic'
 
 export default async function EditPost({
 	params,
