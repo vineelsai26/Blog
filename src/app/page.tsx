@@ -17,7 +17,7 @@ export default function Home() {
 		<div>
 			<div className='min-h-screen w-screen'>
 				<div
-					className='min-h-screen w-full bg-fixed relative'
+					className='relative min-h-screen w-full bg-fixed'
 					style={{ backgroundImage: 'url(/background.webp)' }}
 				>
 					<div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform'>

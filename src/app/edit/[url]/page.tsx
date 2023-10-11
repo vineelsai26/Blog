@@ -36,9 +36,7 @@ export default async function EditPost({
 	if (!article) {
 		return (
 			<div className='relative'>
-				<h1 className='dark:text-white text-center text-3xl '>
-					404
-				</h1>
+				<h1 className='text-center text-3xl dark:text-white '>404</h1>
 			</div>
 		)
 	}

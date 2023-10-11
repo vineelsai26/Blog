@@ -54,13 +54,13 @@ export default function RootLayout({
 					<link rel='icon' href={faviconHref} type='image/x-icon' />
 				</head>
 				<body
-					className={`${kalam.className} bg-slate-200 dark:bg-gray-600 min-h-screen relative`}
+					className={`${kalam.className} relative min-h-screen bg-slate-200 dark:bg-gray-600`}
 				>
 					<div className='sticky top-0 z-50 w-full'>
 						<Navbar />
 					</div>
 					<div className='pb-14'>{children}</div>
-					<div className='bottom-0 absolute w-full h-14'>
+					<div className='absolute bottom-0 h-14 w-full'>
 						<Footer />
 					</div>
 				</body>

@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
 		description,
 		content,
 		tags,
-		isPrivate
+		isPrivate,
 	} = body
 
 	const user = await prisma.users.findUnique({
