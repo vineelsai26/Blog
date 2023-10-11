@@ -1,6 +1,8 @@
 import { ArticleType, ArticleURLType } from '../../../types/article'
 import ArticleEditor from '../../../components/ArticleEditor/ArticleEditor'
 import prisma from '../../../prisma/prisma'
+import { cookies } from 'next/headers'
+import bcrypt from 'bcrypt'
 
 export default async function EditPost({
 	params,
@@ -9,11 +11,37 @@ export default async function EditPost({
 		url: string
 	}
 }) {
+	const cookieStore = cookies()
+	const email = cookieStore.get('email')?.value
+	const password = cookieStore.get('password')?.value
+	let result = false
+
+	if (email && password) {
+		const user = await prisma.users.findUnique({
+			where: {
+				email: email,
+			},
+		})
+
+		result = await bcrypt.compare(password, user!.password)
+	}
+
 	const article = (await prisma.articles.findUnique({
 		where: {
 			url: params.url,
+			private: result,
 		},
 	})) as ArticleType
+
+	if (!article) {
+		return (
+			<div className='relative'>
+				<h1 className='dark:text-white text-center text-3xl '>
+					404
+				</h1>
+			</div>
+		)
+	}
 
 	const user = await prisma.users.findUnique({
 		where: {

@@ -34,9 +34,9 @@ export default async function Blog() {
 	}
 
 	const articles = (await prisma.articles.findMany({
-		where: result ? {
+		where: {
 			private: result,
-		} : {},
+		},
 		select: {
 			title: true,
 			url: true,

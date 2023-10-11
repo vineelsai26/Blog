@@ -2,6 +2,8 @@ import { ArticleURLType, ArticleType } from '../../../types/article'
 import ArticlePreview from '../../../components/ArticlePreview/ArticlePreview'
 import prisma from '../../../prisma/prisma'
 import { Metadata } from 'next'
+import { cookies } from 'next/headers'
+import bcrypt from 'bcrypt'
 
 export const revalidate = 3600
 // export const runtime = 'edge'
@@ -13,11 +15,37 @@ export default async function Post({
 		url: string
 	}
 }) {
+	const cookieStore = cookies()
+	const email = cookieStore.get('email')?.value
+	const password = cookieStore.get('password')?.value
+	let result = false
+
+	if (email && password) {
+		const user = await prisma.users.findUnique({
+			where: {
+				email: email,
+			},
+		})
+
+		result = await bcrypt.compare(password, user!.password)
+	}
+
 	const article = (await prisma.articles.findUnique({
 		where: {
 			url: params.url,
+			private: result,
 		},
 	})) as ArticleType
+
+	if (!article) {
+		return (
+			<div className='relative'>
+				<h1 className='dark:text-white text-center text-3xl '>
+					404
+				</h1>
+			</div>
+		)
+	}
 
 	const user = await prisma.users.findUnique({
 		where: {
