@@ -19,6 +19,8 @@ export default function ArticleEditor({
 
 	const [article, setArticle] = useState<ArticleType>({} as ArticleType)
 
+	const [thumbnail, setThumbnail] = useState<File | null>(null)
+
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
@@ -28,6 +30,36 @@ export default function ArticleEditor({
 
 	const handleSubmit = async (deleteArticle: Boolean = false) => {
 		setLoading(true)
+		setData({} as SaveResponse)
+
+		if (thumbnail) {
+			const formData = new FormData()
+			formData.append('image', thumbnail)
+			formData.append('type', 'thumbnail')
+
+			const request = await fetch('/api/upload', {
+				method: 'POST',
+				body: formData,
+			})
+
+			const response = await request.json()
+
+			if (response.error) {
+				setLoading(false)
+				setData(response)
+				return
+			}
+
+			setArticle((article) => {
+				article = {
+					...article,
+					imageUrl: response.url,
+				} as ArticleType
+				handleLocalStorage(article)
+				return article
+			})
+		}
+
 		if (editMode) {
 			const request = await fetch('/api/edit', {
 				method: 'POST',
@@ -131,70 +163,70 @@ export default function ArticleEditor({
 			<div className='bg-slate-200 dark:bg-slate-600'>
 				{currentTab === 0 && (
 					<div className='m-2 flex w-full flex-col overflow-hidden p-2'>
-						<input
-							className='m-2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
-							placeholder='Title'
-							value={article.title}
-							onChange={(e) => {
-								setArticle((article) => {
-									article = {
-										...article,
-										title: e.target.value,
-									} as ArticleType
-									handleLocalStorage(article)
-									return article
-								})
-							}}
-						/>
-						<input
-							className='m-2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
-							placeholder='Url'
-							value={article.url}
-							onChange={(e) => {
-								e.target.value = e.target.value.replaceAll(
-									' ',
-									'-'
-								)
-								setArticle((article) => {
-									article = {
-										...article,
-										url: e.target.value,
-									} as ArticleType
-									handleLocalStorage(article)
-									return article
-								})
-							}}
-						/>
-						<input
-							className='m-2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
-							placeholder='Image Url'
-							value={article.imageUrl}
-							onChange={(e) => {
-								setArticle((article) => {
-									article = {
-										...article,
-										imageUrl: e.target.value,
-									} as ArticleType
-									handleLocalStorage(article)
-									return article
-								})
-							}}
-						/>
-						<input
-							className='m-2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
-							placeholder='Tags'
-							value={article.tags && article.tags.join(',')}
-							onChange={(e) => {
-								setArticle((article) => {
-									article = {
-										...article,
-										tags: e.target.value.split(','),
-									} as ArticleType
-									handleLocalStorage(article)
-									return article
-								})
-							}}
-						/>
+						<div className='flex flex-row'>
+							<input
+								className='m-2 w-1/2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
+								placeholder='Title'
+								value={article.title}
+								onChange={(e) => {
+									setArticle((article) => {
+										article = {
+											...article,
+											title: e.target.value,
+										} as ArticleType
+										handleLocalStorage(article)
+										return article
+									})
+								}}
+							/>
+							<input
+								className='m-2 w-1/2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
+								placeholder='Url'
+								value={article.url}
+								onChange={(e) => {
+									e.target.value = e.target.value.replaceAll(
+										' ',
+										'-'
+									)
+									setArticle((article) => {
+										article = {
+											...article,
+											url: e.target.value,
+										} as ArticleType
+										handleLocalStorage(article)
+										return article
+									})
+								}}
+							/>
+						</div>
+						<div className='flex flex-row'>
+							<input
+								className='m-2 w-1/2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
+								placeholder='Tags'
+								value={article.tags && article.tags.join(',')}
+								onChange={(e) => {
+									setArticle((article) => {
+										article = {
+											...article,
+											tags: e.target.value.split(','),
+										} as ArticleType
+										handleLocalStorage(article)
+										return article
+									})
+								}}
+							/>
+
+							<input
+								className='m-2 w-1/2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
+								placeholder='Image'
+								type='file'
+								multiple={false}
+								onChange={(e) => {
+									setThumbnail(e.target.files![0])
+								}}
+							/>
+						</div>
+
 						<textarea
 							className='m-2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
 							rows={5}
@@ -209,7 +241,6 @@ export default function ArticleEditor({
 									handleLocalStorage(article)
 									return article
 								})
-
 							}}
 						/>
 						<Editor
@@ -226,7 +257,6 @@ export default function ArticleEditor({
 									handleLocalStorage(article)
 									return article
 								})
-
 							}}
 							options={{
 								minimap: { enabled: false },
@@ -264,7 +294,6 @@ export default function ArticleEditor({
 									handleLocalStorage(article)
 									return article
 								})
-
 							}}
 						/>
 						{loading && <Loader />}
