@@ -1,4 +1,4 @@
-const projects = [
+const projects: ProjectType[] = [
 	{
 		name: 'Arch WSL',
 		image: '/images/projects/arch-wsl.png',
@@ -21,7 +21,7 @@ const projects = [
 		name: 'VMN',
 		image: '/images/projects/vmn.jpg',
 		description:
-			'Version Manager for Node.js. A simple CLI tool to manage multiple versions of Node.js.',
+			'A simple CLI tool to manage multiple versions of Node.js and Python',
 		downloadUrl: 'https://github.com/vineelsai26/VMN/releases',
 		gitUrl: 'https://github.com/vineelsai26/VMN',
 		tags: 'go,powershell,linux,bash',
@@ -43,6 +43,14 @@ const projects = [
 		previewUrl: 'https://blog.vineelsai.com',
 		gitUrl: 'https://github.com/vineelsai26/Blog',
 		tags: 'ts,react,next,tailwind,mongo',
+	},
+	{
+		name: 'Skill Icons',
+		image: '/images/projects/skill-icons.png',
+		description:
+			'Skill Icons API written in Typescript using Cloudflare Functions.',
+		gitUrl: 'https://github.com/vineelsai26/Material-Icons',
+		tags: 'ts,cloudflare,svg',
 	},
 	{
 		name: 'Material Icons',

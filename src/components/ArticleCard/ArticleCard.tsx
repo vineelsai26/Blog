@@ -15,7 +15,6 @@ export default function Article({ article }: { article: ArticleType }) {
 					alt='image'
 					width={200}
 					height={200}
-					priority
 					className='h-auto w-full object-scale-down lg:h-36 lg:w-52'
 				/>
 			</div>

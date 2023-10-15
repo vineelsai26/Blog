@@ -21,7 +21,7 @@ export default function New() {
 						createdBy: {
 							email: 'mail@vineelsai.com',
 							name: 'Vineel Sai',
-							profilePicture: 'https://vineelsai.com/profile.png',
+							profilePicture: 'https://vineelsai.com/profile.webp',
 						},
 						tags: ['test1', 'test2', 'test3'],
 						private: true,

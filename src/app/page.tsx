@@ -3,6 +3,8 @@ import Image from 'next/image'
 import projects from '../data/projects'
 import Contact from '../components/Contact/Contact'
 import ProjectCard from '../components/ProjectCard/ProjectCard'
+import workExperience from '../data/work'
+import WorkCard from '../components/WorkCard/WorkCard'
 
 export const metadata = {
 	title: 'Vineel Sai',
@@ -27,8 +29,7 @@ export default function Home() {
 							width={160}
 							height={160}
 							sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-							className='m-auto h-auto w-40 rounded-full'
-							priority
+							className='m-auto h-auto w-auto rounded-full'
 						/>
 						<h1 className='p-2 text-center text-4xl font-semibold text-orange-600'>
 							Vineel Sai
@@ -59,6 +60,36 @@ export default function Home() {
 										project={project}
 									/>
 								)
+							})}
+						</div>
+					</div>
+				</div>
+
+				<div id='projects' className='min-h-screen w-full'>
+					<div className='w-full'>
+						<h1 className='m-5 p-2 text-center text-4xl font-semibold dark:text-white'>
+							Work Experience
+						</h1>
+						<p className='m-2 text-center text-xl dark:text-white'>
+							Hear are the Companies I Worked for/with.
+						</p>
+						<p className='m-2 text-center text-xl dark:text-white'>
+							For details on what I did at each company, please
+							check out my{' '}
+							<a
+								className='text-blue-400'
+								href='/resume/resume.pdf'
+							>
+								resume
+							</a>
+							.
+						</p>
+						<div
+							className='flex w-full flex-wrap items-center justify-center'
+							style={{ margin: 0, width: '100%' }}
+						>
+							{workExperience.map((work, index) => {
+								return <WorkCard key={index} work={work} />
 							})}
 						</div>
 					</div>

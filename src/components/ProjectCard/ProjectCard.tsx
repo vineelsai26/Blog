@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 
-export default function ProjectCard({ project }: { project: any }) {
+export default function ProjectCard({ project }: { project: ProjectType }) {
 	const [showButtons, setShowButtons] = useState(false)
 	return (
 		<div className='relative m-10 flex h-auto w-full flex-col overflow-hidden rounded-lg bg-white dark:bg-gray-800 md:w-2/5 lg:w-3/12'>
@@ -60,7 +60,7 @@ export default function ProjectCard({ project }: { project: any }) {
 					{project.name}
 				</h1>
 			</div>
-			<div className='p-8 pt-0' style={{ height: '250px' }}>
+			<div className='h-[250px] p-8 pt-0'>
 				<p className='my-6 text-center text-xl font-semibold dark:text-white'>
 					{project.description}
 				</p>
