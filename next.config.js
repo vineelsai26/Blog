@@ -17,10 +17,22 @@ const nextConfig = {
 	},
 	optimizeFonts: true,
 	images: {
-		domains: [
-			'icons.vineelsai.com',
-			'vineelsai.com',
-			'static.vineelsai.com',
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'icons.vineelsai.com',
+				pathname: '/**',
+			},
+			{
+				protocol: 'https',
+				hostname: 'vineelsai.com',
+				pathname: '/**',
+			},
+			{
+				protocol: 'https',
+				hostname: 'static.vineelsai.com',
+				pathname: '/**',
+			},
 		],
 		dangerouslyAllowSVG: true,
 	},
