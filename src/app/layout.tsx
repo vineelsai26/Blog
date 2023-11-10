@@ -1,12 +1,12 @@
 'use client'
 
-import { Kalam } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 import { useCallback, useEffect, useState } from 'react'
 import Footer from '../components/Footer/Footer'
 import Navbar from '../components/Navbar/Navbar'
 import '../styles/globals.css'
 
-const kalam = Kalam({
+const roboto = Roboto({
 	weight: '400',
 	subsets: ['latin'],
 	display: 'swap',
@@ -63,7 +63,7 @@ export default function RootLayout({
 				<link rel='icon' href={faviconHref} type='image/x-icon' />
 			</head>
 			<body
-				className={`${kalam.className} relative min-h-screen bg-slate-200 dark:bg-gray-600`}
+				className={`${roboto.className} relative min-h-screen bg-slate-200 dark:bg-gray-600`}
 			>
 				<div className='sticky top-0 z-50 w-full'>
 					<Navbar />

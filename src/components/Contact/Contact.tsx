@@ -113,10 +113,10 @@ export default function Contact() {
 					OR
 				</p>
 				<div className='w-full lg:w-5/12'>
-					<p className='p-3 text-center text-2xl font-bold dark:text-white'>
+					<p className='p-3 text-center text-2xl font-extrabold dark:text-white'>
 						Social Media
 					</p>
-					<p className='p-3 text-center text-xl dark:text-white'>
+					<p className='p-3 text-center text-xl font-extralight dark:text-white'>
 						You can also reach out to me through social media.
 					</p>
 
@@ -171,10 +171,10 @@ export default function Contact() {
 						</Link>
 					</div>
 
-					<p className='p-5 text-center text-xl dark:text-white'>
+					<p className='p-5 text-center text-xl font-extrabold dark:text-white'>
 						OR
 					</p>
-					<p className='p-3 text-center text-xl dark:text-white'>
+					<p className='p-3 text-center text-xl font-extralight dark:text-white'>
 						Reach out me through email
 					</p>
 					<div className='flex flex-row justify-evenly'>

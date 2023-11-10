@@ -46,7 +46,7 @@ export default function Article({ article }: { article: ArticleType }) {
 							)
 						})}
 				</div>
-				<p className='m-2 p-2 text-xl font-normal dark:text-white'>
+				<p className='m-2 p-2 text-xl font-extralight dark:text-white'>
 					{article.description &&
 						article.description.substring(0, 150)}
 				</p>

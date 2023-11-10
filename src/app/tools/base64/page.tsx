@@ -67,7 +67,6 @@ export default function Base64() {
 								const file = e.target.files
 								if (file && file[0]) {
 									const reader = new FileReader()
-									console.log('is image', isImage)
 									if (isImage) {
 										reader.readAsDataURL(file[0])
 										reader.onload = () => {
