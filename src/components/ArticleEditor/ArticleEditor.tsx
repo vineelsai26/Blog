@@ -6,6 +6,7 @@ import ArticlePreview from '../ArticlePreview/ArticlePreview'
 import { useEffect, useState } from 'react'
 import Article from '../ArticleCard/ArticleCard'
 import Loader from '../Loader/Loader'
+import CopyButton from '../Markdown/CopyButton'
 
 export default function ArticleEditor({
 	articleFetch,
@@ -20,6 +21,7 @@ export default function ArticleEditor({
 	const [article, setArticle] = useState<ArticleType>({} as ArticleType)
 
 	const [thumbnail, setThumbnail] = useState<File | null>(null)
+	const [files, setFiles] = useState<FileList | null>(null)
 
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -58,6 +60,31 @@ export default function ArticleEditor({
 				handleLocalStorage(article)
 				return article
 			})
+		}
+
+		if (files && files.length > 0) {
+			for (let i = 0; i < files.length; i++) {
+				const formData = new FormData()
+				formData.append('image', files.item(i)!)
+				formData.append('type', 'article')
+				formData.append(
+					'articleUrl',
+					article.url.replaceAll(' ', '-').toLowerCase()
+				)
+
+				const request = await fetch('/api/upload', {
+					method: 'POST',
+					body: formData,
+				})
+
+				const response = await request.json()
+
+				if (response.error) {
+					setLoading(false)
+					setData(response)
+					return
+				}
+			}
 		}
 
 		if (editMode) {
@@ -227,22 +254,56 @@ export default function ArticleEditor({
 							/>
 						</div>
 
-						<textarea
-							className='m-2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
-							rows={5}
-							placeholder='Description'
-							value={article.description}
-							onChange={(e) => {
-								setArticle((article) => {
-									article = {
-										...article,
-										description: e.target.value,
-									} as ArticleType
-									handleLocalStorage(article)
-									return article
-								})
-							}}
-						/>
+						<div className='flex flex-row'>
+							<textarea
+								className='m-2 w-1/2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
+								rows={5}
+								placeholder='Description'
+								value={article.description}
+								onChange={(e) => {
+									setArticle((article) => {
+										article = {
+											...article,
+											description: e.target.value,
+										} as ArticleType
+										handleLocalStorage(article)
+										return article
+									})
+								}}
+							/>
+							<div className='flex w-1/2 flex-row'>
+								<input
+									className='m-2 w-1/2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
+									placeholder='Images'
+									type='file'
+									multiple={true}
+									onChange={(e) => {
+										setFiles(e.target.files)
+									}}
+								/>
+								<ul className='m-2 w-1/2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'>
+									{files &&
+										Array.from(files).map((file, index) => {
+											const fileUrl = `https://static.vineelsai.com/blog/images/${new Date().getFullYear()}/${
+												article.url
+											}/${file.name}`
+											return (
+												<div className='flex flex-row'>
+													<li
+														className='m-2 overflow-scroll'
+														key={index}
+													>
+														{fileUrl}
+													</li>
+													<CopyButton
+														content={`![${file.name}](${fileUrl})`}
+													/>
+												</div>
+											)
+										})}
+								</ul>
+							</div>
+						</div>
 						<Editor
 							className='m-2 rounded border-2 border-black dark:border-white  dark:bg-gray-600'
 							height='90vh'

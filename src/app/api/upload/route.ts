@@ -8,6 +8,7 @@ export async function POST(req: NextRequest) {
 
 	const image = body.get('image') as File
 	const type = body.get('type') as string
+	const articleUrl = body.get('articleUrl') as string | null
 
 	const cookieStore = cookies()
 	const email = cookieStore.get('email')?.value
@@ -30,7 +31,7 @@ export async function POST(req: NextRequest) {
 		})
 	}
 
-	if (type == 'thumbnail') {
+	if (type === 'thumbnail') {
 		const response = await fetch(
 			`https://static.vineelsai.com/blog/images/${new Date().getFullYear()}/thumbnails/${
 				image.name
@@ -53,6 +54,34 @@ export async function POST(req: NextRequest) {
 		return NextResponse.json({
 			message: 'Thumbnail uploaded successfully',
 			url: `https://static.vineelsai.com/blog/images/${new Date().getFullYear()}/thumbnails/${
+				image.name
+			}`,
+		})
+	}
+
+	if (type === 'article' && articleUrl !== null) {
+		const response = await fetch(
+			`https://static.vineelsai.com/blog/images/${new Date().getFullYear()}/${articleUrl}/${
+				image.name
+			}`,
+			{
+				method: 'PUT',
+				headers: {
+					Authorization: `Bearer ${process.env.NEXT_STATIC_UPLOAD_AUTH_KEY}`,
+				},
+				body: image,
+			}
+		)
+
+		if (!response.ok) {
+			return NextResponse.json({
+				error: 'Error uploading thumbnail',
+			})
+		}
+
+		return NextResponse.json({
+			message: 'Image uploaded successfully',
+			url: `https://static.vineelsai.com/blog/images/${new Date().getFullYear()}/${articleUrl}/${
 				image.name
 			}`,
 		})
