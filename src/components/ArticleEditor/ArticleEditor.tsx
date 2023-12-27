@@ -288,11 +288,11 @@ export default function ArticleEditor({
 												article.url
 											}/${file.name}`
 											return (
-												<div className='flex flex-row'>
-													<li
-														className='m-2 overflow-scroll'
-														key={index}
-													>
+												<div
+													key={index}
+													className='flex flex-row'
+												>
+													<li className='m-2 overflow-scroll'>
 														{fileUrl}
 													</li>
 													<CopyButton
