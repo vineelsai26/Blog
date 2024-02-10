@@ -1,8 +1,7 @@
 import { ArticleType, ArticleURLType } from '../../../types/article'
 import ArticleEditor from '../../../components/ArticleEditor/ArticleEditor'
 import prisma from '../../../prisma/prisma'
-import { cookies } from 'next/headers'
-import bcrypt from 'bcrypt'
+import { getServerSession } from 'next-auth'
 
 export const dynamic = 'force-dynamic'
 
@@ -13,19 +12,10 @@ export default async function EditPost({
 		url: string
 	}
 }) {
-	const cookieStore = cookies()
-	const email = cookieStore.get('email')?.value
-	const password = cookieStore.get('password')?.value
 	let result = false
-
-	if (email && password) {
-		const user = await prisma.users.findUnique({
-			where: {
-				email: email,
-			},
-		})
-
-		result = await bcrypt.compare(password, user!.password)
+	const session = await getServerSession()
+	if (session?.user?.email && session?.user?.email === 'mail@vineelsai.com') {
+		result = true
 	}
 
 	const article = (await prisma.articles.findUnique({

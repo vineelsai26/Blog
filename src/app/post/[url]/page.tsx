@@ -2,11 +2,8 @@ import { ArticleURLType, ArticleType } from '../../../types/article'
 import ArticlePreview from '../../../components/ArticlePreview/ArticlePreview'
 import prisma from '../../../prisma/prisma'
 import { Metadata } from 'next'
-import { cookies } from 'next/headers'
-import bcrypt from 'bcrypt'
+import { getServerSession } from 'next-auth'
 
-// export const revalidate = 3600
-// export const runtime = 'edge'
 export const dynamic = 'force-dynamic'
 
 export default async function Post({
@@ -16,19 +13,10 @@ export default async function Post({
 		url: string
 	}
 }) {
-	const cookieStore = cookies()
-	const email = cookieStore.get('email')?.value
-	const password = cookieStore.get('password')?.value
 	let result = false
-
-	if (email && password) {
-		const user = await prisma.users.findUnique({
-			where: {
-				email: email,
-			},
-		})
-
-		result = await bcrypt.compare(password, user!.password)
+	const session = await getServerSession()
+	if (session?.user?.email === 'mail@vineelsai.com') {
+		result = true
 	}
 
 	const article = (await prisma.articles.findUnique({

@@ -157,7 +157,7 @@ export default function ArticleEditor({
 		} else {
 			setArticle(articleFetch)
 		}
-	}, [])
+	}, [articleFetch])
 
 	const handleLocalStorage = (article: ArticleType) => {
 		window.localStorage.setItem(

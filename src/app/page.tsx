@@ -12,12 +12,10 @@ export const metadata = {
 }
 
 export const revalidate = 3600
-export const runtime = 'edge'
-
 export default function Home() {
 	return (
 		<div>
-			<div className='min-h-screen w-screen'>
+			<div className='min-h-screen w-full'>
 				<div
 					className='relative min-h-screen w-full bg-fixed'
 					style={{ backgroundImage: 'url(/background.webp)' }}

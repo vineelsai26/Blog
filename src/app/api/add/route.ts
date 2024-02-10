@@ -1,13 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import bcrypt from 'bcrypt'
 import prisma from '../../../prisma/prisma'
+import { getServerSession } from 'next-auth'
 
 export async function POST(req: NextRequest) {
 	const body = await new Response(req.body).json()
 	const {
-		email,
-		password,
 		url,
 		title,
 		imageUrl,
@@ -17,38 +15,31 @@ export async function POST(req: NextRequest) {
 		isPrivate,
 	} = body
 
-	const user = await prisma.users.findUnique({
-		where: {
-			email: email,
-		},
-	})
+	const session = await getServerSession()
 
-	if (user && user.email) {
-		const result = await bcrypt.compare(password, user.password)
-		if (result) {
-			const article = await prisma.articles.create({
-				data: {
-					title: title as string,
-					url: url as string,
-					imageUrl: imageUrl as string,
-					tags: tags as string[],
-					description: description as string,
-					longDescription: content as string,
-					createdBy: user.email as string,
-					createdAt: new Date(),
-					v: 1,
-					private: isPrivate as boolean,
-				},
+	if (session?.user?.email && session?.user?.email === 'mail@vineelsai.com') {
+		const article = await prisma.articles.create({
+			data: {
+				title: title as string,
+				url: url as string,
+				imageUrl: imageUrl as string,
+				tags: tags as string[],
+				description: description as string,
+				longDescription: content as string,
+				createdBy: session.user.email,
+				createdAt: new Date(),
+				v: 1,
+				private: isPrivate as boolean,
+			},
+		})
+		if (article) {
+			return NextResponse.json({
+				message: 'Article saved successfully',
 			})
-			if (article) {
-				return NextResponse.json({
-					message: 'Article saved successfully',
-				})
-			} else {
-				return NextResponse.json({
-					error: 'Error saving article',
-				})
-			}
+		} else {
+			return NextResponse.json({
+				error: 'Error saving article',
+			})
 		}
 	}
 
