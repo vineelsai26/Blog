@@ -4,10 +4,128 @@ import { useEffect, useState } from 'react'
 import CopyButton from '../../../components/Markdown/CopyButton'
 import { Editor } from '@monaco-editor/react'
 
+function customJSONParser(input: string, tabLength: number): string {
+	let output = ''
+	const stack: string[] = []
+
+	input = input.replaceAll('\t', '').replaceAll('\n', '')
+
+	let i = 0
+
+	while (input[i] !== '{' && input[i] !== '[') {
+		i++
+	}
+
+	input = input.slice(i)
+
+	for (let i = 0; i < input.length; i++) {
+		if (input[i] === '{') {
+			stack.push('{')
+
+			output += '{'
+		} else if (stack.length === 0) {
+			break
+		} else if (input[i] === '}') {
+			if (stack[stack.length - 1] === '{') {
+				stack.pop()
+			} else {
+				throw new Error('Invalid JSON')
+			}
+
+			output += '}'
+		} else if (input[i] === '[') {
+			stack.push('[')
+			output += '['
+		} else if (input[i] === ']') {
+			if (stack[stack.length - 1] === '[') {
+				stack.pop()
+			} else {
+				throw new Error('Invalid JSON')
+			}
+
+			output += ']'
+		} else if (input[i] === ',') {
+			let j = i + 1
+
+			while (input[j] === ' ') {
+				j++
+			}
+
+			if (input[j] === '}' || input[j] === ']') {
+				output += ''
+			} else {
+				output += ','
+			}
+		} else if (input[i] === ':') {
+			if (input[i + 1] === ' ') {
+				output += ':'
+			} else {
+				output += ': '
+			}
+		} else if (input[i] === '"') {
+			let j = i + 1
+			while (input[j] !== '"') {
+				if (input[j] === '\\') {
+					j++
+				}
+				j++
+			}
+			output += input.slice(i, j + 1)
+			i = j
+		} else if (input[i] === "'") {
+			let j = i + 1
+			while (input[j] !== "'") {
+				if (input[j] === '\\') {
+					j++
+				}
+				j++
+			}
+			output += '"'
+			output += input
+				.slice(i + 1, j)
+				.replaceAll('"', '\\"')
+				.replaceAll("\\'", "'")
+			output += '"'
+			i = j
+		} else if (input[i] === 'T' || input[i] === 'F' || input[i] === 'N') {
+			let j = i + 1
+			while (
+				input[j] !== ' ' &&
+				input[j] !== ',' &&
+				input[j] !== '}' &&
+				input[j] !== ']'
+			) {
+				j++
+			}
+
+			const output_data = input.slice(i, j)
+			if (output_data === 'True') {
+				output += 'true'
+			} else if (output_data === 'False') {
+				output += 'false'
+			} else if (output_data === 'None') {
+				output += 'null'
+			}
+
+			i = j - 1
+		} else {
+			output += input[i]
+		}
+	}
+
+	return format(output, tabLength)
+}
+
 function format(input: string, tabLength: number) {
 	try {
 		return JSON.stringify(JSON.parse(input), null, tabLength)
 	} catch (err: any) {
+		try {
+			return customJSONParser(input, tabLength)
+		} catch (err: any) {
+			console.error(err)
+		}
+
 		return err.toString()
 	}
 }
@@ -61,7 +179,7 @@ export default function JsonFormator() {
 				className='flex w-full flex-wrap items-center justify-center pt-5'
 				style={{ margin: 0, width: '100%' }}
 			>
-				<div className='m-2 flex h-64 w-4/5 flex-col items-center'>
+				<div className='m-2 flex h-96 w-4/5 flex-col items-center'>
 					<Editor
 						defaultValue='{}'
 						value={input}
@@ -114,7 +232,7 @@ export default function JsonFormator() {
 					</div>
 					<CopyButton content={output} />
 				</div>
-				<div className='m-2 flex h-64 w-4/5 flex-col items-center'>
+				<div className='m-2 flex h-96 w-4/5 flex-col items-center'>
 					<Editor
 						className='h-full w-full rounded-lg border-2 border-gray-300 p-2 dark:border-gray-700 dark:bg-gray-800 dark:text-white'
 						value={output}
