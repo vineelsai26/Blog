@@ -33,6 +33,11 @@ const nextConfig = {
 				hostname: 'static.vineelsai.com',
 				pathname: '/**',
 			},
+			{
+				protocol: 'https',
+				hostname: 'avatars.githubusercontent.com',
+                pathname: '/**',
+			},
 		],
 		dangerouslyAllowSVG: true,
 	},

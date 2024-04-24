@@ -1,8 +1,10 @@
 import Article from '../../components/ArticleCard/ArticleCard'
 import Pagination from '../../components/Pagination/Pagination'
 import { ArticleType } from '../../types/article'
-import prisma from '../../prisma/prisma'
+import { articles as articlesD } from '../../drizzle/schema/articles'
 import { getServerSession } from 'next-auth'
+import db from '../../drizzle/db'
+import { count } from 'drizzle-orm';
 
 const pageLimit = 100
 
@@ -22,29 +24,14 @@ export default async function Blog() {
 		result = true
 	}
 
-	const articles = (await prisma.articles.findMany({
-		where: {
-			private: result,
-		},
-		select: {
-			title: true,
-			url: true,
-			imageUrl: true,
-			description: true,
-			createdAt: true,
-			createdBy: true,
-			tags: true,
-		},
-		orderBy: {
-			createdAt: 'desc',
-		},
-		skip: page * pageLimit,
-		take: pageLimit,
-	})) as ArticleType[]
+    const articles = await db.query.articles.findMany({
+		where: (articles, { eq }) => eq(articles.private, result),
+		orderBy: (articles, { desc }) => [desc(articles.createdAt)],
+	})
 
-	const count = await prisma.articles.count()
+	const articleCount = (await db.select({ count: count() }).from(articlesD))[0].count
 
-	const pageCount = Math.ceil(count / pageLimit)
+	const pageCount = Math.ceil(articleCount / pageLimit)
 
 	return (
 		<div>

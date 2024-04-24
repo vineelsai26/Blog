@@ -1,7 +1,6 @@
-import { ArticleType, ArticleURLType } from '../../../types/article'
 import ArticleEditor from '../../../components/ArticleEditor/ArticleEditor'
-import prisma from '../../../prisma/prisma'
 import { getServerSession } from 'next-auth'
+import db from '../../../drizzle/db'
 
 export const dynamic = 'force-dynamic'
 
@@ -18,12 +17,12 @@ export default async function EditPost({
 		result = true
 	}
 
-	const article = (await prisma.articles.findUnique({
-		where: {
-			url: params.url,
-			private: result,
-		},
-	})) as ArticleType
+
+    const article = await db.query.articles.findFirst({
+		where: (articles, { eq }) =>
+			eq(articles.url, params.url) && eq(articles.private, result),
+	})
+
 
 	if (!article) {
 		return (
@@ -33,24 +32,15 @@ export default async function EditPost({
 		)
 	}
 
-	const user = await prisma.users.findUnique({
-		where: {
-			email: article?.createdBy,
-		},
-		select: {
-			email: true,
-			name: true,
-			profilePicture: true,
-			password: false,
-		},
+	const user = await db.query.users.findFirst({
+		where: (users, { eq }) => eq(users.email, article.createdBy),
 	})
-
-	article!.createdBy = user!
 
 	return (
 		<div>
 			<ArticleEditor
-				articleFetch={article as ArticleType}
+				articleFetch={article}
+                user={user ? user : null}
 				editMode={true}
 			/>
 		</div>
@@ -58,15 +48,15 @@ export default async function EditPost({
 }
 
 export async function generateStaticParams() {
-	const articles = await prisma.articles.findMany({
-		select: {
+	const articles = await db.query.articles.findMany({
+		columns: {
 			url: true,
 		},
 	})
 
 	let paths: { params: { url: string } }[] = []
 
-	articles.forEach((article: ArticleURLType) => {
+	articles.forEach((article) => {
 		paths.push({ params: { url: article.url } })
 	})
 

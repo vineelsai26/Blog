@@ -1,6 +1,8 @@
-import prisma from '../../../prisma/prisma'
+import db from '../../../drizzle/db'
+import { articles as articlesD } from '../../../drizzle/schema/articles'
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
+import { eq } from 'drizzle-orm'
 
 export async function POST(req: NextRequest) {
 	const body = await new Response(req.body).json()
@@ -19,30 +21,23 @@ export async function POST(req: NextRequest) {
 
 	if (session?.user?.email && session?.user?.email === 'mail@vineelsai.com') {
 		if (deleteArticle) {
-			await prisma.articles.delete({
-				where: {
-					url: url,
-				},
-			})
+			await db.delete(articlesD).where(eq(articlesD.url, url))
 			return NextResponse.json({
 				message: 'Article deleted successfully',
 			})
 		} else {
-			const article = await prisma.articles.update({
-				where: {
-					url: url,
-				},
-				data: {
+            const article = await db
+				.update(articlesD)
+				.set({
 					title: title,
 					imageUrl: imageUrl,
 					description: description,
-					longDescription: content,
+					content: content,
 					tags: tags,
-					createdBy: session.user.email,
-					createdAt: new Date(),
+					updatedAt: new Date(),
 					private: isPrivate as boolean,
-				},
-			})
+				})
+				.where(eq(articlesD.url, url))
 
 			if (article) {
 				return NextResponse.json({

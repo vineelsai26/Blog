@@ -1,20 +1,9 @@
-import { Prisma } from '@prisma/client'
+import { articles } from '../drizzle/schema/articles'
+import { users } from '../drizzle/schema/users'
 
-export type ArticleType = {
-	url: string
-	title: string
-	description: string
-	longDescription: string | undefined
-	imageUrl: string
-	createdAt: Date
-	createdBy: string | Prisma.users
-	tags: string[]
-	private: boolean
-}
+type ArticleType = typeof articles.$inferSelect
 
-export type ArticleURLType = {
-	url: string
-}
+type UserType = typeof users.$inferSelect
 
 export type SaveResponse = {
 	message: string | null

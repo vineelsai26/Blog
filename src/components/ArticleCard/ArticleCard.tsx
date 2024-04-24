@@ -7,7 +7,7 @@ export default function Article({ article }: { article: ArticleType }) {
 	return (
 		<Link
 			href={`post/${article.url}`}
-			className='lg:5/6 m-4 flex w-full flex-col items-center rounded-xl border-2 border-slate-400 bg-white p-4 dark:bg-gray-800 md:w-2/3 lg:w-3/5 lg:flex-row'
+			className='lg:5/6 m-4 flex w-full flex-col items-center rounded-xl border-2 border-slate-400 bg-white p-4 md:w-2/3 lg:w-3/5 lg:flex-row dark:bg-gray-800'
 		>
 			<div className='w-full lg:w-1/6'>
 				<Image
@@ -19,7 +19,7 @@ export default function Article({ article }: { article: ArticleType }) {
 				/>
 			</div>
 			<div className='h-full py-10 md:w-5/6 md:py-0'>
-				<h2 className='m-4 mt-0 text-3xl font-bold dark:text-white md:mt-4'>
+				<h2 className='m-4 mt-0 text-3xl font-bold md:mt-4 dark:text-white'>
 					{article.title}
 				</h2>
 				<div className='m-4 flex flex-row items-center'>
@@ -35,7 +35,7 @@ export default function Article({ article }: { article: ArticleType }) {
 				<div className='col my-4 flex'>
 					{article.tags &&
 						article.tags.length > 0 &&
-						article.tags.map((tag, index) => {
+						article.tags.map((tag: string, index: number) => {
 							return (
 								<span
 									key={index}

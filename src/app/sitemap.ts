@@ -1,9 +1,9 @@
 import { MetadataRoute } from 'next'
-import prisma from '../prisma/prisma'
+import db from '../drizzle/db'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-	const articles = await prisma.articles.findMany({
-		select: {
+	const articles = await db.query.articles.findMany({
+		columns: {
 			url: true,
 		},
 	})
