@@ -16,18 +16,22 @@ export default function New() {
 						url: 'test',
 						imageUrl: 'https://vineelsai.com/logo-light.png',
 						description: 'Test Description',
-						longDescription: 'Test Long Description',
+						content: 'Test Long Description',
 						createdAt: new Date(),
-						createdBy: {
-							email: 'mail@vineelsai.com',
-							name: 'Vineel Sai',
-							profilePicture:
-								'https://vineelsai.com/profile.webp',
-						},
+						createdBy: 'mail@vineelsai.com',
 						tags: ['test1', 'test2', 'test3'],
 						private: true,
 					} as ArticleType
 				}
+				user={{
+					id: 1,
+					email: 'mail@vineelsai.com',
+					name: 'Vineel Sai',
+					profilePicture: 'https://vineelsai.com/profile.webp',
+					password: '',
+					role: 'admin',
+					githubToken: '',
+				}}
 				editMode={false}
 			/>
 		</>

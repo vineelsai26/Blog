@@ -1,7 +1,8 @@
 import NextAuth from 'next-auth'
 import GitHubProvider from 'next-auth/providers/github'
-import prisma from '../../../../prisma/prisma'
-
+import db from '../../../../drizzle/db'
+import { users } from '../../../../drizzle/schema/users'
+import { eq } from 'drizzle-orm'
 
 const handler = NextAuth({
 	providers: [
@@ -17,22 +18,23 @@ const handler = NextAuth({
 	],
 	callbacks: {
 		async signIn({ user, account }) {
-			if (user.email) {
-				const userData = await prisma.users.findUnique({
-					where: { email: user.email },
+			if (user && user.email) {
+				const userData = await db.query.users.findFirst({
+					where: eq(users.email, user.email),
 				})
 
 				if (userData && userData.email === user.email) {
 					if (!user.image) {
 						return false
 					}
-					await prisma.users.update({
-						where: { email: user.email },
-						data: {
+
+					await db
+						.update(users)
+						.set({
 							githubToken: account?.access_token,
 							profilePicture: user.image,
-						},
-					})
+						})
+						.where(eq(users.email, user.email))
 
 					return true
 				} else {
@@ -40,18 +42,19 @@ const handler = NextAuth({
 						return false
 					}
 
-					const userData = await prisma.users.create({
-						data: {
+					const userData = await db
+						.insert(users)
+						.values({
 							email: user.email,
 							profilePicture: user.image,
 							name: user.name,
 							githubToken: account?.access_token,
-						},
-						select: {
-							id: true,
-						},
-					})
-					if (userData && userData.id) {
+						})
+						.returning({
+							id: users.id,
+						})
+
+					if (userData[0] && userData[0].id) {
 						return true
 					}
 				}

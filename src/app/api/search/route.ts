@@ -1,4 +1,4 @@
-import prisma from '../../../prisma/prisma'
+import db from '../../../drizzle/db'
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 
@@ -11,48 +11,20 @@ export async function GET(req: NextRequest) {
 		result = true
 	}
 
-	const articles = await prisma.articles.findMany({
-		where: {
-			private: result,
-			OR: [
-				{
-					title: {
-						contains: searchParams
-							.get('query')
-							?.toString()
-							.toLowerCase()!,
-						mode: 'insensitive',
-					},
-				},
-				{
-					description: {
-						contains: searchParams
-							.get('query')
-							?.toString()
-							.toLowerCase()!,
-						mode: 'insensitive',
-					},
-				},
-				{
-					longDescription: {
-						contains: searchParams
-							.get('query')
-							?.toString()
-							.toLowerCase()!,
-						mode: 'insensitive',
-					},
-				},
-				{
-					tags: {
-						has: searchParams
-							.get('query')
-							?.toString()
-							.toLowerCase()!,
-					},
-				},
-			],
-		},
-		take: 5,
+	const articles = await db.query.articles.findMany({
+		where: (articles, { or, and, like, eq }) =>
+			and(
+				eq(articles.private, result),
+				or(
+					like(articles.title, `%${searchParams.get('query')}%`),
+					like(
+						articles.description,
+						`%${searchParams.get('query')}%`
+					),
+					like(articles.content, `%${searchParams.get('query')}%`)
+				)
+			),
+		limit: 5,
 	})
 
 	return NextResponse.json(articles)

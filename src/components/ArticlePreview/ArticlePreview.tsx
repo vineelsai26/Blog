@@ -1,25 +1,31 @@
 import React from 'react'
-import { ArticleType } from '../../types/article'
+import { ArticleType, UserType } from '../../types/article'
 import Markdown from '../Markdown/Markdown'
 import Image from 'next/image'
 
-export default function ArticlePreview({ article }: { article: ArticleType }) {
+export default function ArticlePreview({
+	article,
+	user,
+}: {
+	article: ArticleType
+	user: UserType | null
+}) {
 	return (
 		<div className='min-h-screen bg-slate-200 dark:bg-gray-600'>
-			<div className='m-auto w-full bg-white p-8 dark:bg-gray-800 md:w-2/3 lg:w-3/5'>
+			<div className='m-auto w-full bg-white p-8 md:w-2/3 lg:w-3/5 dark:bg-gray-800'>
 				<h1 className='mb-2 mt-0 text-center text-5xl font-medium leading-tight dark:text-white'>
 					{article.title}
 				</h1>
-				{article.createdBy && (
+				{user && (
 					<div className='flex flex-row items-center justify-center'>
 						<p className='py-4 text-center text-2xl font-medium leading-tight dark:text-white'>
 							By
 						</p>
 						<p className='px-2 py-4 text-center text-xl font-light leading-tight dark:text-white'>
-							{article.createdBy.name}
+							{user.name}
 						</p>
 						<Image
-							src={article.createdBy.profilePicture}
+							src={user.profilePicture}
 							alt={'profile'}
 							width={128}
 							height={128}
@@ -29,7 +35,7 @@ export default function ArticlePreview({ article }: { article: ArticleType }) {
 				)}
 				<div className='mx-auto my-4 flex w-96 justify-evenly'>
 					{article.tags &&
-						article.tags.map((tag, index) => {
+						article.tags.map((tag: string, index: number) => {
 							return (
 								<span
 									key={index}

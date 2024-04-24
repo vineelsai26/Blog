@@ -53,7 +53,7 @@ export default function Contact() {
 				</p>
 			</div>
 			<form
-				className='m-auto mt-10  flex h-auto w-full flex-col rounded-lg bg-white p-10 shadow-lg dark:bg-gray-800 md:w-4/5 lg:w-5/6 lg:flex-row'
+				className='m-auto mt-10  flex h-auto w-full flex-col rounded-lg bg-white p-10 shadow-lg md:w-4/5 lg:w-5/6 lg:flex-row dark:bg-gray-800'
 				onSubmit={(e) => {
 					e.preventDefault()
 					handleContact()

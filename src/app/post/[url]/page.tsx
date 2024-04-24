@@ -1,10 +1,9 @@
-import { ArticleURLType, ArticleType } from '../../../types/article'
 import ArticlePreview from '../../../components/ArticlePreview/ArticlePreview'
-import prisma from '../../../prisma/prisma'
 import { Metadata } from 'next'
-import { getServerSession } from 'next-auth'
+import db from '../../../drizzle/db'
 
 export const dynamic = 'force-dynamic'
+export const runtime = 'edge'
 
 export default async function Post({
 	params,
@@ -14,37 +13,21 @@ export default async function Post({
 	}
 }) {
 	let result = false
-	const session = await getServerSession()
-	if (session?.user?.email === 'mail@vineelsai.com') {
-		result = true
-	}
 
-	const article = (await prisma.articles.findUnique({
-		where: {
-			url: params.url,
-			private: result,
-		},
-	})) as ArticleType
+	const article = await db.query.articles.findFirst({
+		where: (articles, { eq, and }) =>
+			and(eq(articles.url, params.url), eq(articles.private, result)),
+	})
 
-	if (article) {
-		const user = await prisma.users.findUnique({
-			where: {
-				email: article?.createdBy,
-			},
-			select: {
-				email: true,
-				name: true,
-				profilePicture: true,
-				password: false,
-			},
-		})
-
-		article!.createdBy = user!
-	}
+	const user = await db.query.users.findFirst({
+		where: (users, { eq }) => eq(users.email, article!.createdBy),
+	})
 
 	return (
 		<div>
-			<ArticlePreview article={article} />
+			{article && user && (
+				<ArticlePreview article={article} user={user} />
+			)}
 		</div>
 	)
 }
@@ -56,15 +39,20 @@ export async function generateMetadata({
 		url: string
 	}
 }): Promise<Metadata> {
-	const article = (await prisma.articles.findUnique({
-		where: {
-			url: params.url,
-		},
-		select: {
+	const article = await db.query.articles.findFirst({
+		where: (articles, { eq }) => eq(articles.url, params.url),
+		columns: {
 			title: true,
 			description: true,
 		},
-	})) as ArticleType
+	})
+
+	if (!article) {
+		return {
+			title: 'Article not found',
+			description: 'Article not found',
+		}
+	}
 
 	return {
 		title: article.title,
@@ -73,15 +61,15 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-	const articles = await prisma.articles.findMany({
-		select: {
+	const articles = await db.query.articles.findMany({
+		columns: {
 			url: true,
 		},
 	})
 
 	let paths: { params: { url: string } }[] = []
 
-	articles.forEach((article: ArticleURLType) => {
+	articles.forEach((article) => {
 		paths.push({ params: { url: article.url } })
 	})
 

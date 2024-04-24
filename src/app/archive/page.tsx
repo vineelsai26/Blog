@@ -6,6 +6,9 @@ export const metadata = {
 	description: 'Archive of Portfolio`s of Vineel Sai',
 }
 
+export const revalidate = 3600
+export const runtime = 'edge'
+
 export default function Archive() {
 	return (
 		<div className='min-h-screen'>

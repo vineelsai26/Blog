@@ -1,7 +1,7 @@
 'use client'
 
 import Editor from '@monaco-editor/react'
-import { ArticleType, SaveResponse } from '../../types/article'
+import { ArticleType, SaveResponse, UserType } from '../../types/article'
 import ArticlePreview from '../ArticlePreview/ArticlePreview'
 import { useEffect, useState } from 'react'
 import Article from '../ArticleCard/ArticleCard'
@@ -10,9 +10,11 @@ import CopyButton from '../Markdown/CopyButton'
 
 export default function ArticleEditor({
 	articleFetch,
+	user,
 	editMode,
 }: {
 	articleFetch: ArticleType
+	user: UserType | null
 	editMode: Boolean
 }) {
 	const [currentTab, setCurrentTab] = useState<Number>(0)
@@ -99,7 +101,7 @@ export default function ArticleEditor({
 					imageUrl: article.imageUrl,
 					tags: article.tags,
 					description: article.description,
-					content: article.longDescription,
+					content: article.content,
 					email: email,
 					password: password,
 					deleteArticle: deleteArticle,
@@ -122,7 +124,7 @@ export default function ArticleEditor({
 					imageUrl: article.imageUrl,
 					tags: article.tags,
 					description: article.description,
-					content: article.longDescription,
+					content: article.content,
 					email: email,
 					password: password,
 					isPrivate: article.private,
@@ -230,7 +232,9 @@ export default function ArticleEditor({
 							<input
 								className='m-2 w-1/2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
 								placeholder='Tags'
-								value={article.tags && article.tags.join(',')}
+								value={
+									article.tags ? article.tags.join(',') : ''
+								}
 								onChange={(e) => {
 									setArticle((article) => {
 										article = {
@@ -308,12 +312,12 @@ export default function ArticleEditor({
 							className='m-2 rounded border-2 border-black dark:border-white  dark:bg-gray-600'
 							height='90vh'
 							width='-webkit-fill-available'
-							value={article.longDescription}
+							value={article.content}
 							onChange={(value) => {
 								setArticle((article) => {
 									article = {
 										...article,
-										longDescription: value,
+										content: value,
 									} as ArticleType
 									handleLocalStorage(article)
 									return article
@@ -409,7 +413,7 @@ export default function ArticleEditor({
 						<h1 className='m-5 text-center text-2xl dark:text-white'>
 							Article Preview
 						</h1>
-						<ArticlePreview article={article} />
+						<ArticlePreview article={article} user={user} />
 					</div>
 				)}
 			</div>

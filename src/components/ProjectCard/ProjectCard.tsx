@@ -6,7 +6,7 @@ import { useState } from 'react'
 export default function ProjectCard({ project }: { project: ProjectType }) {
 	const [showButtons, setShowButtons] = useState(false)
 	return (
-		<div className='relative m-10 flex h-auto w-full flex-col overflow-hidden rounded-lg bg-white dark:bg-gray-800 md:w-2/5 lg:w-3/12'>
+		<div className='relative m-10 flex h-auto w-full flex-col overflow-hidden rounded-lg bg-white md:w-2/5 lg:w-3/12 dark:bg-gray-800'>
 			<div
 				className='relative h-64'
 				onMouseEnter={() => {
