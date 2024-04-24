@@ -1,9 +1,10 @@
 import ArticlePreview from '../../../components/ArticlePreview/ArticlePreview'
 import { Metadata } from 'next'
-import { getServerSession } from 'next-auth'
 import db from '../../../drizzle/db'
 
 export const dynamic = 'force-dynamic'
+export const runtime = 'edge'
+
 
 export default async function Post({
 	params,
@@ -13,26 +14,22 @@ export default async function Post({
 	}
 }) {
 	let result = false
-	const session = await getServerSession()
-	if (session?.user?.email === 'mail@vineelsai.com') {
-		result = true
-	}
 
     const article = await db.query.articles.findFirst({
-        where: (articles, {eq}) => eq(articles.url, params.url) && eq(articles.private, result)
+        where: (articles, {eq, and}) => and(eq(articles.url, params.url), eq(articles.private, result))
     })
 
-    if (article && article.id) {
-        const user = await db.query.users.findFirst({
-            where: (users, {eq}) => eq(users.email, article.createdBy),
-        })
+    const user = await db.query.users.findFirst({
+		where: (users, { eq }) => eq(users.email, article!.createdBy),
+	})
 
-        return (
-            <div>
-                <ArticlePreview article={article} user={user ? user : null} />
-            </div>
-        )
-    }
+	return (
+		<div>
+			{
+                article && user && <ArticlePreview article={article} user={user} />
+            }
+		</div>
+	)
 }
 
 export async function generateMetadata({

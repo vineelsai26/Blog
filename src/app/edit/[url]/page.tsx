@@ -1,8 +1,8 @@
 import ArticleEditor from '../../../components/ArticleEditor/ArticleEditor'
-import { getServerSession } from 'next-auth'
 import db from '../../../drizzle/db'
 
 export const dynamic = 'force-dynamic'
+export const runtime = 'edge'
 
 export default async function EditPost({
 	params,
@@ -12,15 +12,10 @@ export default async function EditPost({
 	}
 }) {
 	let result = false
-	const session = await getServerSession()
-	if (session?.user?.email && session?.user?.email === 'mail@vineelsai.com') {
-		result = true
-	}
-
 
     const article = await db.query.articles.findFirst({
-		where: (articles, { eq }) =>
-			eq(articles.url, params.url) && eq(articles.private, result),
+		where: (articles, { eq, and }) =>
+			and(eq(articles.url, params.url), eq(articles.private, result)),
 	})
 
 

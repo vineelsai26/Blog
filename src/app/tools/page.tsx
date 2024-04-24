@@ -7,6 +7,7 @@ export const metadata = {
 }
 
 export const revalidate = 3600
+export const runtime = 'edge'
 
 export default async function Tools() {
 	return (
