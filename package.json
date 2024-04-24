@@ -5,6 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"postinstall": "drizzle-kit generate:sqlite",
+        "studio": "drizzle-kit studio",
 		"dev": "next dev --turbo",
 		"build": "next build",
 		"export": "next export",
