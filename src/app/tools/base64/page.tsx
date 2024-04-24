@@ -140,7 +140,10 @@ export default function Base64() {
 					<div className='m-2 flex w-4/5 flex-row'>
 						{isImage && input.trim().length > 0 ? (
 							<div className='w-full overflow-auto rounded-lg border-2 border-gray-300 p-2 text-xl dark:border-gray-700 dark:bg-gray-800 dark:text-white'>
-								<Image src={`data:image/png;base64, ${output}`} alt='base64 decoded image' />
+								<Image
+									src={`data:image/png;base64, ${output}`}
+									alt='base64 decoded image'
+								/>
 							</div>
 						) : (
 							<>

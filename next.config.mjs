@@ -36,7 +36,7 @@ const nextConfig = {
 			{
 				protocol: 'https',
 				hostname: 'avatars.githubusercontent.com',
-                pathname: '/**',
+				pathname: '/**',
 			},
 		],
 		dangerouslyAllowSVG: true,

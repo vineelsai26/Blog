@@ -5,7 +5,6 @@ import db from '../../../drizzle/db'
 export const dynamic = 'force-dynamic'
 export const runtime = 'edge'
 
-
 export default async function Post({
 	params,
 }: {
@@ -15,19 +14,20 @@ export default async function Post({
 }) {
 	let result = false
 
-    const article = await db.query.articles.findFirst({
-        where: (articles, {eq, and}) => and(eq(articles.url, params.url), eq(articles.private, result))
-    })
+	const article = await db.query.articles.findFirst({
+		where: (articles, { eq, and }) =>
+			and(eq(articles.url, params.url), eq(articles.private, result)),
+	})
 
-    const user = await db.query.users.findFirst({
+	const user = await db.query.users.findFirst({
 		where: (users, { eq }) => eq(users.email, article!.createdBy),
 	})
 
 	return (
 		<div>
-			{
-                article && user && <ArticlePreview article={article} user={user} />
-            }
+			{article && user && (
+				<ArticlePreview article={article} user={user} />
+			)}
 		</div>
 	)
 }
@@ -41,18 +41,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 	const article = await db.query.articles.findFirst({
 		where: (articles, { eq }) => eq(articles.url, params.url),
-        columns: {
-            title: true,
-            description: true,
-        }
+		columns: {
+			title: true,
+			description: true,
+		},
 	})
 
-    if (!article) {
-        return {
-            title: 'Article not found',
-            description: 'Article not found',
-        }
-    }
+	if (!article) {
+		return {
+			title: 'Article not found',
+			description: 'Article not found',
+		}
+	}
 
 	return {
 		title: article.title,
@@ -61,7 +61,7 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-    const articles = await db.query.articles.findMany({
+	const articles = await db.query.articles.findMany({
 		columns: {
 			url: true,
 		},

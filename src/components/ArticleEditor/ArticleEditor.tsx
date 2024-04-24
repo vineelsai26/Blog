@@ -10,11 +10,11 @@ import CopyButton from '../Markdown/CopyButton'
 
 export default function ArticleEditor({
 	articleFetch,
-    user,
+	user,
 	editMode,
 }: {
-	articleFetch: ArticleType,
-    user: UserType | null,
+	articleFetch: ArticleType
+	user: UserType | null
 	editMode: Boolean
 }) {
 	const [currentTab, setCurrentTab] = useState<Number>(0)
@@ -232,7 +232,9 @@ export default function ArticleEditor({
 							<input
 								className='m-2 w-1/2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
 								placeholder='Tags'
-								value={article.tags ? article.tags.join(',') : ''}
+								value={
+									article.tags ? article.tags.join(',') : ''
+								}
 								onChange={(e) => {
 									setArticle((article) => {
 										article = {

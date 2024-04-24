@@ -1,9 +1,8 @@
 import NextAuth from 'next-auth'
 import GitHubProvider from 'next-auth/providers/github'
 import db from '../../../../drizzle/db'
-import {users} from '../../../../drizzle/schema/users'
+import { users } from '../../../../drizzle/schema/users'
 import { eq } from 'drizzle-orm'
-
 
 const handler = NextAuth({
 	providers: [
@@ -21,15 +20,15 @@ const handler = NextAuth({
 		async signIn({ user, account }) {
 			if (user && user.email) {
 				const userData = await db.query.users.findFirst({
-                    where: eq(users.email, user.email)
-                })
+					where: eq(users.email, user.email),
+				})
 
 				if (userData && userData.email === user.email) {
 					if (!user.image) {
 						return false
 					}
 
-                    await db
+					await db
 						.update(users)
 						.set({
 							githubToken: account?.access_token,
@@ -43,14 +42,17 @@ const handler = NextAuth({
 						return false
 					}
 
-                    const userData = await db.insert(users).values({
-                        email: user.email,
-                        profilePicture: user.image,
-                        name: user.name,
-                        githubToken: account?.access_token,
-                    }).returning({
-                        id: users.id,
-                    })
+					const userData = await db
+						.insert(users)
+						.values({
+							email: user.email,
+							profilePicture: user.image,
+							name: user.name,
+							githubToken: account?.access_token,
+						})
+						.returning({
+							id: users.id,
+						})
 
 					if (userData[0] && userData[0].id) {
 						return true

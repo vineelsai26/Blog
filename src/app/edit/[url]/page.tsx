@@ -13,11 +13,10 @@ export default async function EditPost({
 }) {
 	let result = false
 
-    const article = await db.query.articles.findFirst({
+	const article = await db.query.articles.findFirst({
 		where: (articles, { eq, and }) =>
 			and(eq(articles.url, params.url), eq(articles.private, result)),
 	})
-
 
 	if (!article) {
 		return (
@@ -35,7 +34,7 @@ export default async function EditPost({
 		<div>
 			<ArticleEditor
 				articleFetch={article}
-                user={user ? user : null}
+				user={user ? user : null}
 				editMode={true}
 			/>
 		</div>

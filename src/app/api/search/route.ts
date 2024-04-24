@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
 					like(articles.content, `%${searchParams.get('query')}%`)
 				)
 			),
-        limit: 5
+		limit: 5,
 	})
 
 	return NextResponse.json(articles)

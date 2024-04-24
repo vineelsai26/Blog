@@ -3,7 +3,7 @@ import Pagination from '../../components/Pagination/Pagination'
 import { ArticleType } from '../../types/article'
 import { articles as articlesD } from '../../drizzle/schema/articles'
 import db from '../../drizzle/db'
-import { count } from 'drizzle-orm';
+import { count } from 'drizzle-orm'
 
 const pageLimit = 100
 
@@ -13,19 +13,21 @@ export const metadata = {
 }
 
 export const revalidate = 3600
-// export const runtime = 'edge'
+export const runtime = 'edge'
 
 export default async function Blog() {
 	const page = 0
 
 	let result = false
 
-    const articles = await db.query.articles.findMany({
+	const articles = await db.query.articles.findMany({
 		where: (articles, { eq }) => eq(articles.private, result),
 		orderBy: (articles, { desc }) => [desc(articles.createdAt)],
 	})
 
-	const articleCount = (await db.select({ count: count() }).from(articlesD))[0].count
+	const articleCount = (
+		await db.select({ count: count() }).from(articlesD)
+	)[0].count
 
 	const pageCount = Math.ceil(articleCount / pageLimit)
 

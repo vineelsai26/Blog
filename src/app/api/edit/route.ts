@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
 				message: 'Article deleted successfully',
 			})
 		} else {
-            const article = await db
+			const article = await db
 				.update(articlesD)
 				.set({
 					title: title,

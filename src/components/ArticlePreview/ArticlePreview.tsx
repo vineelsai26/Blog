@@ -3,7 +3,13 @@ import { ArticleType, UserType } from '../../types/article'
 import Markdown from '../Markdown/Markdown'
 import Image from 'next/image'
 
-export default function ArticlePreview({ article, user }: { article: ArticleType, user: UserType | null }) {
+export default function ArticlePreview({
+	article,
+	user,
+}: {
+	article: ArticleType
+	user: UserType | null
+}) {
 	return (
 		<div className='min-h-screen bg-slate-200 dark:bg-gray-600'>
 			<div className='m-auto w-full bg-white p-8 md:w-2/3 lg:w-3/5 dark:bg-gray-800'>

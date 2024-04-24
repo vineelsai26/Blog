@@ -24,13 +24,13 @@ export default function New() {
 					} as ArticleType
 				}
 				user={{
-                    id: 1,
+					id: 1,
 					email: 'mail@vineelsai.com',
 					name: 'Vineel Sai',
 					profilePicture: 'https://vineelsai.com/profile.webp',
-                    password: '',
-                    role: 'admin',
-                    githubToken: '',
+					password: '',
+					role: 'admin',
+					githubToken: '',
 				}}
 				editMode={false}
 			/>
