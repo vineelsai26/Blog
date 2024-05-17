@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import db from '../../../drizzle/db'
 
 export const dynamic = 'force-dynamic'
-export const runtime = 'edge'
+// export const runtime = 'edge'
 
 export default async function Post({
 	params,

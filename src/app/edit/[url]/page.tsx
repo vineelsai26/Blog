@@ -2,7 +2,7 @@ import ArticleEditor from '../../../components/ArticleEditor/ArticleEditor'
 import db from '../../../drizzle/db'
 
 export const dynamic = 'force-dynamic'
-export const runtime = 'edge'
+// export const runtime = 'edge'
 
 export default async function EditPost({
 	params,

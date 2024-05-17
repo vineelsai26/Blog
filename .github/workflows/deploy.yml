@@ -1,0 +1,71 @@
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+
+env:
+    ACM_CERT_ARN: ${{ secrets.ACM_CERT_ARN }}
+    GITHUB_ID: ${{ secrets.GH_APP_ID }}
+    GH_APP_SECRET: ${{ secrets.GH_APP_SECRET }}
+    NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+    NEXT_DISCORD_WEBHOOK: ${{ secrets.NEXT_DISCORD_WEBHOOK }}
+    NEXT_STATIC_UPLOAD_AUTH_KEY: ${{ secrets.NEXT_STATIC_UPLOAD_AUTH_KEY }}
+    NEXT_TURSO_TOKEN: ${{ secrets.NEXT_TURSO_TOKEN }}
+    NEXT_TURSO_URL: ${{ secrets.NEXT_TURSO_URL }}
+
+jobs:
+    deploy:
+        name: Deploy with SST
+        runs-on: ubuntu-latest
+        # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+        permissions:
+            id-token: write
+            contents: read
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Configure AWS credentials from Production account
+              uses: aws-actions/configure-aws-credentials@v4
+              with:
+                  role-to-assume: ${{ secrets.AWS_ASSUME_ROLE }}
+                  aws-region: ${{ vars.AWS_REGION }}
+
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 9
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: 'pnpm'
+
+            - name: Setup pnpm
+              run: |
+                  npm install -g npm
+                  npm install -g pnpm
+
+            - name: Setup SST
+              run: |
+                  curl -fsSL https://ion.sst.dev/install | bash
+
+            - name: Verify SST install
+              run: |
+                  sst version
+
+            - name: Install Dependencies
+              run: |
+                  pnpm install
+
+            - name: 'DRY RUN: Build'
+              if: github.ref != 'refs/heads/main'
+              run: |
+                  pnpm build
+
+            - name: Build & Deploy
+              if: github.ref == 'refs/heads/main'
+              run: |
+                  sst deploy --stage prod
