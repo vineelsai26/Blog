@@ -8,7 +8,7 @@ export default $config({
 			providers: {
 				aws: {
 					region: 'ap-south-1',
-					profile: 'prod',
+					// profile: 'prod',
 				},
 				// cloudflare: {
 				// 	apiToken: process.env.CLOUDFLARE_API_TOKEN,

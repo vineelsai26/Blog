@@ -32,6 +32,7 @@ jobs:
               uses: aws-actions/configure-aws-credentials@v4
               with:
                   role-to-assume: ${{ secrets.AWS_ASSUME_ROLE }}
+                  role-session-name: prod
                   aws-region: ${{ vars.AWS_REGION }}
 
             - uses: pnpm/action-setup@v4
