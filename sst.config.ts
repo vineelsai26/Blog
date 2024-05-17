@@ -14,15 +14,16 @@ export default $config({
 				// 	apiToken: process.env.CLOUDFLARE_API_TOKEN,
 				// },
 			},
-
 		}
 	},
 	async run() {
 		new sst.aws.Nextjs('Blog', {
-			// domain: {
-			// 	name: 'vineelsai.com',
-			// 	dns: sst.cloudflare.dns(),
-			// },
+			domain: {
+				name: 'vineelsai.com',
+				aliases: ['www.vineelsai.com'],
+				dns: false,
+				cert: process.env.ACM_CERT_ARN,
+			},
 			environment: {
 				NEXT_TURSO_URL: process.env.NEXT_TURSO_URL!,
 				NEXT_TURSO_TOKEN: process.env.NEXT_TURSO_TOKEN!,
