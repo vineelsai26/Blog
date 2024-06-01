@@ -1,4 +1,4 @@
-export const tools: ToolsType[] = [
+const tools: ToolsType[] = [
 	{
 		name: 'Base 64 Encoder/Decoder',
 		description: 'Encode or decode text to/from Base 64',
@@ -15,3 +15,5 @@ export const tools: ToolsType[] = [
 		url: '/tools/string',
 	},
 ]
+
+export default tools

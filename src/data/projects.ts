@@ -73,7 +73,7 @@ const projects: ProjectType[] = [
 		image: 'https://static.vineelsai.com/blog/images/projects/collab.png',
 		description:
 			'Document collaboration online with real-time editing. Just sign in with your Google account and start collaborating.',
-		previewUrl: 'https://collab.vineelsai.com',
+		previewUrl: 'https://collab.vineelsai.dev',
 		gitUrl: 'https://github.com/vineelsai26/Collab',
 		tags: 'js,react,vite,express',
 	},
@@ -91,7 +91,7 @@ const projects: ProjectType[] = [
 		name: 'Algo',
 		image: 'https://static.vineelsai.com/blog/images/projects/algo.png',
 		description: 'Algorithm Visualization website built with React.',
-		previewUrl: 'https://algo.vineelsai.com',
+		previewUrl: 'https://algo.vineelsai.dev',
 		gitUrl: 'https://github.com/vineelsai26/Algo',
 		tags: 'js,react,vite',
 	},

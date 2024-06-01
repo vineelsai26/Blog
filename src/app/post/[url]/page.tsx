@@ -19,8 +19,16 @@ export default async function Post({
 			and(eq(articles.url, params.url), eq(articles.private, result)),
 	})
 
+    if (!article) {
+		return (
+			<div className='relative'>
+				<h1 className='text-center text-3xl dark:text-white '>404</h1>
+			</div>
+		)
+	}
+
 	const user = await db.query.users.findFirst({
-		where: (users, { eq }) => eq(users.email, article!.createdBy),
+		where: (users, { eq }) => eq(users.email, article.createdBy),
 	})
 
 	return (

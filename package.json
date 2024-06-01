@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "build": "next build",
-        "dev": "sst dev next dev --turbo",
+        "dev": "next dev --turbo",
         "export": "next export",
         "fmt": "prettier --write .",
         "lint": "next lint",
@@ -15,10 +15,10 @@
         "studio": "drizzle-kit studio"
     },
     "dependencies": {
-        "@libsql/client": "^0.6.0",
+        "@libsql/client": "^0.6.1",
         "@monaco-editor/react": "^4.6.0",
         "@tailwindcss/typography": "^0.5.13",
-        "drizzle-orm": "^0.30.10",
+        "drizzle-orm": "^0.31.0",
         "next": "14.2.3",
         "next-auth": "^4.24.7",
         "react": "18.3.1",
@@ -27,21 +27,21 @@
         "react-markdown": "^9.0.1",
         "react-syntax-highlighter": "^15.5.0",
         "remark-gfm": "^4.0.0",
-        "sharp": "^0.33.3"
+        "sharp": "^0.33.4"
     },
     "devDependencies": {
         "sst": "ion",
-        "@types/node": "20.12.11",
-        "@types/react": "18.3.1",
+        "@types/node": "20.12.13",
+        "@types/react": "18.3.3",
         "@types/react-dom": "18.3.0",
         "@types/react-syntax-highlighter": "^15.5.13",
         "autoprefixer": "^10.4.19",
-        "drizzle-kit": "^0.21.1",
-        "eslint": "9.2.0",
+        "drizzle-kit": "^0.22.1",
+        "eslint": "9.3.0",
         "eslint-config-next": "14.2.3",
         "postcss": "^8.4.38",
         "prettier": "^3.2.5",
-        "prettier-plugin-tailwindcss": "^0.5.14",
+        "prettier-plugin-tailwindcss": "^0.6.0",
         "tailwindcss": "^3.4.3",
         "typescript": "5.4.5"
     }

@@ -1,3 +1,4 @@
+import { getServerSession } from 'next-auth'
 import ArticleEditor from '../../../components/ArticleEditor/ArticleEditor'
 import db from '../../../drizzle/db'
 
@@ -11,11 +12,22 @@ export default async function EditPost({
 		url: string
 	}
 }) {
-	let result = false
+	const session = await getServerSession()
 
 	const article = await db.query.articles.findFirst({
-		where: (articles, { eq, and }) =>
-			and(eq(articles.url, params.url), eq(articles.private, result)),
+		where: (articles, { eq, and }) => {
+			if (
+				session?.user?.email &&
+				session?.user?.email === 'mail@vineelsai.com'
+			) {
+				return eq(articles.url, params.url)
+			} else {
+				return and(
+					eq(articles.url, params.url),
+					eq(articles.private, false)
+				)
+			}
+		},
 	})
 
 	if (!article) {

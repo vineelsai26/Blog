@@ -1,4 +1,4 @@
-import { tools } from '../../data/tools'
+import tools from '../../data/tools'
 import Link from 'next/link'
 
 export const metadata = {

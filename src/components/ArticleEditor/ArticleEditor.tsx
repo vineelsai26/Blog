@@ -25,9 +25,6 @@ export default function ArticleEditor({
 	const [thumbnail, setThumbnail] = useState<File | null>(null)
 	const [files, setFiles] = useState<FileList | null>(null)
 
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
-
 	const [data, setData] = useState<SaveResponse>({} as SaveResponse)
 
 	const [loading, setLoading] = useState(false)
@@ -102,8 +99,6 @@ export default function ArticleEditor({
 					tags: article.tags,
 					description: article.description,
 					content: article.content,
-					email: email,
-					password: password,
 					deleteArticle: deleteArticle,
 					isPrivate: article.private,
 				}),
@@ -125,8 +120,6 @@ export default function ArticleEditor({
 					tags: article.tags,
 					description: article.description,
 					content: article.content,
-					email: email,
-					password: password,
 					isPrivate: article.private,
 				}),
 			})
@@ -309,7 +302,7 @@ export default function ArticleEditor({
 							</div>
 						</div>
 						<Editor
-							className='m-2 rounded border-2 border-black dark:border-white  dark:bg-gray-600'
+							className='m-2 rounded border-2 border-black dark:border-white dark:bg-gray-600'
 							height='90vh'
 							width='-webkit-fill-available'
 							value={article.content}
@@ -329,22 +322,6 @@ export default function ArticleEditor({
 							}}
 							theme={theme === 'dark' ? 'vs-dark' : 'vs'}
 							defaultLanguage='markdown'
-						/>
-						<input
-							type='email'
-							className='m-2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
-							placeholder='Email'
-							onChange={(e) => {
-								setEmail(e.target.value)
-							}}
-						/>
-						<input
-							type='password'
-							className='m-2 rounded border-2 border-black p-3 dark:border-white dark:bg-gray-600 dark:text-white'
-							placeholder='Password'
-							onChange={(e) => {
-								setPassword(e.target.value)
-							}}
 						/>
 						<input
 							type='checkbox'
@@ -391,7 +368,7 @@ export default function ArticleEditor({
 								style={{ margin: '10px', padding: '10px' }}
 							>
 								<button
-									className='w-1/4  rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white'
+									className='w-1/4 rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white'
 									onClick={() => {
 										handleSubmit(true)
 									}}
@@ -404,9 +381,16 @@ export default function ArticleEditor({
 				)}
 				{currentTab === 1 && (
 					<div className='w-full overflow-scroll p-2'>
-						<h1 className='text-center text-2xl dark:text-white'>
-							Home Page Preview
-						</h1>
+						<div className='mx-auto flex flex-row justify-center'>
+							<h1 className='px-2 text-2xl dark:text-white justify-center align-middle text-center items-center justify-self-center'>
+								Home Page Preview
+							</h1>
+								{articleFetch.private && (
+									<p className='w-fit rounded-2xl bg-red-600 p-2 text-sm text-white'>
+										private
+									</p>
+								)}
+						</div>
 						<div className='flex justify-center'>
 							<Article article={article} />
 						</div>
