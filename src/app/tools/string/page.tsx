@@ -15,6 +15,10 @@ function capitalizeWords(str: string): string {
 const formatString: {
 	[key: string]: (str: string) => [str: string, title: string]
 } = {
+	capitalize: (str: string) => [capitalizeWords(str), 'Capitalized String'],
+	lowercase: (str: string) => [str.toLowerCase(), 'Lowercase String'],
+	uppercase: (str: string) => [str.toUpperCase(), 'Uppercase String'],
+	uppercase_underscroll: (str: string) => [str.toUpperCase().replaceAll(" ", "_").replaceAll("-", "_"), 'Uppercase String (dashes and spaces replaced with underscores)'],
 	url: (str: string) => [encodeURI(str), 'URL Encoded String'],
 	urlComponent: (str: string) => [
 		encodeURIComponent(str),
@@ -216,9 +220,6 @@ const formatString: {
 		}
 		return [result, 'Morse Code Encoded String']
 	},
-	capitalize: (str: string) => [capitalizeWords(str), 'Capitalized String'],
-	lowercase: (str: string) => [str.toLowerCase(), 'Lowercase String'],
-	uppercase: (str: string) => [str.toUpperCase(), 'Uppercase String'],
 }
 
 export default function JsonFormator() {
