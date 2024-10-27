@@ -18,7 +18,10 @@ const formatString: {
 	capitalize: (str: string) => [capitalizeWords(str), 'Capitalized String'],
 	lowercase: (str: string) => [str.toLowerCase(), 'Lowercase String'],
 	uppercase: (str: string) => [str.toUpperCase(), 'Uppercase String'],
-	uppercase_underscroll: (str: string) => [str.toUpperCase().replaceAll(" ", "_").replaceAll("-", "_"), 'Uppercase String (dashes and spaces replaced with underscores)'],
+	uppercase_underscroll: (str: string) => [
+		str.toUpperCase().replaceAll(' ', '_').replaceAll('-', '_'),
+		'Uppercase String (dashes and spaces replaced with underscores)',
+	],
 	url: (str: string) => [encodeURI(str), 'URL Encoded String'],
 	urlComponent: (str: string) => [
 		encodeURIComponent(str),

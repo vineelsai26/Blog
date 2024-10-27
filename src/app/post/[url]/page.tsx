@@ -5,13 +5,12 @@ import db from '../../../drizzle/db'
 export const dynamic = 'force-dynamic'
 // export const runtime = 'edge'
 
-export default async function Post({
-	params,
-}: {
-	params: {
+export default async function Post(props: {
+	params: Promise<{
 		url: string
-	}
+	}>
 }) {
+	const params = await props.params
 	let result = false
 
 	const article = await db.query.articles.findFirst({
@@ -19,10 +18,10 @@ export default async function Post({
 			and(eq(articles.url, params.url), eq(articles.private, result)),
 	})
 
-    if (!article) {
+	if (!article) {
 		return (
 			<div className='relative'>
-				<h1 className='text-center text-3xl dark:text-white '>404</h1>
+				<h1 className='text-center text-3xl dark:text-white'>404</h1>
 			</div>
 		)
 	}
@@ -40,13 +39,12 @@ export default async function Post({
 	)
 }
 
-export async function generateMetadata({
-	params,
-}: {
-	params: {
+export async function generateMetadata(props: {
+	params: Promise<{
 		url: string
-	}
+	}>
 }): Promise<Metadata> {
+	const params = await props.params
 	const article = await db.query.articles.findFirst({
 		where: (articles, { eq }) => eq(articles.url, params.url),
 		columns: {

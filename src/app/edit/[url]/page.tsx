@@ -5,13 +5,12 @@ import db from '../../../drizzle/db'
 export const dynamic = 'force-dynamic'
 // export const runtime = 'edge'
 
-export default async function EditPost({
-	params,
-}: {
-	params: {
+export default async function EditPost(props: {
+	params: Promise<{
 		url: string
-	}
+	}>
 }) {
+	const params = await props.params
 	const session = await getServerSession()
 
 	const article = await db.query.articles.findFirst({
@@ -33,7 +32,7 @@ export default async function EditPost({
 	if (!article) {
 		return (
 			<div className='relative'>
-				<h1 className='text-center text-3xl dark:text-white '>404</h1>
+				<h1 className='text-center text-3xl dark:text-white'>404</h1>
 			</div>
 		)
 	}
