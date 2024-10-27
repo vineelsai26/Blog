@@ -15,7 +15,9 @@ const nextConfig = {
 			},
 		]
 	},
-	optimizeFonts: true,
+    experimental: {
+        reactCompiler: true,
+    },
 	images: {
 		remotePatterns: [
 			{
@@ -41,7 +43,6 @@ const nextConfig = {
 		],
 		dangerouslyAllowSVG: true,
 	},
-	swcMinify: true,
 }
 
 export default nextConfig
