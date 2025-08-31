@@ -382,14 +382,14 @@ export default function ArticleEditor({
 				{currentTab === 1 && (
 					<div className='w-full overflow-scroll p-2'>
 						<div className='mx-auto flex flex-row justify-center'>
-							<h1 className='px-2 text-2xl dark:text-white justify-center align-middle text-center items-center justify-self-center'>
+							<h1 className='items-center justify-center justify-self-center px-2 text-center align-middle text-2xl dark:text-white'>
 								Home Page Preview
 							</h1>
-								{articleFetch.private && (
-									<p className='w-fit rounded-2xl bg-red-600 p-2 text-sm text-white'>
-										private
-									</p>
-								)}
+							{articleFetch.private && (
+								<p className='w-fit rounded-2xl bg-red-600 p-2 text-sm text-white'>
+									private
+								</p>
+							)}
 						</div>
 						<div className='flex justify-center'>
 							<Article article={article} />

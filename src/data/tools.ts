@@ -14,6 +14,11 @@ const tools: ToolsType[] = [
 		description: 'Encode or decode text to/from different formats',
 		url: '/tools/string',
 	},
+	{
+		name: 'AI Chat Tool',
+		description: 'Chat with multiple AI models',
+		url: '/tools/chat',
+	},
 ]
 
 export default tools

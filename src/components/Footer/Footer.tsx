@@ -14,13 +14,13 @@ export default function Footer() {
 				<li>
 					<Link
 						href='https://github.com/vineelsai26/Blog'
-						className='mr-4 hover:underline md:mr-6 '
+						className='mr-4 hover:underline md:mr-6'
 					>
 						GitHub
 					</Link>
 					<Link
 						href='/#contact'
-						className='mr-4 hover:underline md:mr-6 '
+						className='mr-4 hover:underline md:mr-6'
 					>
 						Contact
 					</Link>
