@@ -20,14 +20,18 @@ export default async function Blog() {
 
 	let result = false
 
-	const articles = await db.query.articles.findMany({
-		where: (articles, { eq }) => eq(articles.private, result),
-		orderBy: (articles, { desc }) => [desc(articles.createdAt)],
-	})
+	const articles = await db.query.articles
+		.findMany({
+			where: (articles, { eq }) => eq(articles.private, result),
+			orderBy: (articles, { desc }) => [desc(articles.createdAt)],
+		})
+		.catch(() => [])
 
-	const articleCount = (
-		await db.select({ count: count() }).from(articlesD)
-	)[0].count
+	const articleCount = await db
+		.select({ count: count() })
+		.from(articlesD)
+		.then((res) => res[0]?.count ?? 0)
+		.catch(() => 0)
 
 	const pageCount = Math.ceil(articleCount / pageLimit)
 

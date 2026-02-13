@@ -67,17 +67,5 @@ export async function generateMetadata(props: {
 }
 
 export async function generateStaticParams() {
-	const articles = await db.query.articles.findMany({
-		columns: {
-			url: true,
-		},
-	})
-
-	let paths: { params: { url: string } }[] = []
-
-	articles.forEach((article) => {
-		paths.push({ params: { url: article.url } })
-	})
-
-	return paths
+	return []
 }

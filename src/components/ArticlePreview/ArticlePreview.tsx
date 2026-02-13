@@ -1,4 +1,3 @@
-import React from 'react'
 import { ArticleType, UserType } from '../../types/article'
 import Markdown from '../Markdown/Markdown'
 import Image from 'next/image'
