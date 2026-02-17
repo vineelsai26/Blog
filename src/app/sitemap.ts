@@ -34,10 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	})
 
 	projects.forEach((project) => {
-		if (
-			project.previewUrl?.includes('vineelsai.com') ||
-			project.previewUrl?.includes('vineelsai.dev')
-		) {
+		if (project.previewUrl && isAllowedHost(project.previewUrl)) {
 			paths.push({
 				url: project.previewUrl,
 				lastModified: new Date(),
@@ -58,6 +55,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	})
 
 	return paths
+}
+
+function isAllowedHost(rawUrl: string): boolean {
+	try {
+		const parsed = new URL(rawUrl)
+		const host = parsed.hostname
+		return host === 'vineelsai.com' || host === 'vineelsai.dev'
+	} catch {
+		// If the URL is invalid or relative, exclude it from the sitemap.
+		return false
+	}
 }
 
 type Sitemap = Array<{
