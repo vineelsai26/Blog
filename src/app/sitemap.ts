@@ -5,11 +5,13 @@ import tools from '../data/tools'
 import archive from '../data/archive'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-	const articles = await db.query.articles.findMany({
-		columns: {
-			url: true,
-		},
-	})
+	const articles = await db.query.articles
+		.findMany({
+			columns: {
+				url: true,
+			},
+		})
+		.catch(() => [])
 
 	let paths: Sitemap = [
 		{ url: `${process.env.NEXT_APP_URL}/`, lastModified: new Date() },

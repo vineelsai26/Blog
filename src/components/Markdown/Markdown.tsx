@@ -25,8 +25,8 @@ export default function Markdown({ article }: { article: ArticleType }) {
 	}, [])
 
 	return (
-		<ReactMarkdown
-			className='prose max-w-max dark:prose-invert'
+		<div className='prose max-w-max dark:prose-invert'>
+			<ReactMarkdown
 			remarkPlugins={[remarkGfm]}
 			components={{
 				code({ className, children }) {
@@ -54,10 +54,11 @@ export default function Markdown({ article }: { article: ArticleType }) {
 					)
 				},
 				img({ node, className, children, ...props }) {
+					if (typeof props.src !== 'string') return null
 					return (
 						<Image
-							src={props.src!}
-							alt={props.alt!}
+							src={props.src}
+							alt={props.alt || ''}
 							width={1200}
 							height={600}
 							className={`${className} h-auto w-full`}
@@ -67,6 +68,7 @@ export default function Markdown({ article }: { article: ArticleType }) {
 			}}
 		>
 			{article.content}
-		</ReactMarkdown>
+			</ReactMarkdown>
+		</div>
 	)
 }
