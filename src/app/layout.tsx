@@ -4,6 +4,7 @@ import { Roboto } from 'next/font/google'
 import { useCallback, useEffect, useState } from 'react'
 import Footer from '../components/Footer/Footer'
 import Navbar from '../components/Navbar/Navbar'
+import { PostHogProvider } from '../components/PostHogProvider'
 import '../styles/globals.css'
 
 const roboto = Roboto({
@@ -65,13 +66,15 @@ export default function RootLayout({
 			<body
 				className={`${roboto.className} relative min-h-screen bg-slate-200 dark:bg-gray-600`}
 			>
-				<div className='sticky top-0 z-50 w-full'>
-					<Navbar />
-				</div>
-				<div className='pb-14'>{children}</div>
-				<div className='absolute bottom-0 h-14 w-full'>
-					<Footer />
-				</div>
+				<PostHogProvider>
+					<div className='sticky top-0 z-50 w-full'>
+						<Navbar />
+					</div>
+					<div className='pb-14'>{children}</div>
+					<div className='absolute bottom-0 h-14 w-full'>
+						<Footer />
+					</div>
+				</PostHogProvider>
 			</body>
 		</html>
 	)
