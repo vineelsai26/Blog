@@ -15,7 +15,6 @@ const nextConfig = {
 			},
 		]
 	},
-	turbopackUseSystemTlsCerts: true,
 	reactCompiler: true,
 	images: {
 		remotePatterns: [
