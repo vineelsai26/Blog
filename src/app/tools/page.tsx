@@ -1,5 +1,6 @@
-import tools from '../../data/tools'
 import Link from 'next/link'
+import { HiOutlineArrowRight } from 'react-icons/hi2'
+import tools from '../../data/tools'
 
 export const metadata = {
 	title: 'Tools',
@@ -7,33 +8,51 @@ export const metadata = {
 }
 
 export const revalidate = 3600
-// export const runtime = 'edge'
 
 export default async function Tools() {
 	return (
-		<div className='min-h-screen'>
-			<h1 className='m-5 p-2 text-center text-4xl font-semibold dark:text-white'>
-				Tools
-			</h1>
-			<p className='m-2 text-center text-xl dark:text-white'>
-				Hear are Some Usefull Tools I Made.
-			</p>
-			<div
-				className='flex w-full flex-wrap items-center justify-evenly pt-10'
-				style={{ margin: 0, width: '100%' }}
-			>
-				{tools.map((tool, index) => {
-					return (
+		<div className='section-shell'>
+			<div className='site-container surface-stack'>
+				<section className='section-heading'>
+					<div
+						className='section-eyebrow'
+						style={{ fontFamily: 'var(--font-mono)' }}
+					>
+						Utilities
+					</div>
+					<h1 className='section-title'>Tools</h1>
+					<div className='divider-rule' />
+					<p className='section-copy'>
+						Small browser-based utilities for formatting, encoding, and other
+						daily workflow tasks.
+					</p>
+				</section>
+				<section className='tool-grid'>
+					{tools.map((tool) => (
 						<Link
-							key={index}
-							className='rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+							key={tool.name}
+							className='brutal-card flex flex-col gap-5 p-6 transition-transform hover:-translate-y-1'
 							href={tool.url}
-							target='_blank'
 						>
-							{tool.name}
+							<p
+								className='text-xs font-bold uppercase tracking-[0.24em] text-[var(--text-secondary)]'
+								style={{ fontFamily: 'var(--font-mono)' }}
+							>
+								Tool
+							</p>
+							<h2 className='text-3xl font-black uppercase tracking-[-0.05em]'>
+								{tool.name}
+							</h2>
+							<p className='text-base leading-7 text-[var(--text-secondary)]'>
+								{tool.description}
+							</p>
+							<span className='mt-auto inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-[var(--accent)]'>
+								Open tool
+								<HiOutlineArrowRight className='text-lg' />
+							</span>
 						</Link>
-					)
-				})}
+					))}
+				</section>
 			</div>
 		</div>
 	)

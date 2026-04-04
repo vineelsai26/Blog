@@ -1,6 +1,7 @@
 import { ArticleType, UserType } from '../../types/article'
 import Markdown from '../Markdown/Markdown'
 import Image from 'next/image'
+import { HiOutlineCalendarDays } from 'react-icons/hi2'
 
 export default function ArticlePreview({
 	article,
@@ -10,42 +11,53 @@ export default function ArticlePreview({
 	user: UserType | null
 }) {
 	return (
-		<div className='min-h-screen bg-slate-200 dark:bg-gray-600'>
-			<div className='m-auto w-full bg-white p-8 md:w-2/3 lg:w-3/5 dark:bg-gray-800'>
-				<h1 className='mb-2 mt-0 text-center text-5xl font-medium leading-tight dark:text-white'>
-					{article.title}
-				</h1>
-				{user && (
-					<div className='flex flex-row items-center justify-center'>
-						<p className='py-4 text-center text-2xl font-medium leading-tight dark:text-white'>
-							By
-						</p>
-						<p className='px-2 py-4 text-center text-xl font-light leading-tight dark:text-white'>
-							{user.name}
-						</p>
-						<Image
-							src={user.profilePicture}
-							alt={'profile'}
-							width={128}
-							height={128}
-							className='my-4 h-8 w-8 rounded-full'
-						/>
+		<div className='section-shell'>
+			<div className='site-container'>
+				<article className='brutal-card mx-auto max-w-4xl p-6 md:p-10'>
+					<div className='section-heading mb-10'>
+						<div
+							className='section-eyebrow'
+							style={{ fontFamily: 'var(--font-mono)' }}
+						>
+							Article
+						</div>
+						<h1 className='section-title !text-[clamp(2.8rem,7vw,5.25rem)]'>
+							{article.title}
+						</h1>
+						<div className='divider-rule' />
 					</div>
-				)}
-				<div className='mx-auto my-4 flex w-96 justify-evenly'>
-					{article.tags &&
-						article.tags.map((tag: string, index: number) => {
-							return (
-								<span
-									key={index}
-									className='align-center ease flex w-max cursor-pointer rounded-full bg-gray-200 px-4 py-2 text-sm font-semibold text-black transition duration-300 active:bg-gray-300'
-								>
+					<div className='mb-8 flex flex-wrap items-center gap-4 text-sm font-bold uppercase tracking-[0.16em] text-[var(--text-secondary)]'>
+						<span className='inline-flex items-center gap-2'>
+							<HiOutlineCalendarDays className='text-base' />
+							{new Date(article.createdAt).toLocaleDateString('en', {
+								year: 'numeric',
+								month: 'short',
+								day: 'numeric',
+							})}
+						</span>
+						{user && (
+							<div className='brutal-card-soft inline-flex items-center gap-3 bg-[var(--surface-strong)] px-3 py-2'>
+								<Image
+									src={user.profilePicture}
+									alt={user.name}
+									width={36}
+									height={36}
+									className='h-9 w-9 rounded-full border-2 border-[var(--border)] object-cover'
+								/>
+								<span>{user.name}</span>
+							</div>
+						)}
+					</div>
+					<div className='mb-8 flex flex-wrap gap-2'>
+						{article.tags &&
+							article.tags.map((tag: string, index: number) => (
+								<span key={index} className='brutal-tag'>
 									{tag}
 								</span>
-							)
-						})}
-				</div>
-				<Markdown article={article} />
+							))}
+					</div>
+					<Markdown article={article} />
+				</article>
 			</div>
 		</div>
 	)

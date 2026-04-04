@@ -1,17 +1,31 @@
 const workExperience: WorkExperienceType[] = [
 	{
+		companyName: 'Typeface',
+		image: '/images/work/typeface.svg',
+		from: '01-Jan-2026',
+		to: 'present',
+		role: 'Developer Engineer II',
+	},
+    {
+        companyName: 'Elucidata',
+        image: 'https://static.vineelsai.com/blog/images/work/elucidata.png',
+        from: '01-Jan-2025',
+        to: '31-Dec-2025',
+        role: 'Software Engineer II',
+    },
+	{
 		companyName: 'Elucidata',
 		image: 'https://static.vineelsai.com/blog/images/work/elucidata.png',
 		from: '03-Jul-2023',
-		to: 'present',
-		role: 'Software Developer',
+		to: '31-Dec-2024',
+		role: 'Software Engineer I',
 	},
 	{
 		companyName: 'Elucidata',
 		image: 'https://static.vineelsai.com/blog/images/work/elucidata.png',
 		from: '02-Jan-2023',
 		to: '30-Jun-2023',
-		role: 'Software Developer Intern',
+		role: 'Software Engineer Intern',
 	},
 	{
 		companyName: 'COMETLABS',

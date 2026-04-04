@@ -1,4 +1,5 @@
 import Article from '../../components/ArticleCard/ArticleCard'
+import BlogSearch from '../../components/BlogSearch/BlogSearch'
 import Pagination from '../../components/Pagination/Pagination'
 import { ArticleType } from '../../types/article'
 import { articles as articlesD } from '../../drizzle/schema/articles'
@@ -13,7 +14,6 @@ export const metadata = {
 }
 
 export const revalidate = 3600
-// export const runtime = 'edge'
 
 export default async function Blog() {
 	const page = 0
@@ -36,24 +36,41 @@ export default async function Blog() {
 	const pageCount = Math.ceil(articleCount / pageLimit)
 
 	return (
-		<div>
-			<div className='min-h-screen'>
-				{articles.length > 0 && (
-					<div className='flex flex-col items-center'>
-						{articles.map((article) => (
-							<Article
-								key={article.url}
-								article={article as ArticleType}
-							/>
-						))}
+		<div className='section-shell'>
+			<div className='site-container surface-stack'>
+				<section className='section-heading'>
+					<div
+						className='section-eyebrow'
+						style={{ fontFamily: 'var(--font-mono)' }}
+					>
+						Writing
 					</div>
-				)}
-			</div>
+					<h1 className='section-title'>Blog</h1>
+					<div className='divider-rule' />
+					<p className='section-copy'>
+						Notes on software, tools, and the things worth documenting after the
+						build is done.
+					</p>
+				</section>
 
-			<div className='flex flex-col'>
-				{pageCount > 1 && (
-					<Pagination page={page} pageCount={pageCount} />
-				)}
+				<BlogSearch />
+
+				<section className='surface-stack'>
+					{articles.length > 0 && (
+						<div className='surface-stack'>
+							{articles.map((article) => (
+								<Article key={article.url} article={article as ArticleType} />
+							))}
+						</div>
+					)}
+					{articles.length === 0 && (
+						<div className='brutal-card p-10 text-center text-lg font-semibold uppercase tracking-[0.12em]'>
+							No public posts yet.
+						</div>
+					)}
+				</section>
+
+				{pageCount > 1 && <Pagination page={page} pageCount={pageCount} />}
 			</div>
 		</div>
 	)

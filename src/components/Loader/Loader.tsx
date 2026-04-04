@@ -1,10 +1,10 @@
 export default function Loader() {
 	return (
-		<div className='flex items-center justify-center'>
+		<div className='flex items-center justify-start'>
 			<div role='status'>
 				<svg
 					aria-hidden='true'
-					className='mr-2 h-8 w-8 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600'
+					className='mr-2 h-8 w-8 animate-spin fill-[var(--accent)] text-[var(--accent-muted)]'
 					viewBox='0 0 100 101'
 					fill='none'
 					xmlns='http://www.w3.org/2000/svg'

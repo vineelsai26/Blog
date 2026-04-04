@@ -1,8 +1,8 @@
 'use client'
 
+import { Editor } from '@monaco-editor/react'
 import { useEffect, useState } from 'react'
 import CopyButton from '../../../components/Markdown/CopyButton'
-import { Editor } from '@monaco-editor/react'
 
 function capitalizeWords(str: string): string {
 	return str
@@ -35,8 +35,7 @@ const formatString: {
 			result += base32[str.charCodeAt(i) >> 3]
 			result +=
 				base32[
-					((str.charCodeAt(i) & 0b111) << 2) |
-						(str.charCodeAt(i + 1) >> 6)
+					((str.charCodeAt(i) & 0b111) << 2) | (str.charCodeAt(i + 1) >> 6)
 				]
 			result += base32[(str.charCodeAt(i + 1) & 0b111110) >> 1]
 			result +=
@@ -64,8 +63,7 @@ const formatString: {
 		let result = ''
 		for (let i = 0; i < str.length; i++) {
 			result += String.fromCharCode(
-				(base32.indexOf(str[i]) << 3) |
-					(base32.indexOf(str[i + 1]) >> 2)
+				(base32.indexOf(str[i]) << 3) | (base32.indexOf(str[i + 1]) >> 2)
 			)
 			result += String.fromCharCode(
 				((base32.indexOf(str[i + 1]) & 0b11) << 6) |
@@ -217,21 +215,29 @@ const formatString: {
 		}
 		let result = ''
 		for (let i = 0; i < str.length; i++) {
-			if (morseCode[str[i].toUpperCase()])
+			if (morseCode[str[i].toUpperCase()]) {
 				result += morseCode[str[i].toUpperCase()] + ' '
-			else result += str[i]
+			} else {
+				result += str[i]
+			}
 		}
 		return [result, 'Morse Code Encoded String']
 	},
 }
 
 export default function JsonFormator() {
-	const [input, setInput] = useState('')
-	const [darkTheme, setDarkTheme] = useState(false)
+	const [input, setInput] = useState(() =>
+		typeof window !== 'undefined'
+			? window.localStorage.getItem(`${window.location.pathname}/input`) || ''
+			: ''
+	)
+	const [darkTheme, setDarkTheme] = useState(
+		() =>
+			typeof window !== 'undefined' &&
+			window.matchMedia('(prefers-color-scheme: dark)').matches
+	)
 
 	useEffect(() => {
-		setDarkTheme(window.matchMedia('(prefers-color-scheme: dark)').matches)
-
 		window
 			.matchMedia('(prefers-color-scheme: dark)')
 			.addEventListener('change', (e) => {
@@ -244,66 +250,63 @@ export default function JsonFormator() {
 	}, [])
 
 	useEffect(() => {
-		const cachedInput = window.localStorage.getItem(
-			`${window.location.pathname}/input`
-		)
-		if (cachedInput) {
-			setInput(cachedInput)
-		}
-	}, [])
-
-	useEffect(() => {
 		window.localStorage.setItem(`${window.location.pathname}/input`, input)
 	}, [input])
 
 	return (
-		<div className='min-h-screen'>
-			<h1 className='m-5 p-2 text-center text-4xl font-semibold dark:text-white'>
-				String Encoder/Decoder
-			</h1>
-			<p className='m-2 text-center text-xl dark:text-white'>
-				Encode or decode text to/from different formats
-			</p>
-			<div
-				className='flex w-full flex-wrap items-center justify-center pt-5'
-				style={{ margin: 0, width: '100%' }}
-			>
-				<div className='m-2 flex h-64 w-4/5 flex-col items-center'>
-					<Editor
-						defaultValue=''
-						value={input}
-						className='h-full w-full rounded-lg border-2 border-gray-300 p-2 dark:border-gray-700 dark:bg-gray-800 dark:text-white'
-						theme={darkTheme ? 'vs-dark' : 'light'}
-						language='text'
-						options={{
-							minimap: { enabled: false },
-						}}
-						onChange={(value) => {
-							setInput(value as string)
-						}}
-					/>
-				</div>
-				<div className='m-2 flex w-4/5 flex-col'>
-					{Object.entries(formatString).map(([key, value]) => {
-						const [result, title] = value(input)
-						return (
-							<div
-								className='my-4 flex flex-col rounded-lg border-2 border-gray-300 p-2 dark:border-gray-700 dark:bg-gray-800'
-								key={key}
-							>
-								<div className='p-2 text-3xl dark:text-white'>
-									{title}
-								</div>
-								<div className='flex flex-row'>
-									<div className='w-full overflow-auto rounded-lg border-2 border-gray-300 p-2 text-xl dark:border-gray-700 dark:bg-gray-600 dark:text-white'>
-										{result}
+		<div className='section-shell'>
+			<div className='site-container surface-stack'>
+				<section className='section-heading'>
+					<div
+						className='section-eyebrow'
+						style={{ fontFamily: 'var(--font-mono)' }}
+					>
+						Tool
+					</div>
+					<h1 className='section-title'>String Encoder</h1>
+					<div className='divider-rule' />
+					<p className='section-copy'>
+						Transform a string into multiple encoded or reformatted variants at
+						once.
+					</p>
+				</section>
+
+				<section className='surface-stack'>
+					<div className='tool-editor h-64'>
+						<Editor
+							defaultValue=''
+							value={input}
+							className='h-full w-full'
+							theme={darkTheme ? 'vs-dark' : 'light'}
+							language='text'
+							options={{
+								minimap: { enabled: false },
+							}}
+							onChange={(value) => {
+								setInput(value as string)
+							}}
+						/>
+					</div>
+
+					<div className='surface-stack'>
+						{Object.entries(formatString).map(([key, value]) => {
+							const [result, title] = value(input)
+							return (
+								<div className='brutal-card flex flex-col gap-4 p-4' key={key}>
+									<div className='text-2xl font-black uppercase tracking-[-0.04em]'>
+										{title}
 									</div>
-									<CopyButton content={result} />
+									<div className='flex flex-row items-start gap-3'>
+										<div className='brutal-card-soft w-full overflow-auto bg-[var(--surface)] p-4 text-sm leading-7'>
+											{result}
+										</div>
+										<CopyButton content={result} />
+									</div>
 								</div>
-							</div>
-						)
-					})}
-				</div>
+							)
+						})}
+					</div>
+				</section>
 			</div>
 		</div>
 	)

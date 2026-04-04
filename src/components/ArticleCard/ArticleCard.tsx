@@ -1,55 +1,55 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArticleType } from '../../types/article'
-import { FcCalendar } from 'react-icons/fc'
+import { HiOutlineArrowRight, HiOutlineCalendarDays } from 'react-icons/hi2'
 
 export default function Article({ article }: { article: ArticleType }) {
 	return (
 		<Link
 			href={`post/${article.url}`}
-			className='lg:5/6 m-4 flex w-full flex-col items-center rounded-xl border-2 border-slate-400 bg-white p-4 md:w-2/3 lg:w-3/5 lg:flex-row dark:bg-gray-800'
+			className='brutal-card grid overflow-hidden transition-transform hover:-translate-y-1 lg:grid-cols-[220px_1fr]'
 		>
-			<div className='w-full lg:w-1/6'>
+			<div className='relative min-h-[220px] border-b-[3px] border-[var(--border)] lg:border-b-0 lg:border-r-[3px]'>
 				<Image
 					src={article.imageUrl}
-					alt='image'
-					width={200}
-					height={200}
-					className='h-auto w-full object-scale-down lg:h-36 lg:w-52'
+					alt={article.title}
+					fill
+					className='object-cover'
 				/>
 			</div>
-			<div className='h-full py-10 md:w-5/6 md:py-0'>
-				<h2 className='m-4 mt-0 text-3xl font-bold md:mt-4 dark:text-white'>
-					{article.title}
-				</h2>
-				<div className='m-4 flex flex-row items-center'>
-					<FcCalendar className='text-xl' />
-					<p className='px-1 font-bold dark:text-white'>
+			<div className='flex flex-col gap-5 p-8'>
+				<div className='flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between'>
+					<h2 className='text-3xl font-black uppercase tracking-[-0.05em]'>
+						{article.title}
+					</h2>
+					<span className='brutal-tag w-fit'>Read</span>
+				</div>
+				<div className='flex flex-wrap items-center gap-4 text-sm font-bold uppercase tracking-[0.14em] text-[var(--text-secondary)]'>
+					<span className='inline-flex items-center gap-2'>
+						<HiOutlineCalendarDays className='text-base' />
 						{new Date(article.createdAt).toLocaleDateString('en', {
 							year: 'numeric',
 							month: 'short',
 							day: 'numeric',
 						})}
-					</p>
+					</span>
 				</div>
-				<div className='col my-4 flex'>
+				<div className='flex flex-wrap gap-2'>
 					{article.tags &&
 						article.tags.length > 0 &&
-						article.tags.map((tag: string, index: number) => {
-							return (
-								<span
-									key={index}
-									className='align-center ease mx-4 flex w-max cursor-pointer rounded-full bg-gray-200 px-4 py-2 text-sm font-semibold text-black transition duration-300 active:bg-gray-300'
-								>
-									{tag}
-								</span>
-							)
-						})}
+						article.tags.map((tag: string, index: number) => (
+							<span key={index} className='brutal-tag'>
+								{tag}
+							</span>
+						))}
 				</div>
-				<p className='m-2 p-2 text-xl font-extralight dark:text-white'>
-					{article.description &&
-						article.description.substring(0, 150)}
+				<p className='text-base leading-7 text-[var(--text-secondary)]'>
+					{article.description && article.description.substring(0, 190)}
 				</p>
+				<span className='mt-auto inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-[var(--accent)]'>
+					Open article
+					<HiOutlineArrowRight className='text-lg' />
+				</span>
 			</div>
 		</Link>
 	)

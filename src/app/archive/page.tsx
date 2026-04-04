@@ -7,25 +7,30 @@ export const metadata = {
 }
 
 export const revalidate = 3600
-// export const runtime = 'edge'
 
 export default function Archive() {
 	return (
-		<div className='min-h-screen'>
-			<div id='projects' className='min-h-screen w-full'>
-				<div className='w-full'>
-					<h1 className='m-5 p-2 text-center text-4xl font-semibold'>
-						My Projects
-					</h1>
+		<div className='section-shell'>
+			<div className='site-container surface-stack'>
+				<section className='section-heading'>
 					<div
-						className='flex w-full flex-wrap items-center justify-center'
-						style={{ margin: 0, width: '100%' }}
+						className='section-eyebrow'
+						style={{ fontFamily: 'var(--font-mono)' }}
 					>
-						{archive.map((project, index) => {
-							return <ProjectCard key={index} project={project} />
-						})}
+						Older Iterations
 					</div>
-				</div>
+					<h1 className='section-title'>Archive</h1>
+					<div className='divider-rule' />
+					<p className='section-copy'>
+						Previous versions of the portfolio, preserved as snapshots of how the
+						site evolved over time.
+					</p>
+				</section>
+				<section className='grid gap-8 lg:grid-cols-2'>
+					{archive.map((project) => (
+						<ProjectCard key={project.name} project={project} />
+					))}
+				</section>
 			</div>
 		</div>
 	)

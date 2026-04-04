@@ -8,20 +8,19 @@ export default function CopyButton({ content }: { content: string }) {
 	return (
 		<button
 			aria-label='copy'
+			className='inline-flex items-center justify-center border-2 border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-[var(--text-primary)] transition-transform hover:-translate-y-0.5'
 			onClick={() => {
 				setCopied(true)
-				navigator.clipboard.writeText(
-					String(content).replace(/\n$/, '')
-				)
+				navigator.clipboard.writeText(String(content).replace(/\n$/, ''))
 				setTimeout(() => {
 					setCopied(false)
 				}, 2000)
 			}}
 		>
 			{copied ? (
-				<HiClipboardCheck className='m-2 h-6 w-6 dark:text-white' />
+				<HiClipboardCheck className='h-5 w-5' />
 			) : (
-				<HiOutlineClipboard className='m-2 h-6 w-6 dark:text-white' />
+				<HiOutlineClipboard className='h-5 w-5' />
 			)}
 		</button>
 	)

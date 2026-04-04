@@ -1,8 +1,8 @@
 'use client'
 
+import { Editor } from '@monaco-editor/react'
 import { useEffect, useState } from 'react'
 import CopyButton from '../../../components/Markdown/CopyButton'
-import { Editor } from '@monaco-editor/react'
 
 function customJSONParser(input: string, tabLength: number): string {
 	let output = ''
@@ -21,7 +21,6 @@ function customJSONParser(input: string, tabLength: number): string {
 	for (let i = 0; i < input.length; i++) {
 		if (input[i] === '{') {
 			stack.push('{')
-
 			output += '{'
 		} else if (stack.length === 0) {
 			break
@@ -98,12 +97,12 @@ function customJSONParser(input: string, tabLength: number): string {
 				j++
 			}
 
-			const output_data = input.slice(i, j)
-			if (output_data === 'True') {
+			const outputData = input.slice(i, j)
+			if (outputData === 'True') {
 				output += 'true'
-			} else if (output_data === 'False') {
+			} else if (outputData === 'False') {
 				output += 'false'
-			} else if (output_data === 'None') {
+			} else if (outputData === 'None') {
 				output += 'null'
 			}
 
@@ -122,8 +121,8 @@ function format(input: string, tabLength: number) {
 	} catch (err: any) {
 		try {
 			return customJSONParser(input, tabLength)
-		} catch (err: any) {
-			console.error(err)
+		} catch (parseErr: any) {
+			console.error(parseErr)
 		}
 
 		return err.toString()
@@ -131,14 +130,20 @@ function format(input: string, tabLength: number) {
 }
 
 export default function JsonFormator() {
-	const [input, setInput] = useState('')
+	const [input, setInput] = useState(() =>
+		typeof window !== 'undefined'
+			? window.localStorage.getItem(`${window.location.pathname}/input`) || ''
+			: ''
+	)
 	const [tabLength, setTabLength] = useState(4)
 	const [output, setOutput] = useState('{}')
-	const [darkTheme, setDarkTheme] = useState(false)
+	const [darkTheme, setDarkTheme] = useState(
+		() =>
+			typeof window !== 'undefined' &&
+			window.matchMedia('(prefers-color-scheme: dark)').matches
+	)
 
 	useEffect(() => {
-		setDarkTheme(window.matchMedia('(prefers-color-scheme: dark)').matches)
-
 		window
 			.matchMedia('(prefers-color-scheme: dark)')
 			.addEventListener('change', (e) => {
@@ -151,15 +156,6 @@ export default function JsonFormator() {
 	}, [])
 
 	useEffect(() => {
-		const cachedInput = window.localStorage.getItem(
-			`${window.location.pathname}/input`
-		)
-		if (cachedInput) {
-			setInput(cachedInput)
-		}
-	}, [])
-
-	useEffect(() => {
 		window.localStorage.setItem(`${window.location.pathname}/input`, input)
 	}, [input])
 
@@ -168,82 +164,98 @@ export default function JsonFormator() {
 	}
 
 	return (
-		<div className='min-h-screen'>
-			<h1 className='m-5 p-2 text-center text-4xl font-semibold dark:text-white'>
-				JSON Formatter
-			</h1>
-			<p className='m-2 text-center text-xl dark:text-white'>
-				Beautify JSON
-			</p>
-			<div
-				className='flex w-full flex-wrap items-center justify-center pt-5'
-				style={{ margin: 0, width: '100%' }}
-			>
-				<div className='m-2 flex h-96 w-4/5 flex-col items-center'>
-					<Editor
-						defaultValue='{}'
-						value={input}
-						className='h-full w-full rounded-lg border-2 border-gray-300 p-2 dark:border-gray-700 dark:bg-gray-800 dark:text-white'
-						theme={darkTheme ? 'vs-dark' : 'light'}
-						language='json'
-						options={{
-							minimap: { enabled: false },
-						}}
-						onChange={(value) => {
-							setInput(value as string)
-						}}
-					/>
-				</div>
-				<div className='flex w-1/2 flex-col'>
-					<div className='flex flex-row justify-center'>
-						<label className='m-2 text-xl font-semibold dark:text-white'>
-							<input
-								type='radio'
-								name='spacing'
-								value={4}
-								checked={tabLength == 4}
-								onChange={handleTabLengthChange}
-							/>
-							<span className='ml-2'>Indent with tabs</span>
-						</label>
-						<label className='m-2 text-xl font-semibold dark:text-white'>
-							<input
-								type='radio'
-								name='spacing'
-								value={2}
-								checked={tabLength == 2}
-								onChange={handleTabLengthChange}
-							/>
-							<span className='ml-2'>Indent with Spaces</span>
-						</label>
-					</div>
-					<button
-						className='m-2 w-full rounded-lg bg-blue-700 p-2 text-xl font-semibold text-white dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
-						onClick={() => {
-							setOutput(format(input, tabLength))
-						}}
+		<div className='section-shell'>
+			<div className='site-container surface-stack'>
+				<section className='section-heading'>
+					<div
+						className='section-eyebrow'
+						style={{ fontFamily: 'var(--font-mono)' }}
 					>
-						Format
-					</button>
-				</div>
-				<div className='m-2 flex w-4/5 flex-row'>
-					<div className='w-full overflow-auto rounded-lg border-2 border-gray-300 p-2 text-xl dark:border-gray-700 dark:bg-gray-800 dark:text-white'>
-						Formatted JSON
+						Tool
 					</div>
-					<CopyButton content={output} />
-				</div>
-				<div className='m-2 flex h-96 w-4/5 flex-col items-center'>
-					<Editor
-						className='h-full w-full rounded-lg border-2 border-gray-300 p-2 dark:border-gray-700 dark:bg-gray-800 dark:text-white'
-						value={output}
-						theme={darkTheme ? 'vs-dark' : 'light'}
-						language='json'
-						options={{
-							minimap: { enabled: false },
-							readOnly: true,
-						}}
-					/>
-				</div>
+					<h1 className='section-title'>JSON Formatter</h1>
+					<div className='divider-rule' />
+					<p className='section-copy'>
+						Paste JSON or JSON-like payloads and normalize them into readable
+						output.
+					</p>
+				</section>
+
+				<section className='surface-stack'>
+					<div className='tool-editor h-96'>
+						<Editor
+							defaultValue='{}'
+							value={input}
+							className='h-full w-full'
+							theme={darkTheme ? 'vs-dark' : 'light'}
+							language='json'
+							options={{
+								minimap: { enabled: false },
+							}}
+							onChange={(value) => {
+								setInput(value as string)
+							}}
+						/>
+					</div>
+
+					<div className='brutal-card flex flex-col gap-5 p-6'>
+						<div className='flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between'>
+							<p className='text-sm font-bold uppercase tracking-[0.18em] text-[var(--text-secondary)]'>
+								Formatting options
+							</p>
+							<div className='flex flex-col gap-3 sm:flex-row'>
+								<label className='brutal-card-soft flex items-center gap-2 bg-[var(--surface)] px-4 py-3 text-sm font-bold uppercase tracking-[0.14em]'>
+									<input
+										type='radio'
+										name='spacing'
+										value={4}
+										checked={tabLength == 4}
+										onChange={handleTabLengthChange}
+									/>
+									<span>Indent 4</span>
+								</label>
+								<label className='brutal-card-soft flex items-center gap-2 bg-[var(--surface)] px-4 py-3 text-sm font-bold uppercase tracking-[0.14em]'>
+									<input
+										type='radio'
+										name='spacing'
+										value={2}
+										checked={tabLength == 2}
+										onChange={handleTabLengthChange}
+									/>
+									<span>Indent 2</span>
+								</label>
+							</div>
+						</div>
+						<button
+							className='brutal-button'
+							onClick={() => {
+								setOutput(format(input, tabLength))
+							}}
+						>
+							Format JSON
+						</button>
+					</div>
+
+					<div className='flex items-start gap-3'>
+						<div className='brutal-card-soft w-full overflow-auto bg-[var(--surface)] p-4 text-sm font-bold uppercase tracking-[0.18em] text-[var(--text-secondary)]'>
+							Formatted output
+						</div>
+						<CopyButton content={output} />
+					</div>
+
+					<div className='tool-editor h-96'>
+						<Editor
+							className='h-full w-full'
+							value={output}
+							theme={darkTheme ? 'vs-dark' : 'light'}
+							language='json'
+							options={{
+								minimap: { enabled: false },
+								readOnly: true,
+							}}
+						/>
+					</div>
+				</section>
 			</div>
 		</div>
 	)

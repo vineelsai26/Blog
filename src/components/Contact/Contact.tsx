@@ -1,10 +1,10 @@
 'use client'
 
-import Image from 'next/image'
 import { useState } from 'react'
-import Loader from '../Loader/Loader'
 import Link from 'next/link'
-import { FcInvite } from 'react-icons/fc'
+import { FaGithub, FaInstagram, FaLinkedinIn, FaXTwitter } from 'react-icons/fa6'
+import { HiOutlineArrowUpRight, HiOutlineEnvelope } from 'react-icons/hi2'
+import Loader from '../Loader/Loader'
 
 export default function Contact() {
 	const [name, setName] = useState('')
@@ -43,26 +43,44 @@ export default function Contact() {
 	}
 
 	return (
-		<div id='contact' className='m-10'>
-			<div>
-				<h1 className='m-2 text-center text-5xl font-bold dark:text-white'>
-					Contact
-				</h1>
-				<p className='m-2 mb-10 text-center text-xl dark:text-white'>
-					Hear is the way to contact me.
+		<section id='contact' className='section-shell'>
+			<div className='section-heading'>
+				<div
+					className='section-eyebrow'
+					style={{ fontFamily: 'var(--font-mono)' }}
+				>
+					Reach Out
+				</div>
+				<h2 className='section-title'>Contact</h2>
+				<div className='divider-rule' />
+				<p className='section-copy'>
+					Use the form for project, collaboration, or writing enquiries. If you
+					prefer direct channels, the social links and email route stay
+					available below.
 				</p>
 			</div>
 			<form
-				className='m-auto mt-10 flex h-auto w-full flex-col rounded-lg bg-white p-10 shadow-lg md:w-4/5 lg:w-5/6 lg:flex-row dark:bg-gray-800'
+				className='brutal-card grid gap-0 overflow-hidden lg:grid-cols-[1.25fr_0.75fr]'
 				onSubmit={(e) => {
 					e.preventDefault()
 					handleContact()
 				}}
 			>
-				<div className='flex w-full flex-col lg:w-5/12'>
+				<div className='surface-stack border-b-[3px] border-[var(--border)] p-8 lg:border-b-0 lg:border-r-[3px]'>
+					<div>
+						<p
+							className='text-xs font-bold uppercase tracking-[0.24em] text-[var(--text-secondary)]'
+							style={{ fontFamily: 'var(--font-mono)' }}
+						>
+							Message
+						</p>
+						<h3 className='mt-3 text-3xl font-black uppercase tracking-[-0.05em]'>
+							Tell me what you&apos;re building
+						</h3>
+					</div>
 					<input
 						type='text'
-						className='my-3 box-border rounded-lg border-2 p-3 dark:bg-gray-600 dark:text-white'
+						className='brutal-input'
 						placeholder='Name'
 						onChange={(e) => {
 							setName(e.target.value)
@@ -72,7 +90,7 @@ export default function Contact() {
 
 					<input
 						type='email'
-						className='my-3 box-border rounded-lg border-2 p-3 dark:bg-gray-600 dark:text-white'
+						className='brutal-input'
 						placeholder='Email'
 						onChange={(e) => {
 							setEmail(e.target.value)
@@ -81,8 +99,8 @@ export default function Contact() {
 					/>
 
 					<textarea
-						rows={5}
-						className='box-border-2 my-3 rounded-lg border p-3 dark:bg-gray-600 dark:text-white'
+						rows={7}
+						className='brutal-textarea'
 						placeholder='Write something..'
 						onChange={(e) => {
 							setMessage(e.target.value)
@@ -93,100 +111,92 @@ export default function Contact() {
 					{loading && <Loader />}
 
 					{submitStatus && (
-						<p className='p-2 text-center text-green-600'>
+						<p className='border-2 border-[var(--border)] bg-lime-200 px-4 py-3 text-sm font-bold uppercase tracking-[0.18em] text-[var(--text-primary)]'>
 							{submitStatus}
 						</p>
 					)}
 					{submitError && (
-						<p className='p-2 text-center text-red-600'>
+						<p className='border-2 border-[var(--border)] bg-rose-200 px-4 py-3 text-sm font-bold uppercase tracking-[0.18em] text-[var(--text-primary)]'>
 							{submitError}
 						</p>
 					)}
 
-					<div className='flex justify-center'>
-						<button className='m-3 w-2/4 rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white lg:w-1/4'>
-							Submit
-						</button>
+					<div className='flex flex-col gap-4 sm:flex-row'>
+						<button className='brutal-button'>Submit</button>
+						<a
+							href='mailto:mail@vineelsai.com'
+							className='brutal-button brutal-button-secondary'
+						>
+							<HiOutlineEnvelope className='text-xl' />
+							Email directly
+						</a>
 					</div>
 				</div>
-				<p className='w-2/12 self-center p-5 text-center dark:text-white'>
-					OR
-				</p>
-				<div className='w-full lg:w-5/12'>
-					<p className='p-3 text-center text-2xl font-extrabold dark:text-white'>
-						Social Media
-					</p>
-					<p className='p-3 text-center text-xl font-extralight dark:text-white'>
-						You can also reach out to me through social media.
-					</p>
-
-					<div className='flex flex-row justify-evenly'>
-						<Link
-							href='https://instagram.com/vineelsai26'
-							aria-label='instagram'
+				<div className='flex flex-col gap-6 bg-[var(--surface-strong)] p-8'>
+					<div>
+						<p
+							className='text-xs font-bold uppercase tracking-[0.24em] text-[var(--text-secondary)]'
+							style={{ fontFamily: 'var(--font-mono)' }}
 						>
-							<Image
-								src='https://icons.vineelsai.com/icons?i=instagram'
-								alt={''}
-								width={40}
-								height={40}
-								className='m-2'
-							/>
-						</Link>
-						<Link
-							href='https://twitter.com/vineelsai26'
-							aria-label='twitter'
-						>
-							<Image
-								src='https://icons.vineelsai.com/icons?i=twitter'
-								alt={''}
-								width={40}
-								height={40}
-								className='m-2'
-							/>
-						</Link>
-						<Link
-							href='https://linkedin.com/in/vineelsai26'
-							aria-label='linkedin'
-						>
-							<Image
-								src='https://icons.vineelsai.com/icons?i=linkedin'
-								alt={''}
-								width={40}
-								height={40}
-								className='m-2'
-							/>
-						</Link>
-						<Link
-							href='https://github.com/vineelsai26'
-							aria-label='github'
-						>
-							<Image
-								src='https://icons.vineelsai.com/icons?i=github'
-								alt={''}
-								width={40}
-								height={40}
-								className='m-2'
-							/>
-						</Link>
+							Elsewhere
+						</p>
+						<h3 className='mt-3 text-3xl font-black uppercase tracking-[-0.05em]'>
+							Direct channels
+						</h3>
 					</div>
 
-					<p className='p-5 text-center text-xl font-extrabold dark:text-white'>
-						OR
-					</p>
-					<p className='p-3 text-center text-xl font-extralight dark:text-white'>
-						Reach out me through email
-					</p>
-					<div className='flex flex-row justify-evenly'>
-						<Link
+					<div className='grid gap-3'>
+						{[
+							{
+								label: 'GitHub',
+								href: 'https://github.com/vineelsai26',
+								icon: FaGithub,
+							},
+							{
+								label: 'LinkedIn',
+								href: 'https://linkedin.com/in/vineelsai26',
+								icon: FaLinkedinIn,
+							},
+							{
+								label: 'Twitter',
+								href: 'https://twitter.com/vineelsai26',
+								icon: FaXTwitter,
+							},
+							{
+								label: 'Instagram',
+								href: 'https://instagram.com/vineelsai26',
+								icon: FaInstagram,
+							},
+						].map((item) => (
+							<Link
+								key={item.label}
+								href={item.href}
+								target='_blank'
+								className='brutal-card-soft surface-default flex items-center justify-between gap-4 px-4 py-4 text-sm font-black uppercase tracking-[0.18em]'
+							>
+								<span className='flex items-center gap-3'>
+									<item.icon className='text-lg' />
+									{item.label}
+								</span>
+								<HiOutlineArrowUpRight className='text-lg' />
+							</Link>
+						))}
+					</div>
+
+					<div className='brutal-card-soft surface-default p-5'>
+						<p className='text-sm font-bold uppercase tracking-[0.18em] text-[var(--text-secondary)]'>
+							Email
+						</p>
+						<a
 							href='mailto:mail@vineelsai.com'
-							aria-label='instagram'
+							className='mt-3 inline-flex items-center gap-3 text-xl font-black tracking-tight text-[var(--accent)]'
 						>
-							<FcInvite className='m-2' size={40} />
-						</Link>
+							<HiOutlineEnvelope className='text-2xl' />
+							mail@vineelsai.com
+						</a>
 					</div>
 				</div>
 			</form>
-		</div>
+		</section>
 	)
 }

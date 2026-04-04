@@ -20,7 +20,16 @@ export default function ArticleEditor({
 	const [currentTab, setCurrentTab] = useState<Number>(0)
 	const tabs = ['Editor', 'Preview']
 
-	const [article, setArticle] = useState<ArticleType>({} as ArticleType)
+	const [article, setArticle] = useState<ArticleType>(() => {
+		if (typeof window !== 'undefined') {
+			const cached = window.localStorage.getItem(window.location.pathname)
+			if (cached) {
+				return JSON.parse(cached)
+			}
+		}
+
+		return articleFetch
+	})
 
 	const [thumbnail, setThumbnail] = useState<File | null>(null)
 	const [files, setFiles] = useState<FileList | null>(null)
@@ -131,27 +140,19 @@ export default function ArticleEditor({
 		setLoading(false)
 	}
 
-	const [theme, setTheme] = useState('light')
+	const [theme, setTheme] = useState(() =>
+		typeof window !== 'undefined' &&
+		window.matchMedia('(prefers-color-scheme: dark)').matches
+			? 'dark'
+			: 'light'
+	)
 
 	useEffect(() => {
-		window.matchMedia('(prefers-color-scheme: dark)').matches
-			? setTheme('dark')
-			: setTheme('light')
-
 		window
 			.matchMedia('(prefers-color-scheme: dark)')
 			.addEventListener('change', (e) => {
 				e.matches ? setTheme('dark') : setTheme('light')
 			})
-
-		if (window.localStorage.getItem(window.location.pathname)) {
-			const article = JSON.parse(
-				window.localStorage.getItem(window.location.pathname)!
-			)
-			setArticle(article)
-		} else {
-			setArticle(articleFetch)
-		}
 	}, [articleFetch])
 
 	const handleLocalStorage = (article: ArticleType) => {
