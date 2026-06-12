@@ -1,17 +1,10 @@
 import { MetadataRoute } from 'next'
-import db from '../drizzle/db'
 import projects from '../data/projects'
 import tools from '../data/tools'
 import archive from '../data/archive'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-	const articles = await db.query.articles
-		.findMany({
-			columns: {
-				url: true,
-			},
-		})
-		.catch(() => [])
+	const articles = await getArticleUrls()
 
 	let paths: Sitemap = [
 		{ url: `${process.env.NEXT_APP_URL}/`, lastModified: new Date() },
@@ -55,6 +48,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	})
 
 	return paths
+}
+
+async function getArticleUrls(): Promise<Array<{ url: string }>> {
+	if (!process.env.NEXT_TURSO_URL || !process.env.NEXT_TURSO_TOKEN) {
+		return []
+	}
+
+	const db = (await import('../drizzle/db')).default
+	return db.query.articles
+		.findMany({
+			columns: {
+				url: true,
+			},
+		})
+		.catch(() => [])
 }
 
 function isAllowedHost(rawUrl: string): boolean {
