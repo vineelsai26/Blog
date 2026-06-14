@@ -36,8 +36,7 @@ export default function WorkCard({ work }: { work: WorkExperienceType }) {
 					</div>
 				</div>
 				<p className='max-w-3xl text-base leading-7 text-[var(--text-secondary)]'>
-					Backend-focused engineering work spanning product delivery, internal
-					tooling, and maintainable implementation details across the stack.
+					{work.description}
 				</p>
 			</div>
 		</article>
