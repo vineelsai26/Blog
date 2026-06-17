@@ -4,3 +4,12 @@ allowBuilds:
   protobufjs: true
   sharp: true
   unrs-resolver: true
+minimumReleaseAgeExclude:
+  - '@ai-sdk/anthropic@3.0.85'
+  - '@ai-sdk/gateway@3.0.133'
+  - '@ai-sdk/openai@3.0.72'
+  - '@ai-sdk/provider-utils@4.0.30'
+  - '@posthog/core@1.35.1'
+  - '@posthog/types@1.390.0'
+  - ai@6.0.207
+  - posthog-js@1.390.0
