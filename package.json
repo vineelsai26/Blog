@@ -1,63 +1,20 @@
 {
-	"name": "blog",
-	"version": "0.1.0",
-	"private": true,
-	"type": "module",
-    "packageManager": "pnpm@11.7.0",
-	"scripts": {
-		"build": "next build",
-		"dev": "next dev --turbopack",
-		"export": "next export",
-		"fmt": "prettier --write .",
-		"lint": "eslint .",
-		"postinstall": "drizzle-kit generate",
-		"r2:upload": "rclone copy public/images r2:static/blog/images",
-		"start": "next start",
-		"studio": "drizzle-kit studio"
-	},
-	"dependencies": {
-		"@ai-sdk/anthropic": "^3.0.85",
-		"@ai-sdk/openai": "^3.0.72",
-		"@libsql/client": "^0.17.4",
-		"@monaco-editor/react": "^4.7.0",
-		"@tailwindcss/typography": "^0.5.20",
-		"ai": "^6.0.207",
-		"babel-plugin-react-compiler": "1.0.0",
-		"drizzle-orm": "^0.45.2",
-		"next": "16.2.9",
-		"next-auth": "^4.24.14",
-		"posthog-js": "^1.390.0",
-		"react": "19.2.7",
-		"react-dom": "19.2.7",
-		"react-icons": "^5.6.0",
-		"react-markdown": "^10.1.0",
-		"react-syntax-highlighter": "^16.1.1",
-		"remark-gfm": "^4.0.1",
-		"sharp": "^0.35.1"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"core-js",
-			"esbuild",
-			"protobufjs",
-			"sharp",
-			"unrs-resolver"
-		]
-	},
-	"devDependencies": {
-		"@tailwindcss/postcss": "^4.3.1",
-		"@types/node": "25.9.3",
-		"@types/react": "^19.2.17",
-		"@types/react-dom": "^19.2.3",
-		"@types/react-syntax-highlighter": "^15.5.13",
-		"autoprefixer": "^10.5.0",
-		"drizzle-kit": "^0.31.10",
-		"eslint": "10.5.0",
-		"eslint-config-next": "16.2.9",
-		"postcss": "^8.5.15",
-		"prettier": "^3.8.4",
-		"prettier-plugin-tailwindcss": "^0.8.0",
-		"tailwindcss": "^4.3.1",
-		"typescript": "6.0.3"
-	}
+  "name": "blog-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^3.8.4",
+    "prettier-plugin-tailwindcss": "^0.8.0",
+    "turbo": "^2.10.0",
+    "typescript": "^6.0.3"
+  }
 }

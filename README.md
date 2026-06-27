@@ -1,3 +1,5 @@
-# Portfolio
+# blog
 
-This is my portfolio and blog site built with [Next.js](https://nextjs.org/). Check it out at [https://vineelsai.com](https://vineelsai.com).
+Automatically published mirror of `apps/blog (+ packages/ui)`. The source of truth lives in a
+private monorepo and is synced here on every change — please make changes upstream
+rather than opening pull requests against this repository.
