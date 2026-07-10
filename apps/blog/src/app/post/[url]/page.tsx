@@ -46,7 +46,8 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
 	const params = await props.params
 	const article = await db.query.articles.findFirst({
-		where: (articles, { eq }) => eq(articles.url, params.url),
+		where: (articles, { eq, and }) =>
+			and(eq(articles.url, params.url), eq(articles.private, false)),
 		columns: {
 			title: true,
 			description: true,

@@ -24,9 +24,9 @@ export default function Contact() {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				username: 'Contact Form',
-				avatar_url: 'https://vineelsai.com/logo-light.png',
-				content: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+				name,
+				email,
+				message,
 			}),
 		})
 

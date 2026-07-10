@@ -14,6 +14,12 @@
         "TURSO_*"
       ]
     },
+    "@vstack/vscloud#build": {
+      "outputs": []
+    },
+    "orderflow#build": {
+      "outputs": []
+    },
     "dev": {
       "cache": false,
       "persistent": true
@@ -22,8 +28,7 @@
       "dependsOn": ["^lint"]
     },
     "test": {
-      "dependsOn": ["^test"],
-      "outputs": ["coverage/**"]
+      "dependsOn": ["^test"]
     },
     "typecheck": {
       "dependsOn": ["^typecheck"]
