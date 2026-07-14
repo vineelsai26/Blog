@@ -17,6 +17,27 @@
     "@vstack/vscloud#build": {
       "outputs": []
     },
+    "@vstack/ai#build": {
+      "outputs": []
+    },
+    "@vstack/auth#build": {
+      "outputs": []
+    },
+    "@vstack/content#build": {
+      "outputs": []
+    },
+    "@vstack/data#build": {
+      "outputs": []
+    },
+    "@vstack/observability#build": {
+      "outputs": []
+    },
+    "@vstack/ui#build": {
+      "outputs": []
+    },
+    "@vstack/template-scheduled-task#build": {
+      "outputs": []
+    },
     "orderflow#build": {
       "outputs": []
     },

@@ -11,13 +11,13 @@ const handler = NextAuth({
 			clientSecret: process.env.GITHUB_SECRET!,
 			authorization: {
 				params: {
-					scope: 'read:user user:email repo',
+					scope: 'read:user user:email',
 				},
 			},
 		}),
 	],
 	callbacks: {
-		async signIn({ user, account }) {
+		async signIn({ user }) {
 			if (user && user.email) {
 				const userData = await db.query.users.findFirst({
 					where: eq(users.email, user.email),
@@ -31,7 +31,6 @@ const handler = NextAuth({
 					await db
 						.update(users)
 						.set({
-							githubToken: account?.access_token,
 							profilePicture: user.image,
 						})
 						.where(eq(users.email, user.email))
@@ -48,7 +47,6 @@ const handler = NextAuth({
 							email: user.email,
 							profilePicture: user.image,
 							name: user.name,
-							githubToken: account?.access_token,
 						})
 						.returning({
 							id: users.id,
