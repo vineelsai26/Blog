@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
+import { authOptions, isAdmin } from '../../../lib/auth'
 
 const MAX_IMAGE_BYTES = 10 * 1024 * 1024
 const MAX_MULTIPART_BYTES = MAX_IMAGE_BYTES + 64 * 1024
@@ -27,8 +28,8 @@ function verifiedImageType(bytes: Uint8Array): string | undefined {
 }
 
 export async function POST(req: NextRequest) {
-	const session = await getServerSession()
-	if (session?.user?.email !== 'mail@vineelsai.com') {
+	const session = await getServerSession(authOptions)
+	if (!isAdmin(session)) {
 		return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 	}
 	const contentLength = Number(req.headers.get('content-length'))

@@ -1,11 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { ContactRateLimiter, parseContactPayload } from './validation'
+import { getClientIp } from './clientIp'
 
 const rateLimiter = new ContactRateLimiter(5, 15 * 60 * 1000)
+// Secondary, instance-wide cap so that even if per-key buckets are somehow
+// evaded the total volume of outbound webhook relays stays bounded.
+const globalRateLimiter = new ContactRateLimiter(100, 15 * 60 * 1000)
 const MAX_BODY_BYTES = 16 * 1024
 
-function getClientIp(req: NextRequest): string {
-	return req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+function tooManyRequests(retryAfterSeconds: number): NextResponse {
+	return NextResponse.json(
+		{ error: 'Too many messages. Please try again later.' },
+		{ status: 429, headers: { 'Retry-After': String(retryAfterSeconds) } },
+	)
 }
 
 export async function POST(req: NextRequest) {
@@ -14,12 +21,14 @@ export async function POST(req: NextRequest) {
 		return NextResponse.json({ error: 'Request is too large.' }, { status: 413 })
 	}
 
-	const rateLimit = rateLimiter.consume(getClientIp(req))
+	const rateLimit = rateLimiter.consume(getClientIp(req.headers))
 	if (!rateLimit.allowed) {
-		return NextResponse.json(
-			{ error: 'Too many messages. Please try again later.' },
-			{ status: 429, headers: { 'Retry-After': String(rateLimit.retryAfterSeconds) } },
-		)
+		return tooManyRequests(rateLimit.retryAfterSeconds)
+	}
+
+	const globalRateLimit = globalRateLimiter.consume('global')
+	if (!globalRateLimit.allowed) {
+		return tooManyRequests(globalRateLimit.retryAfterSeconds)
 	}
 
 	let body: unknown

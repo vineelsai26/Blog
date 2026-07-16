@@ -2,11 +2,12 @@ import { NextRequest } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { streamText } from 'ai'
 import { openai } from '@ai-sdk/openai'
+import { authOptions, isAdmin } from '../../../../lib/auth'
 
 // Generate a concise title for a conversation using gpt-5-nano
 export async function POST(req: NextRequest) {
-	const session = await getServerSession()
-	if (!session || session.user?.email !== 'mail@vineelsai.com') {
+	const session = await getServerSession(authOptions)
+	if (!isAdmin(session)) {
 		return new Response(JSON.stringify({ error: 'Unauthorized' }), {
 			status: 401,
 		})

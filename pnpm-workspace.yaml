@@ -10,6 +10,7 @@ allowBuilds:
   puppeteer: true
   sharp: true
   unrs-resolver: true
+  workerd: true
 
 packageExtensions:
   '@tailwindcss/typography@*':
@@ -19,7 +20,7 @@ packageExtensions:
 overrides:
   esbuild@<=0.24.2: 0.25.0
   immutable@<3.8.3: 3.8.3
-  postcss: 8.5.15
+  postcss: 8.5.18
   uuid@<11.1.1: 11.1.1
 
 peerDependencyRules:

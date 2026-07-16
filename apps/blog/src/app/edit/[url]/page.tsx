@@ -1,6 +1,7 @@
 import { getServerSession } from 'next-auth'
 import ArticleEditor from '../../../components/ArticleEditor/ArticleEditor'
 import db from '../../../drizzle/db'
+import { authOptions, isAdmin } from '../../../lib/auth'
 
 export const dynamic = 'force-dynamic'
 // export const runtime = 'edge'
@@ -11,14 +12,11 @@ export default async function EditPost(props: {
 	}>
 }) {
 	const params = await props.params
-	const session = await getServerSession()
+	const session = await getServerSession(authOptions)
 
 	const article = await db.query.articles.findFirst({
 		where: (articles, { eq, and }) => {
-			if (
-				session?.user?.email &&
-				session?.user?.email === 'mail@vineelsai.com'
-			) {
+			if (isAdmin(session)) {
 				return eq(articles.url, params.url)
 			} else {
 				return and(

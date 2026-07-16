@@ -12,9 +12,9 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
-    "prettier": "^3.8.4",
+    "prettier": "^3.9.5",
     "prettier-plugin-tailwindcss": "^0.8.0",
-    "turbo": "^2.10.0",
+    "turbo": "^2.10.4",
     "typescript": "^6.0.3"
   }
 }

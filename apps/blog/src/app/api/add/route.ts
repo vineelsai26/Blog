@@ -3,14 +3,15 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import db from '../../../drizzle/db'
 import { articles as articlesD } from '../../../drizzle/schema/articles'
+import { authOptions, isAdmin } from '../../../lib/auth'
 
 export async function POST(req: NextRequest) {
 	const body = await new Response(req.body).json()
 	const { url, title, imageUrl, description, content, tags, isPrivate } = body
 
-	const session = await getServerSession()
+	const session = await getServerSession(authOptions)
 
-	if (session?.user?.email && session?.user?.email === 'mail@vineelsai.com') {
+	if (isAdmin(session)) {
 		const article = await db.insert(articlesD).values({
 			title: title as string,
 			url: url as string,
@@ -18,7 +19,7 @@ export async function POST(req: NextRequest) {
 			tags: tags as string[],
 			description: description as string,
 			content: content as string,
-			createdBy: session.user.email,
+			createdBy: session!.user!.email!,
 			createdAt: new Date(),
 			updatedAt: new Date(),
 			private: isPrivate as boolean,

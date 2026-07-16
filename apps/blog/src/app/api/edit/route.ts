@@ -3,6 +3,7 @@ import { articles as articlesD } from '../../../drizzle/schema/articles'
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { eq } from 'drizzle-orm'
+import { authOptions, isAdmin } from '../../../lib/auth'
 
 export async function POST(req: NextRequest) {
 	const body = await new Response(req.body).json()
@@ -17,9 +18,9 @@ export async function POST(req: NextRequest) {
 		isPrivate,
 	} = body
 
-	const session = await getServerSession()
+	const session = await getServerSession(authOptions)
 
-	if (session?.user?.email && session?.user?.email === 'mail@vineelsai.com') {
+	if (isAdmin(session)) {
 		if (deleteArticle) {
 			await db.delete(articlesD).where(eq(articlesD.url, url))
 			return NextResponse.json({

@@ -40,7 +40,13 @@ const nextConfig = {
 				pathname: '/**',
 			},
 		],
+		// SVG optimization is required for the icon assets served from
+		// icons.vineelsai.com, but a script-bearing SVG on an allowlisted
+		// host must not be able to execute. Force downloads instead of
+		// inline rendering and apply a strict CSP that blocks scripts.
 		dangerouslyAllowSVG: true,
+		contentDispositionType: 'attachment',
+		contentSecurityPolicy: "default-src 'none'; script-src 'none'; sandbox;",
 	},
 }
 

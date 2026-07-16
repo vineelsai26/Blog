@@ -41,7 +41,7 @@ const projects: ProjectType[] = [
 		description:
 			'My personal portfolio website and personal Blog. Built with Next.js, Typescript and Tailwind CSS.',
 		previewUrl: 'https://blog.vineelsai.com',
-		gitUrl: 'https://github.com/vineelsai26/vstack/tree/main/apps/blog',
+		gitUrl: 'https://github.com/VSPKG/vstack/tree/main/apps/blog',
 		tags: 'ts,react,next,tailwind,mongo',
 	},
 	{
