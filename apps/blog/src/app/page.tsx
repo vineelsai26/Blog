@@ -17,34 +17,25 @@ export const revalidate = 3600
 
 export default function Home() {
 	return (
-		<div className='section-shell'>
+		<div className='section-shell !pt-8'>
 			<div className='site-container surface-stack'>
 				<section id='home' className='hero-grid enter-rise'>
-					<div className='surface-stack'>
-						<div
-							className='section-eyebrow'
-							style={{ fontFamily: 'var(--font-mono)' }}
-						>
-							System.Init() // Software Developer
-						</div>
-						<div className='brutal-card hero-panel'>
-							<p
-								className='mb-6 text-sm font-bold uppercase tracking-[0.28em] text-[var(--text-secondary)]'
-								style={{ fontFamily: 'var(--font-mono)' }}
-							>
-								Backend systems · web apps · writing
-							</p>
+					<div className='surface-stack gap-10'>
+						<div className='hero-panel'>
+							<p className='meta-label mb-5'>Software · systems · writing</p>
 							<h1 className='hero-title'>
-								Vineel <br />
-								<span className='text-[var(--accent)]'>Sai.</span>
+								Vineel
+								<br />
+								<span className='text-[var(--accent)]'>Sai</span>
 							</h1>
-							<p className='hero-copy mt-8'>
-								I build backend systems, developer tooling, and web
-								products that stay fast, reliable, and easy to maintain.
+							<div className='divider-rule mt-6' />
+							<p className='hero-copy mt-6'>
+								I build backend systems, developer tooling, and web products
+								that stay fast, reliable, and easy to maintain.
 							</p>
-							<div className='mt-10 flex flex-col gap-4 sm:flex-row'>
+							<div className='mt-9 flex flex-col gap-3 sm:flex-row sm:items-center'>
 								<Link href='/#projects' className='brutal-button'>
-									View Projects
+									View projects
 									<HiArrowLongRight className='text-xl' />
 								</Link>
 								<a
@@ -53,27 +44,27 @@ export default function Home() {
 									rel='noopener noreferrer'
 									className='brutal-button brutal-button-secondary'
 								>
-									Open Resume
+									Open resume
 									<HiOutlineArrowUpRight className='text-xl' />
 								</a>
 							</div>
 						</div>
 
-						<div className='grid gap-4 md:grid-cols-3'>
+						<div className='grid gap-3 md:grid-cols-3'>
 							{[
 								{
-									label: 'View Blog',
+									label: 'Blog',
 									value: 'Read posts and notes',
 									href: '/blog',
 								},
 								{
-									label: 'Explore Tools',
-									value: 'Open browser utilities',
+									label: 'Tools',
+									value: 'Browser utilities',
 									href: '/tools',
 								},
 								{
-									label: 'Open Resume',
-									value: 'See full experience',
+									label: 'Resume',
+									value: 'Full experience',
 									href: '/resume/resume.pdf',
 								},
 							].map((item) => (
@@ -88,15 +79,10 @@ export default function Home() {
 											? 'noopener noreferrer'
 											: undefined
 									}
-									className='hero-note transition-transform hover:-translate-y-1'
+									className='hero-note transition-transform hover:-translate-y-0.5'
 								>
-									<p
-										className='text-xs font-bold uppercase tracking-[0.22em] text-[var(--text-secondary)]'
-										style={{ fontFamily: 'var(--font-mono)' }}
-									>
-										{item.label}
-									</p>
-									<p className='mt-3 text-2xl font-black uppercase tracking-tight'>
+									<p className='meta-label'>{item.label}</p>
+									<p className='display-heading mt-2 text-xl text-[var(--text-primary)]'>
 										{item.value}
 									</p>
 								</a>
@@ -105,30 +91,22 @@ export default function Home() {
 					</div>
 
 					<div className='brutal-card hero-portrait'>
-						<div className='surface-default absolute right-4 top-4 z-10 border-2 border-[var(--border)] px-3 py-2 text-xs font-bold uppercase tracking-[0.22em]'>
-							Open to building useful things
-						</div>
-						<div className='absolute inset-0 bg-[url("/background.webp")] bg-cover bg-center opacity-25' />
-						<div className='absolute inset-0 flex flex-col items-center justify-center gap-6 p-6 text-center'>
-							<div className='surface-default relative h-44 w-44 overflow-hidden rounded-full border-[4px] border-[var(--border)] shadow-[8px_8px_0_0_#111111]'>
+						<div className='absolute inset-0 bg-[url("/background.webp")] bg-cover bg-center opacity-35' />
+						<div className='absolute inset-0 z-10 flex flex-col items-center justify-end gap-5 p-6 pb-8 text-center'>
+							<div className='relative h-40 w-40 overflow-hidden rounded-full shadow-[var(--shadow)] ring-4 ring-[var(--surface)]'>
 								<Image
 									src='/profile.webp'
 									alt='Vineel Sai'
 									fill
-									sizes='176px'
+									sizes='160px'
 									className='object-cover'
 								/>
 							</div>
-							<div className='surface-default max-w-sm brutal-card-soft p-5'>
-								<p
-									className='text-xs font-bold uppercase tracking-[0.22em] text-[var(--text-secondary)]'
-									style={{ fontFamily: 'var(--font-mono)' }}
-								>
-									Current focus
-								</p>
-								<p className='mt-3 text-left text-base leading-7 text-[var(--text-secondary)]'>
-									Building software across backend, tooling, and web
-									with an emphasis on reliability and clear execution.
+							<div className='frost-panel'>
+								<p className='meta-label'>Current focus</p>
+								<p className='mt-2 text-sm leading-6 text-[var(--text-secondary)]'>
+									Building software across backend, tooling, and web with an
+									emphasis on reliability and clear execution.
 								</p>
 							</div>
 						</div>
@@ -137,20 +115,15 @@ export default function Home() {
 
 				<section id='projects' className='section-shell'>
 					<div className='section-heading'>
-						<div
-							className='section-eyebrow'
-							style={{ fontFamily: 'var(--font-mono)' }}
-						>
-							Things I&apos;ve Built
-						</div>
+						<div className='section-eyebrow'>Selected work</div>
 						<h2 className='section-title'>Projects</h2>
 						<div className='divider-rule' />
 						<p className='section-copy'>
-							Products, tools, experiments, and infrastructure work across web,
-							desktop, mobile, and cloud.
+							Products, tools, and infrastructure across web, desktop, mobile,
+							and cloud.
 						</p>
 					</div>
-					<div className='grid gap-8 lg:grid-cols-2'>
+					<div className='grid gap-6 lg:grid-cols-2'>
 						{projects.map((project, index) => (
 							<ProjectCard
 								key={project.name}
@@ -163,17 +136,12 @@ export default function Home() {
 
 				<section id='experience' className='section-shell'>
 					<div className='section-heading'>
-						<div
-							className='section-eyebrow'
-							style={{ fontFamily: 'var(--font-mono)' }}
-						>
-							Professional Timeline
-						</div>
+						<div className='section-eyebrow'>Timeline</div>
 						<h2 className='section-title'>Experience</h2>
 						<div className='divider-rule' />
 						<p className='section-copy'>
 							Roles focused on backend engineering, infrastructure, and product
-							delivery with the same visual weight as the featured project work.
+							delivery.
 						</p>
 					</div>
 					<div className='surface-stack'>

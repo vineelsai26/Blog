@@ -39,12 +39,7 @@ export default async function Blog() {
 		<div className='section-shell'>
 			<div className='site-container surface-stack'>
 				<section className='section-heading'>
-					<div
-						className='section-eyebrow'
-						style={{ fontFamily: 'var(--font-mono)' }}
-					>
-						Writing
-					</div>
+					<div className='section-eyebrow'>Writing</div>
 					<h1 className='section-title'>Blog</h1>
 					<div className='divider-rule' />
 					<p className='section-copy'>
@@ -68,8 +63,11 @@ export default async function Blog() {
 						</div>
 					)}
 					{articles.length === 0 && (
-						<div className='brutal-card p-10 text-center text-lg font-semibold uppercase tracking-[0.12em]'>
-							No public posts yet.
+						<div className='brutal-card px-8 py-14 text-center'>
+							<p className='display-heading text-2xl'>No public posts yet</p>
+							<p className='mx-auto mt-3 max-w-md text-[var(--text-secondary)]'>
+								New writing will show up here when it&apos;s ready to share.
+							</p>
 						</div>
 					)}
 				</section>

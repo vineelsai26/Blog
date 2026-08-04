@@ -3,35 +3,30 @@ import { HiOutlineArrowLongRight } from 'react-icons/hi2'
 
 export default function WorkCard({ work }: { work: WorkExperienceType }) {
 	return (
-		<article className='brutal-card grid gap-0 overflow-hidden md:grid-cols-[220px_1fr]'>
-			<div className='relative min-h-[220px] border-b-[3px] border-[var(--border)] md:border-b-0 md:border-r-[3px]'>
+		<article className='brutal-card grid overflow-hidden md:grid-cols-[200px_1fr]'>
+			<div className='relative min-h-[180px] bg-[var(--surface-strong)] md:min-h-full'>
 				<Image
 					src={work.image}
 					alt={work.companyName}
 					fill
-					sizes='220px'
+					sizes='200px'
 					className='object-contain p-8'
 				/>
 			</div>
-			<div className='flex flex-col gap-5 p-8'>
-				<div className='flex flex-col gap-4 md:flex-row md:items-start md:justify-between'>
+			<div className='flex flex-col gap-4 p-7'>
+				<div className='flex flex-col gap-3 md:flex-row md:items-start md:justify-between'>
 					<div>
-						<p
-							className='text-xs font-bold uppercase tracking-[0.24em] text-[var(--text-secondary)]'
-							style={{ fontFamily: 'var(--font-mono)' }}
-						>
-							Experience
-						</p>
-						<h3 className='mt-3 text-3xl font-black uppercase tracking-[-0.05em]'>
+						<p className='meta-label'>Experience</p>
+						<h3 className='display-heading mt-2 text-2xl md:text-3xl'>
 							{work.companyName}
 						</h3>
-						<p className='mt-3 text-lg font-semibold uppercase tracking-[0.08em] text-[var(--accent)]'>
+						<p className='mt-2 text-base font-medium text-[var(--accent)]'>
 							{work.role}
 						</p>
 					</div>
-					<div className='brutal-card-soft w-fit bg-[var(--surface-strong)] px-4 py-3 text-sm font-bold uppercase tracking-[0.18em]'>
+					<div className='inline-flex w-fit items-center gap-2 rounded-full bg-[var(--accent-muted)] px-3 py-1.5 text-xs font-medium text-[var(--accent)]'>
 						{work.from}
-						<HiOutlineArrowLongRight className='mx-2 inline-block text-base' />
+						<HiOutlineArrowLongRight className='text-sm' />
 						{work.to}
 					</div>
 				</div>

@@ -48,7 +48,7 @@ export default function BlogSearch() {
 								href={`/post/${article.url}`}
 								className='brutal-card-soft grid grid-cols-[88px_1fr] gap-4 bg-[var(--surface)] p-3'
 							>
-								<div className='relative h-20 overflow-hidden border-2 border-[var(--border)]'>
+								<div className='relative h-20 overflow-hidden rounded-[var(--radius-sm)]'>
 									<Image
 										src={article.imageUrl}
 										alt={article.title}
@@ -57,7 +57,7 @@ export default function BlogSearch() {
 									/>
 								</div>
 								<div className='min-w-0'>
-									<p className='truncate text-lg font-black uppercase tracking-tight'>
+									<p className='display-heading truncate text-lg'>
 										{article.title}
 									</p>
 									<p className='line-clamp-2 text-sm text-[var(--text-secondary)]'>
@@ -67,7 +67,7 @@ export default function BlogSearch() {
 							</Link>
 						))
 					) : (
-						<div className='brutal-card-soft bg-[var(--surface)] px-4 py-5 text-sm font-bold uppercase tracking-[0.18em] text-[var(--text-secondary)]'>
+						<div className='brutal-card-soft bg-[var(--surface)] px-4 py-5 text-sm text-[var(--text-secondary)]'>
 							No matching posts
 						</div>
 					)}

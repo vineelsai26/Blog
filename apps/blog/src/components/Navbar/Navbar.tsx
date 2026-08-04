@@ -31,43 +31,35 @@ export default function Navbar({
 }) {
 	const pathname = usePathname()
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
+
 	return (
-		<header className='fixed left-0 right-0 top-0 z-50 px-3 py-3 md:px-6'>
-			<div className='site-container brutal-card-soft bg-[var(--surface)] px-4 py-3'>
-				<div className='flex items-center gap-4'>
+		<header className='fixed left-0 right-0 top-0 z-50 px-3 pt-4 md:px-6'>
+			<div className='site-container'>
+				<div className='site-nav-shell'>
 					<Link href='/' className='flex items-center gap-3'>
-						<span className='inverse-surface inline-flex h-12 w-12 items-center justify-center border-2 border-[var(--border)] text-xl font-black uppercase tracking-tight'>
+						<span className='inline-flex h-10 w-10 items-center justify-center rounded-[12px] bg-[var(--text-primary)] text-sm font-semibold tracking-tight text-[var(--accent-contrast)]'>
 							VS
 						</span>
 						<div className='hidden sm:block'>
-							<p className='text-lg font-black uppercase tracking-[-0.08em]'>
+							<p className='display-heading text-[1.05rem] text-[var(--text-primary)]'>
 								Vineel Sai
 							</p>
-							<p
-								className='text-[0.72rem] font-bold uppercase tracking-[0.24em] text-[var(--text-secondary)]'
-								style={{ fontFamily: 'var(--font-mono)' }}
-							>
-								Software Developer
-							</p>
+							<p className='meta-label mt-0.5'>Software developer</p>
 						</div>
 					</Link>
 
-					<nav className='hidden flex-1 items-center justify-center gap-7 lg:flex'>
+					<nav className='hidden flex-1 items-center justify-center gap-6 lg:flex'>
 						{navigation.map((item) => {
 							const isActive =
 								item.href === '/'
 									? pathname === '/'
-									: pathname === item.href ||
-									  (item.href.startsWith('/#') && pathname === '/')
+									: !item.href.includes('#') && pathname === item.href
 
 							return (
 								<Link
 									key={item.name}
 									href={item.href}
-									className={cx(
-										'nav-link',
-										isActive && 'nav-link-active'
-									)}
+									className={cx('nav-link', isActive && 'nav-link-active')}
 								>
 									{item.name}
 								</Link>
@@ -75,13 +67,13 @@ export default function Navbar({
 						})}
 					</nav>
 
-					<div className='ml-auto hidden items-center gap-3 md:flex'>
+					<div className='ml-auto hidden items-center gap-2 md:flex'>
 						<ThemeToggleButton
 							onToggle={onToggleTheme}
 							isDark={theme === 'dark'}
 							darkIcon={<HiSun className='text-lg' />}
 							lightIcon={<HiMoon className='text-lg' />}
-							className='inline-flex h-10 w-10 items-center justify-center border-2 border-[var(--border)] bg-[var(--surface)] transition-transform hover:-translate-y-1'
+							className='inline-flex h-9 w-9 items-center justify-center rounded-full text-[var(--text-secondary)] transition-colors hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]'
 						/>
 						{[
 							{
@@ -106,16 +98,16 @@ export default function Navbar({
 								target='_blank'
 								rel='noopener noreferrer'
 								aria-label={item.label}
-								className='inline-flex h-10 w-10 items-center justify-center border-2 border-[var(--border)] bg-[var(--surface)] transition-transform hover:-translate-y-1'
+								className='inline-flex h-9 w-9 items-center justify-center rounded-full text-[var(--text-secondary)] transition-colors hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]'
 							>
-								<item.icon className='text-lg' />
+								<item.icon className='text-base' />
 							</a>
 						))}
 						<a
 							href='/resume/resume.pdf'
 							target='_blank'
 							rel='noopener noreferrer'
-							className='brutal-button px-4 py-3 text-sm'
+							className='brutal-button px-4 py-2.5 text-sm'
 						>
 							Resume
 							<HiOutlineArrowUpRight />
@@ -126,24 +118,24 @@ export default function Navbar({
 						type='button'
 						aria-label='Toggle navigation'
 						onClick={() => setIsMenuOpen((value) => !value)}
-						className='inline-flex h-11 w-11 items-center justify-center border-2 border-[var(--border)] bg-[var(--surface)] lg:hidden'
+						className='ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full bg-[var(--bg-secondary)] text-[var(--text-primary)] lg:hidden'
 					>
 						{isMenuOpen ? (
-							<HiXMark className='text-2xl' />
+							<HiXMark className='text-xl' />
 						) : (
-							<HiBars3BottomRight className='text-2xl' />
+							<HiBars3BottomRight className='text-xl' />
 						)}
 					</button>
 				</div>
 
 				{isMenuOpen && (
-					<div className='mt-4 grid gap-3 border-t-2 border-[var(--border)] pt-4 lg:hidden'>
+					<div className='mt-3 grid gap-2 rounded-[var(--radius)] bg-[var(--surface)] p-3 shadow-[var(--shadow)] lg:hidden'>
 						{navigation.map((item) => (
 							<Link
 								key={item.name}
 								href={item.href}
 								onClick={() => setIsMenuOpen(false)}
-								className='brutal-card-soft bg-[var(--surface)] px-4 py-3 text-sm font-bold uppercase tracking-[0.18em]'
+								className='rounded-[var(--radius-sm)] px-3 py-3 text-sm font-medium text-[var(--text-primary)] hover:bg-[var(--bg-secondary)]'
 							>
 								{item.name}
 							</Link>
@@ -151,7 +143,7 @@ export default function Navbar({
 						<button
 							type='button'
 							onClick={onToggleTheme}
-							className='brutal-card-soft bg-[var(--surface)] px-4 py-3 text-sm font-bold uppercase tracking-[0.18em]'
+							className='rounded-[var(--radius-sm)] px-3 py-3 text-left text-sm font-medium text-[var(--text-primary)] hover:bg-[var(--bg-secondary)]'
 						>
 							{theme === 'dark' ? 'Light mode' : 'Dark mode'}
 						</button>

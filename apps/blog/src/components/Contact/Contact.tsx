@@ -45,36 +45,25 @@ export default function Contact() {
 	return (
 		<section id='contact' className='section-shell'>
 			<div className='section-heading'>
-				<div
-					className='section-eyebrow'
-					style={{ fontFamily: 'var(--font-mono)' }}
-				>
-					Reach Out
-				</div>
+				<div className='section-eyebrow'>Reach out</div>
 				<h2 className='section-title'>Contact</h2>
 				<div className='divider-rule' />
 				<p className='section-copy'>
-					Use the form for project, collaboration, or writing enquiries. If you
-					prefer direct channels, the social links and email route stay
-					available below.
+					Project, collaboration, or writing enquiries — use the form, or reach
+					me directly through email and socials.
 				</p>
 			</div>
 			<form
-				className='brutal-card grid gap-0 overflow-hidden lg:grid-cols-[1.25fr_0.75fr]'
+				className='brutal-card grid overflow-hidden lg:grid-cols-[1.25fr_0.75fr]'
 				onSubmit={(e) => {
 					e.preventDefault()
 					handleContact()
 				}}
 			>
-				<div className='surface-stack border-b-[3px] border-[var(--border)] p-8 lg:border-b-0 lg:border-r-[3px]'>
+				<div className='surface-stack border-b border-[var(--border)] p-7 lg:border-b-0 lg:border-r'>
 					<div>
-						<p
-							className='text-xs font-bold uppercase tracking-[0.24em] text-[var(--text-secondary)]'
-							style={{ fontFamily: 'var(--font-mono)' }}
-						>
-							Message
-						</p>
-						<h3 className='mt-3 text-3xl font-black uppercase tracking-[-0.05em]'>
+						<p className='meta-label'>Message</p>
+						<h3 className='display-heading mt-2 text-2xl md:text-3xl'>
 							Tell me what you&apos;re building
 						</h3>
 					</div>
@@ -101,7 +90,7 @@ export default function Contact() {
 					<textarea
 						rows={7}
 						className='brutal-textarea'
-						placeholder='Write something..'
+						placeholder='Write something…'
 						onChange={(e) => {
 							setMessage(e.target.value)
 						}}
@@ -111,17 +100,17 @@ export default function Contact() {
 					{loading && <Loader />}
 
 					{submitStatus && (
-						<p className='border-2 border-[var(--border)] bg-lime-200 px-4 py-3 text-sm font-bold uppercase tracking-[0.18em] text-[var(--text-primary)]'>
+						<p className='rounded-[var(--radius-sm)] bg-[var(--accent-muted)] px-4 py-3 text-sm font-medium text-[var(--accent)]'>
 							{submitStatus}
 						</p>
 					)}
 					{submitError && (
-						<p className='border-2 border-[var(--border)] bg-rose-200 px-4 py-3 text-sm font-bold uppercase tracking-[0.18em] text-[var(--text-primary)]'>
+						<p className='rounded-[var(--radius-sm)] bg-rose-100 px-4 py-3 text-sm font-medium text-rose-800'>
 							{submitError}
 						</p>
 					)}
 
-					<div className='flex flex-col gap-4 sm:flex-row'>
+					<div className='flex flex-col gap-3 sm:flex-row'>
 						<button className='brutal-button'>Submit</button>
 						<a
 							href='mailto:mail@vineelsai.com'
@@ -132,20 +121,13 @@ export default function Contact() {
 						</a>
 					</div>
 				</div>
-				<div className='flex flex-col gap-6 bg-[var(--surface-strong)] p-8'>
+				<div className='flex flex-col gap-5 bg-[var(--surface-strong)] p-7'>
 					<div>
-						<p
-							className='text-xs font-bold uppercase tracking-[0.24em] text-[var(--text-secondary)]'
-							style={{ fontFamily: 'var(--font-mono)' }}
-						>
-							Elsewhere
-						</p>
-						<h3 className='mt-3 text-3xl font-black uppercase tracking-[-0.05em]'>
-							Direct channels
-						</h3>
+						<p className='meta-label'>Elsewhere</p>
+						<h3 className='display-heading mt-2 text-2xl'>Direct channels</h3>
 					</div>
 
-					<div className='grid gap-3'>
+					<div className='grid gap-2'>
 						{[
 							{
 								label: 'GitHub',
@@ -172,26 +154,24 @@ export default function Contact() {
 								key={item.label}
 								href={item.href}
 								target='_blank'
-								className='brutal-card-soft surface-default flex items-center justify-between gap-4 px-4 py-4 text-sm font-black uppercase tracking-[0.18em]'
+								className='flex items-center justify-between gap-4 rounded-[var(--radius-sm)] bg-[var(--surface)] px-4 py-3.5 text-sm font-medium transition-colors hover:bg-[var(--bg-primary)]'
 							>
 								<span className='flex items-center gap-3'>
 									<item.icon className='text-lg' />
 									{item.label}
 								</span>
-								<HiOutlineArrowUpRight className='text-lg' />
+								<HiOutlineArrowUpRight className='text-base opacity-60' />
 							</Link>
 						))}
 					</div>
 
-					<div className='brutal-card-soft surface-default p-5'>
-						<p className='text-sm font-bold uppercase tracking-[0.18em] text-[var(--text-secondary)]'>
-							Email
-						</p>
+					<div className='rounded-[var(--radius)] bg-[var(--surface)] p-5'>
+						<p className='meta-label'>Email</p>
 						<a
 							href='mailto:mail@vineelsai.com'
-							className='mt-3 inline-flex items-center gap-3 text-xl font-black tracking-tight text-[var(--accent)]'
+							className='mt-2 inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-[var(--accent)]'
 						>
-							<HiOutlineEnvelope className='text-2xl' />
+							<HiOutlineEnvelope className='text-xl' />
 							mail@vineelsai.com
 						</a>
 					</div>

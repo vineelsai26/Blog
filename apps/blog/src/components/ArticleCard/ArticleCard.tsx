@@ -13,9 +13,9 @@ export default function Article({
 	return (
 		<Link
 			href={`post/${article.url}`}
-			className='brutal-card grid overflow-hidden transition-transform hover:-translate-y-1 lg:grid-cols-[220px_1fr]'
+			className='brutal-card grid overflow-hidden transition-transform hover:-translate-y-0.5 lg:grid-cols-[220px_1fr]'
 		>
-			<div className='relative min-h-[220px] border-b-[3px] border-[var(--border)] lg:border-b-0 lg:border-r-[3px]'>
+			<div className='relative min-h-[200px] bg-[var(--surface-strong)]'>
 				<Image
 					src={article.imageUrl}
 					alt={article.title}
@@ -25,14 +25,14 @@ export default function Article({
 					className='object-cover'
 				/>
 			</div>
-			<div className='flex flex-col gap-5 p-8'>
+			<div className='flex flex-col gap-4 p-7'>
 				<div className='flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between'>
-					<h2 className='text-3xl font-black uppercase tracking-[-0.05em]'>
+					<h2 className='display-heading text-2xl md:text-3xl'>
 						{article.title}
 					</h2>
 					<span className='brutal-tag w-fit'>Read</span>
 				</div>
-				<div className='flex flex-wrap items-center gap-4 text-sm font-bold uppercase tracking-[0.14em] text-[var(--text-secondary)]'>
+				<div className='flex flex-wrap items-center gap-3 text-sm text-[var(--text-secondary)]'>
 					<span className='inline-flex items-center gap-2'>
 						<HiOutlineCalendarDays className='text-base' />
 						{new Date(article.createdAt).toLocaleDateString('en', {
@@ -54,7 +54,7 @@ export default function Article({
 				<p className='text-base leading-7 text-[var(--text-secondary)]'>
 					{article.description && article.description.substring(0, 190)}
 				</p>
-				<span className='mt-auto inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-[var(--accent)]'>
+				<span className='mt-auto inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)]'>
 					Open article
 					<HiOutlineArrowRight className='text-lg' />
 				</span>
