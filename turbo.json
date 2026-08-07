@@ -8,6 +8,7 @@
         "CLERK_*",
         "CONVEX_*",
         "DATABASE_URL",
+        "MODEL_GATEWAY_*",
         "NEXT_PUBLIC_*",
         "NEXTAUTH_*",
         "POSTHOG_*",

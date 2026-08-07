@@ -48,6 +48,18 @@ const nextConfig = {
 		contentDispositionType: 'attachment',
 		contentSecurityPolicy: "default-src 'none'; script-src 'none'; sandbox;",
 	},
+	// Workspace packages such as @vstack/ai are consumed as TypeScript source
+	// and use Node-style ".js" specifiers for their relative imports, which is
+	// what their NodeNext consumers require. Turbopack maps those back to the
+	// ".ts" sources on its own; the webpack builder used by `next build
+	// --webpack` needs the mapping spelled out.
+	webpack: (config) => {
+		config.resolve.extensionAlias = {
+			...config.resolve.extensionAlias,
+			'.js': ['.ts', '.tsx', '.js'],
+		}
+		return config
+	},
 }
 
 export default nextConfig

@@ -1,9 +1,32 @@
 import { NextRequest } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { streamText } from 'ai'
-import { openai } from '@ai-sdk/openai'
-import { anthropic } from '@ai-sdk/anthropic'
+import { createOpenAI } from '@ai-sdk/openai'
+import { openAICompatibleGatewaySettings } from '@vstack/ai'
 import { authOptions, isAdmin } from '../../../lib/auth'
+
+const MODEL_ROUTES: Record<string, string> = {
+	'gpt-5': 'openai/gpt-5',
+	'gpt-5-chat-latest': 'openai/gpt-5.5',
+	'gpt-5-mini': 'openai/gpt-5-mini',
+	'gpt-5-nano': 'openai/gpt-5-nano',
+	'anthropic-claude-4.1': 'anthropic/claude-opus-4.1',
+}
+
+function gateway() {
+	const baseURL = process.env.MODEL_GATEWAY_BASE_URL?.trim()
+	const apiKey = process.env.MODEL_GATEWAY_API_KEY?.trim()
+	if (!baseURL || !apiKey) {
+		throw new Error('VAI Gateway is not configured.')
+	}
+	return createOpenAI(
+		openAICompatibleGatewaySettings({
+			baseURL,
+			apiKey,
+			workload: 'blog-chat',
+		})
+	)
+}
 
 export async function POST(req: NextRequest) {
 	const session = await getServerSession(authOptions)
@@ -27,25 +50,15 @@ export async function POST(req: NextRequest) {
 		else model = 'gpt-5'
 	}
 
-	let modelProvider
-	if (model === 'gpt-5') {
-		modelProvider = openai('gpt-5')
-	} else if (model === 'gpt-5-chat-latest') {
-		modelProvider = openai('gpt-5-chat-latest')
-	} else if (model === 'gpt-5-mini') {
-		modelProvider = openai('gpt-5-mini')
-	} else if (model === 'gpt-5-nano') {
-		modelProvider = openai('gpt-5-nano')
-	} else if (model === 'anthropic-claude-4.1') {
-		modelProvider = anthropic('claude-4.1')
-	} else {
+	const routeModel = MODEL_ROUTES[model]
+	if (!routeModel) {
 		return new Response(JSON.stringify({ error: 'Model not supported' }), {
 			status: 400,
 		})
 	}
 
 	const stream = await streamText({
-		model: modelProvider,
+		model: gateway().chat(routeModel),
 		messages,
 		...(model === 'anthropic-claude-4.1' ? { maxOutputTokens: 1024 } : {}),
 	})

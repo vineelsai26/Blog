@@ -1,8 +1,24 @@
 import { NextRequest } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { streamText } from 'ai'
-import { openai } from '@ai-sdk/openai'
+import { createOpenAI } from '@ai-sdk/openai'
+import { openAICompatibleGatewaySettings } from '@vstack/ai'
 import { authOptions, isAdmin } from '../../../../lib/auth'
+
+function gateway() {
+	const baseURL = process.env.MODEL_GATEWAY_BASE_URL?.trim()
+	const apiKey = process.env.MODEL_GATEWAY_API_KEY?.trim()
+	if (!baseURL || !apiKey) {
+		throw new Error('VAI Gateway is not configured.')
+	}
+	return createOpenAI(
+		openAICompatibleGatewaySettings({
+			baseURL,
+			apiKey,
+			workload: 'blog-title',
+		})
+	)
+}
 
 // Generate a concise title for a conversation using gpt-5-nano
 export async function POST(req: NextRequest) {
@@ -44,7 +60,7 @@ export async function POST(req: NextRequest) {
 	try {
 		// Use messages array with system instruction and user message for title generation
 		const result = await streamText({
-			model: openai('gpt-5-nano'),
+			model: gateway().chat('openai/gpt-5-nano'),
 			messages: [
 				{ role: 'system', content: system },
 				{ role: 'user', content: user },

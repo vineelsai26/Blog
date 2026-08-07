@@ -18,11 +18,11 @@
 		"typecheck": "next typegen && tsc --noEmit"
 	},
 	"dependencies": {
-		"@ai-sdk/anthropic": "^4.0.12",
 		"@ai-sdk/openai": "^4.0.11",
 		"@libsql/client": "^0.17.4",
 		"@monaco-editor/react": "^4.7.0",
 		"@tailwindcss/typography": "^0.5.20",
+		"@vstack/ai": "workspace:*",
 		"@vstack/ui": "workspace:*",
 		"ai": "^7.0.22",
 		"babel-plugin-react-compiler": "1.0.0",
